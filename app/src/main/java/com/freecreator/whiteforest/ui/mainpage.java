@@ -34,5 +34,8 @@ public class mainpage extends AppCompatActivity {
 
         ImageView ImageView_background = (ImageView)findViewById(R.id.ImageView_background);
         ImageView_background.setImageResource(R.drawable.background);
+
+        ImageView ImageView_story_banner = (ImageView)findViewById(R.id.ImageView_story_banner);
+        ImageView_story_banner.setImageResource(R.drawable.task);
     }
 }
