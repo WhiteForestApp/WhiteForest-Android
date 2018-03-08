@@ -12,6 +12,8 @@ import com.freecreator.whiteforest.R;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class mainpage extends AppCompatActivity {
@@ -22,11 +24,14 @@ public class mainpage extends AppCompatActivity {
         setContentView(R.layout.activity_mainpage);
 
         UI_init();
-
-
     }
 
     private void UI_init() {
+
+        //全屏
+        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams. FLAG_FULLSCREEN);
+
         ImageView ImageView_background = (ImageView)findViewById(R.id.ImageView_background);
         ImageView_background.setImageResource(R.drawable.background);
     }

@@ -7,5 +7,13 @@
         android:id="@+id/ImageView_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitXY"
+        android:layout_centerInParent="true"  />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ScrollView>
 </RelativeLayout>

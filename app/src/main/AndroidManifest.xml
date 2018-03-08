@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.MyTheme.standard">
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
