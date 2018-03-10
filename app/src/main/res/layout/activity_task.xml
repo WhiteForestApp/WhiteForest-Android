@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ImageView_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_centerInParent="true"  />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ImageView_icon_task"
+                android:layout_weight="7"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"  />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.freecreator.whiteforest.ui.views.FontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/dark3"
+            android:textSize="27sp"
+            android:text="我的使命"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/list_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/ImageView_btn_add"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"  />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

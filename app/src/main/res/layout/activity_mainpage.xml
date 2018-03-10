@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/splash_layout"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -85,7 +85,7 @@
 
                 <ImageView
                     android:id="@+id/ImageView_character"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:layout_width="0dp"
                     android:layout_height="260dp"
                     android:scaleType="fitXY"
@@ -97,11 +97,49 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent">
 
-                    <com.freecreator.whiteforest.ui.FontTextView
+
+                    <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="试试这个效果"
-                        android:textSize="20sp"/>
+                        android:layout_height="0dp">
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_weight="4"
+                        android:layout_height="0dp">
+
+
+                        <com.freecreator.whiteforest.ui.views.FontTextView_DemiLight
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:text="灿柳\n膜法师\nLv:神族\n段位:黑钻"
+                            android:textColor="@color/black"
+                            android:textSize="17sp"/>
+
+
+
+
+                        <com.freecreator.whiteforest.ui.views.FontTextView_DemiLight
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:text="当你凝望深渊,\n深渊也在凝望着你"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"/>
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -146,7 +184,7 @@
                         android:scaleType="fitXY"
                         android:layout_centerInParent="true"  />
 
-                    <com.freecreator.whiteforest.ui.FontTextView
+                    <com.freecreator.whiteforest.ui.views.FontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -176,7 +214,7 @@
                         android:scaleType="fitXY"
                         android:layout_centerInParent="true"  />
 
-                    <com.freecreator.whiteforest.ui.FontTextView
+                    <com.freecreator.whiteforest.ui.views.FontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"

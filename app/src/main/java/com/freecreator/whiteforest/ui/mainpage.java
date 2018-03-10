@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.utils.AdjustSize;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class mainpage extends AppCompatActivity {
+
+    private ImageView ImageView_background = null;
+    private ImageView ImageView_story_banner = null;
+    private ImageView ImageView_character = null;
+    private ImageView ImageView_task = null;
+    private ImageView ImageView_desire = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,24 +39,39 @@ public class mainpage extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
                 WindowManager.LayoutParams. FLAG_FULLSCREEN);
 
-        ImageView ImageView_background = (ImageView)findViewById(R.id.ImageView_background);
+        ImageView_background = (ImageView)findViewById(R.id.ImageView_background);
         ImageView_background.setImageResource(R.drawable.background);
 
-        ImageView ImageView_story_banner = (ImageView)findViewById(R.id.ImageView_story_banner);
+        ImageView_story_banner = (ImageView)findViewById(R.id.ImageView_story_banner);
         ImageView_story_banner.setImageResource(R.drawable.banner);
 
         // 建立阴影
         //ImageView shadow_story_banner = (ImageView)findViewById(R.id.shadow_story_banner);
         //shadow_story_banner.setImageResource(R.drawable.shadow);
 
-        ImageView ImageView_character = (ImageView) findViewById(R.id.ImageView_character);
+        ImageView_character = (ImageView) findViewById(R.id.ImageView_character);
         ImageView_character.setImageResource(R.drawable.character);
 
-        ImageView ImageView_task = (ImageView) findViewById(R.id.ImageView_task);
+        ImageView_task = (ImageView) findViewById(R.id.ImageView_task);
         ImageView_task.setImageResource(R.drawable.task);
 
-        ImageView ImageView_desire = (ImageView) findViewById(R.id.ImageView_desire);
+        ImageView_desire = (ImageView) findViewById(R.id.ImageView_desire);
         ImageView_desire.setImageResource(R.drawable.desire);
 
+    }
+
+    private void UI_adjust(){
+        // 尺寸自适应 根据图片的宽高 来调整view高度 [宽度不调整]
+        AdjustSize.adjustHeight(ImageView_story_banner, AdjustSize.getImageWidthHeight(this, R.drawable.banner));
+        AdjustSize.adjustHeight(ImageView_character, AdjustSize.getImageWidthHeight(this, R.drawable.character));
+        AdjustSize.adjustHeight(ImageView_desire, AdjustSize.getImageWidthHeight(this, R.drawable.desire));
+        AdjustSize.adjustHeight(ImageView_task, AdjustSize.getImageWidthHeight(this, R.drawable.task));
+    }
+
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+
+        UI_adjust();
     }
 }
