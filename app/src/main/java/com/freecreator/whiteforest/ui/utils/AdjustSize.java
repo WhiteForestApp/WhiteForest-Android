@@ -14,19 +14,6 @@ import android.view.ViewGroup;
 
 public class AdjustSize {
 
-    private DisplayMetrics dm;
-    private int screen_width;
-    private int screen_height;
-    private float density;
-
-    public AdjustSize(Context context){
-        Resources resources = context.getResources();
-
-        dm = resources.getDisplayMetrics();
-        density = dm.density;
-        screen_width = dm.widthPixels;
-        screen_height = dm.heightPixels;
-    }
 
     public static Size getViewSize(View view){
 /*
@@ -68,6 +55,11 @@ public class AdjustSize {
         return size;
     }
 
+    /**
+     *
+     * @param v the view need to be adjusted size
+     * @param refSize a reference size for adjusting the view size
+     */
     public static void adjustHeight(View v, Size refSize){
         Size currentSize = getViewSize(v);
 

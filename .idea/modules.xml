@@ -4,9 +4,7 @@
     <modules>
       <module fileurl="file://F:\GitHub\WhiteForest-Android\WhiteForest.iml" filepath="F:\GitHub\WhiteForest-Android\WhiteForest.iml" />
       <module fileurl="file://$PROJECT_DIR$/WhiteForest-Android.iml" filepath="$PROJECT_DIR$/WhiteForest-Android.iml" />
-      <module fileurl="file://F:\GitHub\WhiteForest-Android\WhiteForest-Android.iml" filepath="F:\GitHub\WhiteForest-Android\WhiteForest-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://F:\GitHub\WhiteForest-Android\app\app.iml" filepath="F:\GitHub\WhiteForest-Android\app\app.iml" />
     </modules>
   </component>
 </project>
