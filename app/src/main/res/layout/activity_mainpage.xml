@@ -132,13 +132,30 @@
                     android:layout_height="match_parent">
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/ImageView_task"
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="60"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
-                    android:scaleType="fitXY"
-                    android:layout_centerInParent="true"  />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ImageView_task"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:scaleType="fitXY"
+                        android:layout_centerInParent="true"  />
+
+                    <com.freecreator.whiteforest.ui.FontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="任务"
+                        android:textSize="23sp"/>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_weight="15"
@@ -146,13 +163,28 @@
                     android:layout_height="match_parent">
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/ImageView_desire"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="60"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
-                    android:scaleType="fitXY"
-                    android:layout_centerInParent="true"  />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ImageView_desire"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:scaleType="fitXY"
+                        android:layout_centerInParent="true"  />
+
+                    <com.freecreator.whiteforest.ui.FontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:text="欲望"
+                        android:textSize="23sp"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_weight="10"
