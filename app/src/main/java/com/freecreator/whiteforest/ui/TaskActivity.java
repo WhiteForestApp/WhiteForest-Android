@@ -22,6 +22,10 @@ public class TaskActivity extends AppCompatActivity {
     // 1. item_timer_task  这种布局是 时间投资型 任务的item布局
     //  该布局的 标题TextView 的 id 是 text_title
     //  该布局的 "加号" 按钮的 LinearLayout 的 id 是 btn_add_timer
+    // 2.  item_normal_task   这种布局是普通任务的布局
+    //   该布局的 标题 TextView 的 id 是 task_content
+    // 3.  item_finished_task   这种布局是普通任务被完成时 显示出来的布局
+    //   该布局的标题 TextView 的 id 是 task_content
     private LinearLayout list_task = null;
 
 
