@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="300dp"
+    android:layout_height="53dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/item_timer_task" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="32">
+
+
+                <com.freecreator.whiteforest.ui.views.FontTextView
+                    android:id="@+id/text_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="20sp"
+                    android:textColor="#e1e1e1"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btn_add_timer"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7">
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

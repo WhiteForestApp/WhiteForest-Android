@@ -68,10 +68,17 @@
 
 
         <ScrollView
-            android:background="@color/dark3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/list_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
         </ScrollView>
 

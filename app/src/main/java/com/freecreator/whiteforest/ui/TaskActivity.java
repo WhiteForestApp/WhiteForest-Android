@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
@@ -15,6 +16,14 @@ import com.freecreator.whiteforest.ui.utils.AdjustSize;
 public class TaskActivity extends AppCompatActivity {
 
     private ImageView ImageView_icon_task = null;
+
+    // list_task 是可滑动区域的layout, 往list_task 添加view, 就可以添加到可滑动区域进去
+    // 可以添加的view布局有两种
+    // 1. item_timer_task  这种布局是 时间投资型 任务的item布局
+    //  该布局的 标题TextView 的 id 是 text_title
+    //  该布局的 "加号" 按钮的 LinearLayout 的 id 是 btn_add_timer
+    private LinearLayout list_task = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,9 @@ public class TaskActivity extends AppCompatActivity {
 
         ImageView ImageView_btn_add = (ImageView) findViewById(R.id.ImageView_btn_add);
         ImageView_btn_add.setImageResource(R.drawable.btn_add);
+
+        list_task = (LinearLayout) findViewById(R.id.list_task);
+
     }
 
 
