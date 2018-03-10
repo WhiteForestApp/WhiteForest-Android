@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ImageView_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_centerInParent="true"  />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ImageView_icon_task"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"  />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+        </LinearLayout>
+
+        <com.freecreator.whiteforest.ui.views.FontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/dark3"
+            android:textSize="27sp"
+            android:text="我的使命"/>
+    </LinearLayout>
+</RelativeLayout>

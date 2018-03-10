@@ -29,21 +29,23 @@ public class AdjustSize {
     }
 
     public static Size getViewSize(View view){
-        /*
-        int width = View.MeasureSpec.makeMeasureSpec(0,
-                View.MeasureSpec.UNSPECIFIED);
-        int height = View.MeasureSpec.makeMeasureSpec(0,
-                View.MeasureSpec.UNSPECIFIED);
-        view.measure(width, height);
-
+/*
         Size size = new Size();
+        size.width = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        size.height = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        view.measure(size.width, size.height);
+
         size.width = view.getMeasuredWidth(); // 获取宽度
         size.height = view.getMeasuredHeight(); // 获取高度
 */
         // 注意 这种获取 宽高的方式 只有当activity执行了 onWindowFocusChanged 之后才能准确获得.
+
         Size size = new Size();
         size.width = view.getWidth(); // 获取宽度
         size.height = view.getHeight(); // 获取高度
+        
         return size;
     }
 
@@ -66,13 +68,14 @@ public class AdjustSize {
         return size;
     }
 
-    public static void adjustHeight(View v, Size originalSize){
+    public static void adjustHeight(View v, Size refSize){
         Size currentSize = getViewSize(v);
 
         ViewGroup.LayoutParams lp;
         lp = v.getLayoutParams();
-        float h  = (float)currentSize.height * (float)originalSize.width / (float)originalSize.width;
+        float h  = (float)currentSize.width * (float)refSize.height / (float)refSize.width;
         lp.height = (int)h;
+        v.setLayoutParams(lp);
     }
 
 
