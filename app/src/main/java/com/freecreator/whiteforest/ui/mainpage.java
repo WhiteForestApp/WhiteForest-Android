@@ -44,5 +44,12 @@ public class mainpage extends AppCompatActivity {
 
         ImageView ImageView_character = (ImageView) findViewById(R.id.ImageView_character);
         ImageView_character.setImageResource(R.drawable.character);
+
+        ImageView ImageView_task = (ImageView) findViewById(R.id.ImageView_task);
+        ImageView_task.setImageResource(R.drawable.task);
+
+        ImageView ImageView_desire = (ImageView) findViewById(R.id.ImageView_desire);
+        ImageView_desire.setImageResource(R.drawable.desire);
+
     }
 }
