@@ -37,5 +37,9 @@ public class mainpage extends AppCompatActivity {
 
         ImageView ImageView_story_banner = (ImageView)findViewById(R.id.ImageView_story_banner);
         ImageView_story_banner.setImageResource(R.drawable.task);
+
+        // 建立阴影
+        //ImageView shadow_story_banner = (ImageView)findViewById(R.id.shadow_story_banner);
+        //shadow_story_banner.setImageResource(R.drawable.shadow);
     }
 }
