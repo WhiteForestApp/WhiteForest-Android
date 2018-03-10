@@ -45,7 +45,7 @@ public class AdjustSize {
         Size size = new Size();
         size.width = view.getWidth(); // 获取宽度
         size.height = view.getHeight(); // 获取高度
-        
+
         return size;
     }
 

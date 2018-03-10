@@ -36,7 +36,7 @@
 
             <ImageView
                 android:id="@+id/ImageView_icon_task"
-                android:layout_weight="5"
+                android:layout_weight="7"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:scaleType="fitXY"
@@ -52,12 +52,6 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp">
-        </LinearLayout>
-
         <com.freecreator.whiteforest.ui.views.FontTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,5 +59,42 @@
             android:textColor="@color/dark3"
             android:textSize="27sp"
             android:text="我的使命"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+        </LinearLayout>
+
+
+        <ScrollView
+            android:background="@color/dark3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/ImageView_btn_add"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"  />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
+        </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

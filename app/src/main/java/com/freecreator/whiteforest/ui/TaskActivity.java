@@ -35,6 +35,9 @@ public class TaskActivity extends AppCompatActivity {
 
         ImageView_icon_task = (ImageView)findViewById(R.id.ImageView_icon_task);
         ImageView_icon_task.setImageResource(R.drawable.task);
+
+        ImageView ImageView_btn_add = (ImageView) findViewById(R.id.ImageView_btn_add);
+        ImageView_btn_add.setImageResource(R.drawable.btn_add);
     }
 
 
