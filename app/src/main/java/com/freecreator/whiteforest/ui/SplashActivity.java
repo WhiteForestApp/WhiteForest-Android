@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(SplashActivity.this, DesireActivity.class));
+                        startActivity(new Intent(SplashActivity.this, TaskActivity.class));
                         SplashActivity.this.finish();
                     }
                 });

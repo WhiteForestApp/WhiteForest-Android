@@ -72,13 +72,42 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
+
             <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/list_desire"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="18"
+                    android:layout_height="match_parent">
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/list_desire"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="98"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="16"
+                    android:layout_height="match_parent">
+                </LinearLayout>
+
+
+
             </LinearLayout>
+
 
         </ScrollView>
 
