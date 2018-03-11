@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center_horizontal"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="53dp">
 
     <RelativeLayout
@@ -31,6 +31,7 @@
 
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="32">
@@ -39,8 +40,11 @@
                 <com.freecreator.whiteforest.ui.views.FontTextView
                     android:id="@+id/text_title"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:includeFontPadding="false"
                     android:text=""
                     android:textSize="20sp"
                     android:textColor="#e1e1e1"/>
