@@ -2,4 +2,8 @@
     <string name="app_name">白色森林</string>
     <string name="title_activity_splash">banner</string>
     <string name="title_activity_mainpage">首页</string>
+    <string name="desire">欲望</string>
+    <string name="task">任务</string>
+    <string name="my_task">我的使命</string>
+    <string name="my_desire">我的欲望</string>
 </resources>

@@ -29,18 +29,13 @@ public class SplashActivity extends AppCompatActivity {
         new Thread(){
             @Override
             public void run(){
-                try{
-
-                    sleep(3000);
+                try{  sleep(3000);
                 }
-                catch (InterruptedException e){
-
-                }
+                catch (InterruptedException e){ }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-                        startActivity(new Intent(SplashActivity.this, TaskActivity.class));
+                        startActivity(new Intent(SplashActivity.this, DesireActivity.class));
                         SplashActivity.this.finish();
                     }
                 });

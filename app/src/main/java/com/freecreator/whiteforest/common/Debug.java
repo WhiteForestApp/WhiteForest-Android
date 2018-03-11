@@ -1,4 +1,4 @@
-package com.wutnews.bus.commen;
+package com.freecreator.whiteforest.common;
 
 /**
  * Created by niko on 2017/8/27.

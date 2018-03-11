@@ -189,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textColor="@color/black"
-                        android:text="任务"
+                        android:text="@string/task"
                         android:textSize="23sp"/>
 
                 </LinearLayout>
@@ -219,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:gravity="center"
-                        android:text="欲望"
+                        android:text="@string/desire"
                         android:textSize="23sp"/>
 
                 </LinearLayout>
