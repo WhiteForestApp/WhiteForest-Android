@@ -19,7 +19,7 @@ public class AdjustSize {
      * Remember this function must be called after the activity call the method"onWindowFocusChanged"
      * Or the size this function return will not be correct
      * @param view
-     * @return
+     * @return return the size(in px instead of dp) of the view
      */
     public static Size getViewSize(View view){
 /*

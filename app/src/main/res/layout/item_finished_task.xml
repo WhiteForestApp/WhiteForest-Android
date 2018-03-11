@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center_horizontal"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="23dp"
-            android:layout_height="22dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:scaleType="fitXY"
             android:layout_centerInParent="true"
@@ -28,14 +28,16 @@
         android:layout_height="match_parent">
     </LinearLayout>
 
-    <com.freecreator.whiteforest.ui.views.FontTextView_Midline
+    <com.freecreator.whiteforest.ui.views.FontTextView_Bold
         android:id="@+id/task_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.3"
+        android:includeFontPadding="false"
         android:gravity="center_vertical"
-        android:textColor="#e2e2e2"
+        android:textColor="@color/dark9"
         android:text=""
-        android:textSize="20sp"/>
+        android:textSize="18sp"/>
 
 
 
