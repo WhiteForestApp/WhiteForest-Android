@@ -43,6 +43,7 @@ public class TaskActivity extends AppCompatActivity {
     // 3.  item_finished_task   这种布局是普通任务被完成时 显示出来的布局
     //   该布局的标题 TextView 的 id 是 task_content
     private LinearLayout list_task = null;
+    private ImageView ImageView_btn_add = null;
 
 
     @Override
@@ -65,7 +66,7 @@ public class TaskActivity extends AppCompatActivity {
         ImageView_icon_task = (ImageView)findViewById(R.id.ImageView_icon_task);
         ImageView_icon_task.setImageResource(R.drawable.task);
 
-        ImageView ImageView_btn_add = (ImageView) findViewById(R.id.ImageView_btn_add);
+        ImageView_btn_add = (ImageView) findViewById(R.id.ImageView_btn_add);
         ImageView_btn_add.setImageResource(R.drawable.btn_add);
 
         list_task = (LinearLayout) findViewById(R.id.list_task);
@@ -76,6 +77,7 @@ public class TaskActivity extends AppCompatActivity {
     private void UI_adjust(){
         // 尺寸自适应 根据图片的宽高 来调整view高度 [宽度不调整]
         AdjustSize.adjustHeight(ImageView_icon_task, AdjustSize.getImageWidthHeight(this, R.drawable.task));
+        AdjustSize.adjustHeight(ImageView_btn_add, AdjustSize.getImageWidthHeight(this, R.drawable.btn_add));
     }
 
     /**

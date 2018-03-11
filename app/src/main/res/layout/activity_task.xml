@@ -116,13 +116,35 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/ImageView_btn_add"
-            android:layout_gravity="center"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            android:layout_centerInParent="true"  />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="23"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ImageView_btn_add"
+                android:layout_gravity="center"
+                android:layout_weight="9"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"  />
+
+
+            <LinearLayout
+                android:layout_weight="21"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
