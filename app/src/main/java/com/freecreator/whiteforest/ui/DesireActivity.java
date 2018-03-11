@@ -102,7 +102,7 @@ public class DesireActivity extends AppCompatActivity {
         LinearLayout space = (LinearLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
         Size list_desire_size = AdjustSize.getViewSize(list_desire);
         Size refSize = new Size();
-        refSize.height = 8;
+        refSize.height = 18;
         refSize.width = 500;
         float h  = (float)list_desire_size.width * (float)refSize.height / (float)refSize.width;
         params = new LinearLayout.LayoutParams(list_desire_size.width, (int)h);
