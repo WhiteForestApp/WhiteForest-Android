@@ -82,6 +82,7 @@ public class TaskActivity extends AppCompatActivity {
      * Why i use "JSONObject" as the param instead of "int type, String title, ..." ?
      * Because in this way we can devide the UI part and the data part
      * in long run, this kind of model (UI / Data part) will be convenient.
+     * @param position the position to insert a new item view
      * @param data Json data. An sample is below:
      *             { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
      */
