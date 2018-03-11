@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">White Forest</string>
+    <string name="title_activity_splash">banner</string>
+    <string name="title_activity_mainpage">Main Page</string>
+    <string name="desire">DESIRE</string>
+    <string name="task">TASK</string>
+    <string name="my_task">MY MISSIONS</string>
+    <string name="my_desire">MY DESIRE</string>
+</resources>

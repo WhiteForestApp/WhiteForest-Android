@@ -15,6 +15,12 @@ import android.view.ViewGroup;
 public class AdjustSize {
 
 
+    /**
+     * Remember this function must be called after the activity call the method"onWindowFocusChanged"
+     * Or the size this function return will not be correct
+     * @param view
+     * @return
+     */
     public static Size getViewSize(View view){
 /*
         Size size = new Size();
@@ -39,16 +45,9 @@ public class AdjustSize {
     public static Size getImageWidthHeight(Context context, int resId){
         BitmapFactory.Options options = new BitmapFactory.Options();
 
-        /**
-         * 最关键在此，把options.inJustDecodeBounds = true;
-         * 这里再decodeFile()，返回的bitmap为空，但此时调用options.outHeight时，已经包含了图片的高了
-         */
         options.inJustDecodeBounds = true;
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId, options); // 此时返回的bitmap为null
 
-        /**
-         *options.outHeight为原始图片的高
-         */
         Size size = new Size();
         size.width = options.outWidth;
         size.height = options.outHeight;

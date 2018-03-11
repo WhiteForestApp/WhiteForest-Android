@@ -35,7 +35,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/ImageView_icon_task"
+                android:id="@+id/ImageView_icon_desire"
                 android:layout_weight="7"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:textColor="@color/dark3"
             android:textSize="27sp"
-            android:text="@string/my_task"/>
+            android:text="@string/my_desire"/>
 
 
         <LinearLayout
@@ -74,7 +74,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:id="@+id/list_task"
+                android:id="@+id/list_desire"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
