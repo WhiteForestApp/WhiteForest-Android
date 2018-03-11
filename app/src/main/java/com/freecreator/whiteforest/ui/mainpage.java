@@ -13,6 +13,7 @@ import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -31,6 +32,22 @@ public class mainpage extends AppCompatActivity {
         setContentView(R.layout.activity_mainpage);
 
         UI_init();
+        setListeners();
+    }
+
+    private void setListeners() {
+        ImageView_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mainpage.this , TaskActivity.class));
+            }
+        });
+        ImageView_desire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mainpage.this , DesireActivity.class));
+            }
+        });
     }
 
     private void UI_init() {

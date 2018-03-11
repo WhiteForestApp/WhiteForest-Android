@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/item_desire"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ImageView>
+
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="32">
+
+
+            <com.freecreator.whiteforest.ui.views.FontTextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:includeFontPadding="true"
+                android:lineSpacingMultiplier="1.2"
+                android:text="阿斯达地图阿斯达地图阿斯达地图阿斯达地图阿斯达地图阿斯达地图阿斯达地图"
+                android:textSize="20sp"
+                android:textColor="#e1e1e1"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/btn_add_timer"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7">
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>
