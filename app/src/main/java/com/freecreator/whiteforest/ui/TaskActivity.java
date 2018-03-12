@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.dialogs.dialogAddTask;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
 import com.freecreator.whiteforest.ui.utils.UIUtils;
@@ -45,6 +47,7 @@ public class TaskActivity extends AppCompatActivity {
     private LinearLayout list_task = null;
     private ImageView ImageView_btn_add = null;
 
+    private dialogAddTask dialogTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,18 @@ public class TaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task);
 
         UI_init();
+        setListeners();
+    }
+
+    private void setListeners() {
+        if(null != ImageView_btn_add){
+            ImageView_btn_add.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
     }
 
     private void UI_init() {
@@ -70,6 +85,9 @@ public class TaskActivity extends AppCompatActivity {
         ImageView_btn_add.setImageResource(R.drawable.btn_add);
 
         list_task = (LinearLayout) findViewById(R.id.list_task);
+
+        dialogTask = new dialogAddTask(this, (RelativeLayout) findViewById(R.id.task_page));
+        //dialogTask.show();
 
     }
 
