@@ -77,7 +77,7 @@
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
                             android:gravity="center_vertical"
-                            android:text="@string/make_task"
+                            android:text="@string/make_desire"
                             android:textColor="@color/dark3"
                             android:textSize="22sp"
                             android:layout_width="wrap_content"
@@ -103,91 +103,9 @@
                         <!-- 选择栏 普通/时间投资计划-->
                         <LinearLayout
                             android:orientation="vertical"
-                            android:layout_weight="141"
+                            android:layout_weight="71"
                             android:layout_width="match_parent"
                             android:layout_height="0dp">
-
-                            <RelativeLayout
-                                android:layout_gravity="center_horizontal"
-                                android:id="@+id/task_option_bg"
-                                android:layout_width="350dp"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:srcCompat="@drawable/option_bg"
-                                    android:scaleType="fitXY" />
-
-                                <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="55"></LinearLayout>
-
-                                    <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="362">
-
-
-                                        <LinearLayout
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="55"></LinearLayout>
-
-                                        <com.freecreator.whiteforest.ui.views.FontTextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:includeFontPadding="false"
-                                            android:text="@string/task_add_options_1"
-                                            android:textSize="15sp"
-                                            android:textColor="#eeeeee"/>
-
-
-                                        <com.freecreator.whiteforest.ui.views.FontTextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:textSize="15sp"
-                                            android:text=" / "
-                                            android:includeFontPadding="false"
-                                            android:textColor="#eeeeee"/>
-
-
-                                        <com.freecreator.whiteforest.ui.views.FontTextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:textSize="15sp"
-                                            android:includeFontPadding="false"
-                                            android:text="@string/task_add_options_2"
-                                            android:textColor="#eeeeee"/>
-
-
-                                        <LinearLayout
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="55"></LinearLayout>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="42"></LinearLayout>
-
-
-                                </LinearLayout>
-
-
-                            </RelativeLayout>
 
                         </LinearLayout>
 
@@ -223,46 +141,6 @@
                                     android:layout_height="0dp">
                                 </LinearLayout>
 
-
-                                <!--输入经验值-->
-                                <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_weight="94"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp">
-
-                                    <com.freecreator.whiteforest.ui.views.FontTextView
-                                        android:textColor="@color/dark3"
-                                        android:text="@string/exp_to_add"
-                                        android:gravity="center_vertical"
-                                        android:textSize="24sp"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent" />
-
-
-                                    <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="10dp"
-                                        android:layout_height="match_parent">
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1">
-
-                                        <EditText
-                                            android:inputType="number"
-                                            android:textCursorDrawable="@null"
-                                            android:textColor="@color/dark3"
-                                            android:textSize="24sp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"/>
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
                                 <!--输入金币-->
                                 <LinearLayout
                                     android:orientation="horizontal"
@@ -272,7 +150,7 @@
 
                                     <com.freecreator.whiteforest.ui.views.FontTextView
                                         android:textColor="@color/dark3"
-                                        android:text="@string/coins_to_add"
+                                        android:text="@string/coins_to_cost"
                                         android:gravity="center_vertical"
                                         android:textSize="24sp"
                                         android:layout_width="wrap_content"

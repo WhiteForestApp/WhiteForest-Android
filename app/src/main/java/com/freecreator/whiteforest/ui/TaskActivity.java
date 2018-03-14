@@ -63,7 +63,7 @@ public class TaskActivity extends AppCompatActivity {
             ImageView_btn_add.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-
+                    dialogTask.show();
                 }
             });
         }
@@ -87,7 +87,7 @@ public class TaskActivity extends AppCompatActivity {
         list_task = (LinearLayout) findViewById(R.id.list_task);
 
         dialogTask = new dialogAddTask(this, (RelativeLayout) findViewById(R.id.task_page));
-        //dialogTask.show();
+
 
     }
 

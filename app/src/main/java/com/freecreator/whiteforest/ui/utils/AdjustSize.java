@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Created by niko on 2018/3/10.
@@ -69,5 +70,30 @@ public class AdjustSize {
         v.setLayoutParams(lp);
     }
 
+    /**
+     *
+     * @param v the view need to be adjusted size
+     * @param refSize a reference size for adjusting the view size
+     */
+    public static void adjustWidth(View v, Size refSize){
+        Size currentSize = getViewSize(v);
+
+        ViewGroup.LayoutParams lp;
+        lp = v.getLayoutParams();
+        float w = (float)currentSize.height * (float)refSize.width / (float)refSize.height;
+        lp.width = (int)w;
+        v.setLayoutParams(lp);
+    }
+
+
+    public static void adjustFontSize(Context context, TextView v){
+        DisplayMetrics dm = new DisplayMetrics();
+        dm = context.getResources().getDisplayMetrics();
+
+        float density  = dm.density;        // 屏幕密度（像素比例：0.75/1.0/1.5/2.0）
+        int densityDPI = dm.densityDpi;     // 屏幕密度（每寸像素：120/160/240/320）
+        float xdpi = dm.xdpi;
+        float ydpi = dm.ydpi;
+    }
 
 }

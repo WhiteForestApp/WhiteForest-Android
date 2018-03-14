@@ -3,14 +3,17 @@ package com.freecreator.whiteforest.ui;
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.dialogs.dialogAddDesire;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
 
@@ -41,12 +44,27 @@ public class DesireActivity extends AppCompatActivity {
     private ImageView ImageView_btn_add = null;
 
 
+    private dialogAddDesire dialogDesire = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desire);
 
         UI_init();
+        setListeners();
+    }
+
+    private void setListeners() {
+        if(null != ImageView_btn_add){
+            ImageView_btn_add.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    dialogDesire.show();
+                }
+            });
+        }
     }
 
     private void UI_init() {
@@ -66,6 +84,7 @@ public class DesireActivity extends AppCompatActivity {
 
         list_desire = (LinearLayout) findViewById(R.id.list_desire);
 
+        dialogDesire = new dialogAddDesire(this, (RelativeLayout) findViewById(R.id.desire_page) );
     }
 
 

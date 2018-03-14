@@ -6,4 +6,13 @@
     <string name="task">任务</string>
     <string name="my_task">我的使命</string>
     <string name="my_desire">我的欲望</string>
+    <string name="make_task">承诺你的任务</string>
+    <string name="task_add_options_1">普通任务</string>
+    <string name="task_add_options_2">时间投资计划</string>
+    <string name="exp_to_add">经验值:</string>
+    <string name="coins_to_add">金币:</string>
+    <string name="content_to_add">内容:</string>
+    <string name="confirm">确认</string>
+    <string name="make_desire">许下你的心愿</string>
+    <string name="coins_to_cost">消耗的金币</string>
 </resources>

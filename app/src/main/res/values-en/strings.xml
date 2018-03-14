@@ -7,4 +7,13 @@
     <string name="task">TASK</string>
     <string name="my_task">MY MISSIONS</string>
     <string name="my_desire">MY DESIRE</string>
+    <string name="make_task">Promise your task</string>
+    <string name="task_add_options_1">Normal Task</string>
+    <string name="task_add_options_2">Time Invest Plan</string>
+    <string name="exp_to_add">Exp:</string>
+    <string name="coins_to_add">Money:</string>
+    <string name="content_to_add">Content:</string>
+    <string name="confirm">Confirm</string>
+    <string name="make_desire">Tell your desire</string>
+    <string name="coins_to_cost">Money to cost</string>
 </resources>
