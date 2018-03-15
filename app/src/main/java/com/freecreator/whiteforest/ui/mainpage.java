@@ -48,6 +48,12 @@ public class mainpage extends AppCompatActivity {
                 startActivity(new Intent(mainpage.this , DesireActivity.class));
             }
         });
+        ImageView_story_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mainpage.this , StoryActivity.class));
+            }
+        });
     }
 
     private void UI_init() {

@@ -16,4 +16,8 @@
     <string name="confirm">Confirm</string>
     <string name="make_desire">Tell your desire</string>
     <string name="coins_to_cost">Money to cost</string>
+    <string name="greeting"> Hello</string>
+    <string name="story_part1">asd</string>
+    <string name="story_part2">asd</string>
+    <string name="story_part3">asd</string>
 </resources>
