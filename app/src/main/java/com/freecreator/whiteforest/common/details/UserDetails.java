@@ -44,6 +44,8 @@ public class UserDetails extends AbstractDetails{
     //private List<TaskDetails> taskDetailsList = new LinkedList();
     /*欲望总计数*/
     private long totalDesireNum;
+    /*用户状态*/
+    private int userStatus;
     /*所有欲望详细列表(暂时存在)*/
     //private List<DesireDetails> desireDetailsList = new LinkedList();
 
@@ -95,6 +97,9 @@ public class UserDetails extends AbstractDetails{
     public void setTotalDesireNum(long totalDesireNum){
         this.totalDesireNum = totalDesireNum;
     }
+    public void setUserStatus(int userStatus){
+        this.userStatus = userStatus;
+    }
 
     public long getUID(){
         return this.uid;
@@ -144,25 +149,29 @@ public class UserDetails extends AbstractDetails{
     public long getTotalDesireNum(){
         return this.totalDesireNum;
     }
+    public int getUserStatus(){
+        return this.userStatus;
+    }
 
     public UserDetails(JSONObject jsonObject)throws JSONException{
         if(jsonObject == null) return;
-        uid = jsonObject.getLong("uid");
-        nickName = jsonObject.getString("nickName");
-        realName = jsonObject.getString("realName");
-        password = jsonObject.getString("password");
-        sex = jsonObject.getString("sex");
-        phoneNumber = jsonObject.getString("phoneNumber");
-        motto = jsonObject.getString("motto");
-        birthday = jsonObject.getString("birthday");
-        level = jsonObject.getLong("level");
-        segmentLevel = jsonObject.getLong("segmentLevel");
-        totalExperienceValue = jsonObject.getLong("totalExperienceValue");
-        costExperienceValue = jsonObject.getLong("costExperienceValue");
-        remainExperienceValue = jsonObject.getLong("remainExperienceValue");
-        totalTaskNum = jsonObject.getLong("totalTaskNum");
-        finishedTaskNum = jsonObject.getLong("finishedTaskNum");
-        totalDesireNum = jsonObject.getLong("totalDesireNum");
+        uid = jsonObject.optLong("uid",0);
+        nickName = jsonObject.optString("nickName",UNDEF);
+        realName = jsonObject.optString("realName",UNDEF);
+        password = jsonObject.optString("password",UNDEF);
+        sex = jsonObject.optString("sex",UNDEF);
+        phoneNumber = jsonObject.optString("phoneNumber",UNDEF);
+        motto = jsonObject.optString("motto",UNDEF);
+        birthday = jsonObject.optString("birthday",UNDEF);
+        level = jsonObject.optLong("level",0);
+        segmentLevel = jsonObject.optLong("segmentLevel",0);
+        totalExperienceValue = jsonObject.optLong("totalExperienceValue",0);
+        costExperienceValue = jsonObject.optLong("costExperienceValue",0);
+        remainExperienceValue = jsonObject.optLong("remainExperienceValue",0);
+        totalTaskNum = jsonObject.optLong("totalTaskNum",0);
+        finishedTaskNum = jsonObject.optLong("finishedTaskNum",0);
+        totalDesireNum = jsonObject.optLong("totalDesireNum",0);
+        userStatus = jsonObject.optInt("userStatus",ERRSTATUS);
     }
 
     @Override
@@ -184,6 +193,7 @@ public class UserDetails extends AbstractDetails{
         jsonPut(jsonObject, "totalTaskNum", ""+totalTaskNum);
         jsonPut(jsonObject, "finishedTaskNum", ""+finishedTaskNum);
         jsonPut(jsonObject, "totalDesireNum", ""+totalDesireNum);
+        jsonPut(jsonObject, "userStatus", ""+userStatus);
         return jsonObject.toString();
     }
 

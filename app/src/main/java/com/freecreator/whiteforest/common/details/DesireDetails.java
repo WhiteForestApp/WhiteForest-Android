@@ -94,14 +94,14 @@ public class DesireDetails extends AbstractDetails{
     public DesireDetails(JSONObject jsonObject)throws JSONException {
         if(jsonObject == null) return;
         //uid = jsonObject.getLong("uid");
-        desireID = jsonObject.getLong("desireID");
-        desireTitle = jsonObject.getString("desireTitle");
-        desireDescription = jsonObject.getString("desireDescription");
-        desireType = jsonObject.getString("desireType");
-        desireAddTime = jsonObject.getLong("desireAddTime");
-        desireFulfillmentTime = jsonObject.getLong("desireFulfillmentTime");
-        desireStatus = jsonObject.getInt("desireStatus");
-        desireCostExperienceValue = jsonObject.getLong("desireCostExperienceValue");
+        desireID = jsonObject.optLong("desireID", 0);
+        desireTitle = jsonObject.optString("desireTitle", UNDEF);
+        desireDescription = jsonObject.optString("desireDescription", UNDEF);
+        desireType = jsonObject.optString("desireType", UNDEF);
+        desireAddTime = jsonObject.optLong("desireAddTime", 0);
+        desireFulfillmentTime = jsonObject.optLong("desireFulfillmentTime", 0);
+        desireStatus = jsonObject.optInt("desireStatus", ERRSTATUS);
+        desireCostExperienceValue = jsonObject.optLong("desireCostExperienceValue", 0);
     }
 
     @Override

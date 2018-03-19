@@ -11,7 +11,8 @@ import org.json.JSONObject;
  */
 
 public abstract class AbstractDetails {
-    protected static final String UNDEF = "UndefinedText";
+    public static final String UNDEF = "UndefinedText";
+    public static final int ERRSTATUS = -1;
 
     /*验证字符串是否为空或者NULL,Null,null*/
     protected boolean isNull(String str) {
@@ -36,10 +37,6 @@ public abstract class AbstractDetails {
             e.printStackTrace();
         }
     }
-
-
-
-
 
     public abstract boolean isInvalid();
 }

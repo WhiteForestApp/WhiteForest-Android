@@ -112,16 +112,16 @@ public class TaskDetails extends AbstractDetails{
     public TaskDetails(JSONObject jsonObject)throws JSONException {
         if(jsonObject == null) return;
         //uid = jsonObject.getLong("uid");
-        taskID = jsonObject.getLong("taskID");
-        taskTitle = jsonObject.getString("taskTitle");
-        taskDescription = jsonObject.getString("taskDescription");
-        taskType = jsonObject.getString("taskType");
-        taskCreateTime = jsonObject.getLong("taskCreateTime");
-        taskDurationTime = jsonObject.getLong("taskDurationTime");
-        taskStartTime = jsonObject.getLong("taskStartTime");
-        taskEndTime = jsonObject.getLong("taskEndTime");
-        taskStatus = jsonObject.getInt("taskStatus");
-        taskObtainExperienceValue = jsonObject.getLong("taskObtainExperienceValue");
+        taskID = jsonObject.optLong("taskID",0);
+        taskTitle = jsonObject.optString("taskTitle",UNDEF);
+        taskDescription = jsonObject.optString("taskDescription",UNDEF);
+        taskType = jsonObject.optString("taskType",UNDEF);
+        taskCreateTime = jsonObject.optLong("taskCreateTime",0);
+        taskDurationTime = jsonObject.optLong("taskDurationTime",0);
+        taskStartTime = jsonObject.optLong("taskStartTime",0);
+        taskEndTime = jsonObject.optLong("taskEndTime",0);
+        taskStatus = jsonObject.optInt("taskStatus",ERRSTATUS);
+        taskObtainExperienceValue = jsonObject.optLong("taskObtainExperienceValue",0);
     }
 
     @Override
