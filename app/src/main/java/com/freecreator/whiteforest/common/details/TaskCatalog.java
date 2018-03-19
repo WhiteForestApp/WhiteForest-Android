@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonArrayPut;
 import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonPut;
 
 /**
@@ -15,8 +16,8 @@ import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonPut
  */
 
 public class TaskCatalog {
-    private long uid;
-    private long itemNum;
+    private long uid = 0L;
+    private long itemNum = 0L;
     private long itemEarliestCreateTime;
     private long itemLatestCreateTime;
     private List<TaskDetails> taskDetailsList = new ArrayList<>();
@@ -27,11 +28,12 @@ public class TaskCatalog {
     * */
     public TaskCatalog(JSONObject jsonObject) throws JSONException{
         if(null == jsonObject) return;
-        JSONArray jsonArray = jsonObject.getJSONArray("taskDetailsList");
+        uid = jsonObject.optLong("uid",0);
+        JSONArray jsonArray = jsonObject.optJSONArray("taskDetailsList");
         itemNum = jsonArray.length();
         long tempTime = 0;
         for(int i = 0;i < itemNum;i++){
-            TaskDetails taskDetails = new TaskDetails(jsonArray.getJSONObject(i));
+            TaskDetails taskDetails = new TaskDetails(jsonArray.optJSONObject(i));
             tempTime = taskDetails.getTaskCreateTime();
             taskDetailsList.add(taskDetails);
             if(i == 0){
@@ -65,12 +67,23 @@ public class TaskCatalog {
         if(null == taskDetails || taskDetails.isInvalid()){
             return false;
         }
+        long tempTime = taskDetails.getTaskCreateTime();
         taskDetailsList.add(taskDetails);
+        if(itemNum == 0){
+            itemEarliestCreateTime = tempTime;
+        }
+        itemNum++;
+        itemEarliestCreateTime = itemEarliestCreateTime > tempTime ? tempTime : itemEarliestCreateTime;
+        itemLatestCreateTime = itemLatestCreateTime < tempTime ? tempTime : itemLatestCreateTime;
         return true;
     }
 
     @Override
     public String toString(){
+        return toJSONObject().toString();
+    }
+
+    public JSONObject toJSONObject(){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         jsonPut(jsonObject, "uid", ""+uid);
@@ -78,10 +91,11 @@ public class TaskCatalog {
         jsonPut(jsonObject, "itemEarliestCreateTime", ""+itemEarliestCreateTime);
         jsonPut(jsonObject, "itemLatestCreateTime", ""+itemLatestCreateTime);
         for(int i = 0;i < taskDetailsList.size();i++){
-            jsonArray.put(taskDetailsList.get(i).toString());
+            jsonArray.put(taskDetailsList.get(i).toJSONObject());
         }
-        jsonPut(jsonObject, "taskDetailsList",jsonArray.toString());
-        return jsonObject.toString();
+        jsonArrayPut(jsonObject,"taskDetailsList",jsonArray);
+        //jsonPut(jsonObject, "taskDetailsList",jsonArray);
+        return jsonObject;
     }
 
 }

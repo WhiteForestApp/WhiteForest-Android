@@ -126,6 +126,11 @@ public class TaskDetails extends AbstractDetails{
 
     @Override
     public String toString(){
+        return toJSONObject().toString();
+    }
+
+
+    public JSONObject toJSONObject(){
         JSONObject jsonObject = new JSONObject();
         //jsonPut(jsonObject, "uid", ""+uid);
         jsonPut(jsonObject, "taskID", ""+taskID);
@@ -138,7 +143,7 @@ public class TaskDetails extends AbstractDetails{
         jsonPut(jsonObject, "taskEndTime", ""+taskEndTime);
         jsonPut(jsonObject, "taskStatus", ""+taskStatus);
         jsonPut(jsonObject, "taskObtainExperienceValue", ""+taskObtainExperienceValue);
-        return jsonObject.toString();
+        return jsonObject;
     }
 
     @Override

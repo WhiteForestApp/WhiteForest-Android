@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonArrayPut;
 import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonPut;
 
 /**
@@ -28,11 +29,12 @@ public class DesireCatalog {
     * */
     public DesireCatalog(JSONObject jsonObject) throws JSONException{
         if(null == jsonObject) return;
+        uid = jsonObject.optLong("uid",0);
         JSONArray jsonArray = jsonObject.getJSONArray("desireDetailsList");
         itemNum = jsonArray.length();
         long tempTime = 0;
         for(int i = 0;i < itemNum;i++){
-            DesireDetails desireDetails = new DesireDetails(jsonArray.getJSONObject(i));
+            DesireDetails desireDetails = new DesireDetails(jsonArray.optJSONObject(i));
             tempTime = desireDetails.getDesireAddTime();
             desireDetailsList.add(desireDetails);
             if(i == 0){
@@ -72,6 +74,10 @@ public class DesireCatalog {
 
     @Override
     public String toString(){
+        return toJSONObject().toString();
+    }
+
+    public JSONObject toJSONObject(){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         jsonPut(jsonObject, "uid", ""+uid);
@@ -79,10 +85,11 @@ public class DesireCatalog {
         jsonPut(jsonObject, "itemEarliestAddTime", ""+itemEarliestAddTime);
         jsonPut(jsonObject, "itemLatestAddTime", ""+itemLatestAddTime);
         for(int i = 0;i < desireDetailsList.size();i++){
-            jsonArray.put(desireDetailsList.get(i).toString());
+            jsonArray.put(desireDetailsList.get(i).toJSONObject());
         }
-        jsonPut(jsonObject, "desireDetailsList",jsonArray.toString());
-        return jsonObject.toString();
+        jsonArrayPut(jsonObject,"desireDetailsList",jsonArray);
+        //jsonPut(jsonObject, "desireDetailsList",jsonArray);
+        return jsonObject;
     }
 
 }

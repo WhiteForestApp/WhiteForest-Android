@@ -153,6 +153,7 @@ public class UserDetails extends AbstractDetails{
         return this.userStatus;
     }
 
+    public UserDetails(){}
     public UserDetails(JSONObject jsonObject)throws JSONException{
         if(jsonObject == null) return;
         uid = jsonObject.optLong("uid",0);
@@ -176,6 +177,10 @@ public class UserDetails extends AbstractDetails{
 
     @Override
     public String toString(){
+        return toJSONObject().toString();
+    }
+
+    public JSONObject toJSONObject(){
         JSONObject jsonObject = new JSONObject();
         jsonPut(jsonObject, "uid", ""+uid);
         jsonPut(jsonObject, "nickName", nickName);
@@ -194,7 +199,7 @@ public class UserDetails extends AbstractDetails{
         jsonPut(jsonObject, "finishedTaskNum", ""+finishedTaskNum);
         jsonPut(jsonObject, "totalDesireNum", ""+totalDesireNum);
         jsonPut(jsonObject, "userStatus", ""+userStatus);
-        return jsonObject.toString();
+        return jsonObject;
     }
 
     @Override

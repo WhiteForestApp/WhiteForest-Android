@@ -6,4 +6,5 @@ package com.freecreator.whiteforest.common;
 
 public class LocalCache {
 
+
 }

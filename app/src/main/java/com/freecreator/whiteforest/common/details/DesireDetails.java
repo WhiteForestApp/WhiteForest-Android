@@ -106,17 +106,21 @@ public class DesireDetails extends AbstractDetails{
 
     @Override
     public String toString(){
+        return toJSONObject().toString();
+    }
+
+    public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
         //jsonPut(jsonObject, "uid", ""+uid);
-        jsonPut(jsonObject, "desireID", ""+desireID);
+        jsonPut(jsonObject, "desireID", "" + desireID);
         jsonPut(jsonObject, "desireTitle", desireTitle);
         jsonPut(jsonObject, "desireDescription", desireDescription);
         jsonPut(jsonObject, "desireType", desireType);
-        jsonPut(jsonObject, "desireAddTime", ""+desireAddTime);
-        jsonPut(jsonObject, "desireFulfillmentTime", ""+desireFulfillmentTime);
-        jsonPut(jsonObject, "desireStatus", ""+desireStatus);
-        jsonPut(jsonObject, "desireCostExperienceValue", ""+desireCostExperienceValue);
-        return jsonObject.toString();
+        jsonPut(jsonObject, "desireAddTime", "" + desireAddTime);
+        jsonPut(jsonObject, "desireFulfillmentTime", "" + desireFulfillmentTime);
+        jsonPut(jsonObject, "desireStatus", "" + desireStatus);
+        jsonPut(jsonObject, "desireCostExperienceValue", "" + desireCostExperienceValue);
+        return jsonObject;
     }
 
     @Override
