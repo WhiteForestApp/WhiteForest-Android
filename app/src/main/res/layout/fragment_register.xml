@@ -1,0 +1,329 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="724">
+
+
+        <!--中部栏 内容 积分等-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="583"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="75"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="540"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="71"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+                </LinearLayout>
+
+                <!--用户名-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+                    <com.freecreator.whiteforest.ui.views.FontTextView
+                        android:textColor="@color/dark3"
+                        android:text="@string/username"
+                        android:textSize="@dimen/register_page_font"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:textCursorDrawable="@null"
+                            android:textColor="@color/dark3"
+                            android:textSize="24sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <!--密码-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+                    <com.freecreator.whiteforest.ui.views.FontTextView
+                        android:textColor="@color/dark3"
+                        android:text="@string/password"
+                        android:textSize="@dimen/register_page_font"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:textCursorDrawable="@null"
+                            android:textColor="@color/dark3"
+                            android:textSize="24sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <!--确认密码-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+                    <com.freecreator.whiteforest.ui.views.FontTextView
+                        android:textColor="@color/dark3"
+                        android:text="@string/confirm_password"
+                        android:textSize="@dimen/register_page_font"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:textCursorDrawable="@null"
+                            android:textColor="@color/dark3"
+                            android:textSize="24sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <!--昵称-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+                    <com.freecreator.whiteforest.ui.views.FontTextView
+                        android:textColor="@color/dark3"
+                        android:text="@string/nickname"
+                        android:textSize="@dimen/register_page_font"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:textCursorDrawable="@null"
+                            android:textColor="@color/dark3"
+                            android:textSize="24sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <!--个性签名-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+                    <com.freecreator.whiteforest.ui.views.FontTextView
+                        android:textColor="@color/dark3"
+                        android:text="@string/motto"
+                        android:textSize="@dimen/register_page_font"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:textCursorDrawable="@null"
+                            android:textColor="@color/dark3"
+                            android:textSize="24sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <!--填补空白-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--填补空白-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="312"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="101"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+    <!--确认按钮-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="152"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <com.freecreator.whiteforest.ui.views.FontTextView
+            android:textSize="28sp"
+            android:textColor="@color/dark3"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:text="@string/register"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+</LinearLayout>
