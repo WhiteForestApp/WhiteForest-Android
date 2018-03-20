@@ -1,14 +1,13 @@
 package com.freecreator.whiteforest.common.details;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonArrayPut;
-import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonPut;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by JackYanx on 2018/3/15.
@@ -26,7 +25,7 @@ public class TaskCatalog {
     /*
     * 使用JSON初始化任务目录列表
     * */
-    public TaskCatalog(JSONObject jsonObject) throws JSONException{
+    public TaskCatalog(JSONObject jsonObject){
         if(null == jsonObject) return;
         uid = jsonObject.optLong("uid",0);
         JSONArray jsonArray = jsonObject.optJSONArray("taskDetailsList");
@@ -64,7 +63,7 @@ public class TaskCatalog {
 
     /*向本列表中添加任务项目*/
     public boolean addTaskDetails(TaskDetails taskDetails){
-        if(null == taskDetails || taskDetails.isInvalid()){
+        if(null == taskDetails || !taskDetails.isValid()){
             return false;
         }
         long tempTime = taskDetails.getTaskCreateTime();

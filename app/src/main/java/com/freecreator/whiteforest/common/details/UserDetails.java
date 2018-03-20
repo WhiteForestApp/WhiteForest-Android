@@ -1,7 +1,8 @@
 package com.freecreator.whiteforest.common.details;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by JackYanx on 2018/3/15.
@@ -154,7 +155,7 @@ public class UserDetails extends AbstractDetails{
     }
 
     public UserDetails(){}
-    public UserDetails(JSONObject jsonObject)throws JSONException{
+    public UserDetails(JSONObject jsonObject){
         if(jsonObject == null) return;
         uid = jsonObject.optLong("uid",0);
         nickName = jsonObject.optString("nickName",UNDEF);
@@ -203,8 +204,8 @@ public class UserDetails extends AbstractDetails{
     }
 
     @Override
-    public boolean isInvalid(){
-        return false;
+    public boolean isValid(){
+        return true;
     }
 
 

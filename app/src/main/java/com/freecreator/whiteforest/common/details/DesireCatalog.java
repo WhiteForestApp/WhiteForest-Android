@@ -1,14 +1,13 @@
 package com.freecreator.whiteforest.common.details;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonArrayPut;
-import static com.freecreator.whiteforest.common.details.AbstractDetails.jsonPut;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by JackYanx on 2018/3/15.
@@ -27,10 +26,10 @@ public class DesireCatalog {
     /*
     * 使用JSON初始化欲望目录列表
     * */
-    public DesireCatalog(JSONObject jsonObject) throws JSONException{
+    public DesireCatalog(JSONObject jsonObject){
         if(null == jsonObject) return;
         uid = jsonObject.optLong("uid",0);
-        JSONArray jsonArray = jsonObject.getJSONArray("desireDetailsList");
+        JSONArray jsonArray = jsonObject.optJSONArray("desireDetailsList");
         itemNum = jsonArray.length();
         long tempTime = 0;
         for(int i = 0;i < itemNum;i++){
@@ -65,7 +64,7 @@ public class DesireCatalog {
 
     /*向本列表中添加欲望项目*/
     public boolean addDesireDetails(DesireDetails desireDetails){
-        if(null == desireDetails || desireDetails.isInvalid()){
+        if(null == desireDetails || !desireDetails.isValid()){
             return false;
         }
         desireDetailsList.add(desireDetails);
