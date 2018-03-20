@@ -76,6 +76,7 @@
                         </LinearLayout>
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
+                            android:id="@+id/textLogin"
                             android:gravity="center_vertical"
                             android:text="@string/login"
                             android:textColor="@color/dark3"
@@ -94,12 +95,20 @@
 
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
+                            android:id="@+id/textRegister"
                             android:gravity="center_vertical"
                             android:text="@string/register"
                             android:textColor="@color/dark6"
                             android:textSize="22sp"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                        </LinearLayout>
 
                         <LinearLayout
                             android:orientation="horizontal"
@@ -113,31 +122,18 @@
 
 
                     <LinearLayout
-                        android:id="@+id/fragment"
                         android:orientation="vertical"
-                        android:layout_weight="724"
+                        android:layout_weight="876"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
 
+                        <FrameLayout
+                            android:id="@+id/fragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                        </FrameLayout>
 
-                    </LinearLayout>
-
-
-                    <!--确认按钮-->
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="152"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp">
-
-                        <com.freecreator.whiteforest.ui.views.FontTextView
-                            android:textSize="28sp"
-                            android:textColor="@color/dark3"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical"
-                            android:text="@string/confirm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
                     </LinearLayout>
 
 

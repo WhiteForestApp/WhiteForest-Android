@@ -22,4 +22,9 @@
     <string name="story_part3">asd</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="confirm_password">Confirm Password:</string>
+    <string name="nickname">nickname</string>
+    <string name="motto">Motto</string>
 </resources>
