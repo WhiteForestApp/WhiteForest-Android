@@ -2,6 +2,7 @@ package com.freecreator.whiteforest.common.details;
 
 import android.text.TextUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +12,8 @@ import org.json.JSONObject;
  */
 
 public abstract class AbstractDetails {
-    protected static final String UNDEF = "UndefinedText";
+    public static final String UNDEF = "UndefinedText";
+    public static final int ERRSTATUS = -1;
 
     /*验证字符串是否为空或者NULL,Null,null*/
     protected boolean isNull(String str) {
@@ -36,10 +38,13 @@ public abstract class AbstractDetails {
             e.printStackTrace();
         }
     }
-
-
-
-
+    protected static void jsonArrayPut(JSONObject jsonObject, String name, JSONArray value) {
+        try {
+            jsonObject.put(name, value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public abstract boolean isInvalid();
 }
