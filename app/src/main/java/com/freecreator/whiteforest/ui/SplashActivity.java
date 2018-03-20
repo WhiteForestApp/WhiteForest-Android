@@ -12,6 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import static com.freecreator.whiteforest.common.Debug.toMainlogin;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -35,8 +37,15 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(SplashActivity.this, mainpage.class));
-                        SplashActivity.this.finish();
+
+                        if(toMainlogin){
+                            startActivity(new Intent(SplashActivity.this, MainloginActivity.class));
+                            SplashActivity.this.finish();
+                        }
+                        else{
+                            startActivity(new Intent(SplashActivity.this, mainpage.class));
+                            SplashActivity.this.finish();
+                        }
                     }
                 });
             }
