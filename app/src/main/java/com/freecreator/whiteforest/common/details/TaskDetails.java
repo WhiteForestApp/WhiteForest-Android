@@ -1,7 +1,8 @@
 package com.freecreator.whiteforest.common.details;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by JackYanx on 2018/3/15.
@@ -109,9 +110,9 @@ public class TaskDetails extends AbstractDetails{
 
     public TaskDetails(){}
 
-    public TaskDetails(JSONObject jsonObject)throws JSONException {
+    public TaskDetails(JSONObject jsonObject){
         if(jsonObject == null) return;
-        //uid = jsonObject.getLong("uid");
+        //uid = jsonObject.optLong("uid");
         taskID = jsonObject.optLong("taskID",0);
         taskTitle = jsonObject.optString("taskTitle",UNDEF);
         taskDescription = jsonObject.optString("taskDescription",UNDEF);
@@ -147,8 +148,8 @@ public class TaskDetails extends AbstractDetails{
     }
 
     @Override
-    public boolean isInvalid(){
-        return false;
+    public boolean isValid(){
+        return true;
     }
 
 }
