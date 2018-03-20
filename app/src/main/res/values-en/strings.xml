@@ -20,4 +20,6 @@
     <string name="story_part1">asd</string>
     <string name="story_part2">asd</string>
     <string name="story_part3">asd</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>

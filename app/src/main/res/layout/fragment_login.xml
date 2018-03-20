@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!-- 选择栏 普通/时间投资计划-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="71"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </LinearLayout>
+
+
+    <!--中部栏 内容 积分等-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="583"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="25"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="540"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="71"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            </LinearLayout>
+
+            <!--输入金币-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="106"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <com.freecreator.whiteforest.ui.views.FontTextView
+                    android:textColor="@color/dark3"
+                    android:text="@string/coins_to_cost"
+                    android:gravity="center_vertical"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"
+                        android:textColor="@color/dark3"
+                        android:textSize="24sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--输入内容-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="312"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+
+                <com.freecreator.whiteforest.ui.views.FontTextView
+                    android:textColor="@color/dark3"
+                    android:text="@string/content_to_add"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:textCursorDrawable="@null"
+                        android:textColor="@color/dark3"
+                        android:textSize="24sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="71"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
