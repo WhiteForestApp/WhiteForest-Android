@@ -43,6 +43,21 @@ public class AdjustSize {
         return size;
     }
 
+    public static Size getMeasuredSize(View view){
+
+        Size size = new Size();
+        size.width = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        size.height = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        view.measure(size.width, size.height);
+
+        size.width = view.getMeasuredWidth(); // 获取宽度
+        size.height = view.getMeasuredHeight(); // 获取高度
+
+        return size;
+    }
+
     public static Size getImageWidthHeight(Context context, int resId){
         BitmapFactory.Options options = new BitmapFactory.Options();
 

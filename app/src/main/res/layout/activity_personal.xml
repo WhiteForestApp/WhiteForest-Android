@@ -31,6 +31,249 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"></LinearLayout>
+
+            <!--个人信息栏-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/ImageView_character"
+                    android:layout_weight="384"
+                    android:layout_width="0dp"
+                    android:layout_height="260dp"
+                    android:scaleType="fitXY"
+                    android:layout_centerInParent="true"  />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="336"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="8">
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="295">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="98"></LinearLayout>
+
+                        <!--昵称-->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="101">
+
+                            <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="灿柳"
+                                android:textColor="@color/dark2"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="26sp"/>
+
+
+                        </LinearLayout>
+
+
+                        <!--个性签名-->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="176">
+
+                            <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="center_vertical"
+                                android:lineSpacingMultiplier="1.2"
+                                android:text="游戏你的游戏\n别被游戏所游戏"
+                                android:textColor="@color/dark2"
+                                android:textSize="20sp"/>
+
+                        </LinearLayout>
+
+
+                        <!--修改信息-->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="139">
+
+                            <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="center_vertical"
+                                android:lineSpacingMultiplier="1.2"
+                                android:text="@string/change_personal_info"
+                                android:textColor="@color/dark3"
+                                android:textSize="16sp"/>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="级别 : 加诺侯爵"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/dark3"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="已获得奖牌"
+                    android:textColor="@color/dark3"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="85dp">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="130">
+                </LinearLayout>
+
+
+
+                <HorizontalScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="489">
+
+                    <LinearLayout
+                        android:id="@+id/list_attained"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="130">
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.freecreator.whiteforest.ui.views.FontTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/unattained_medal"
+                    android:textColor="@color/dark3"
+                    android:textSize="32sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/list_unattained"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="220dp">
+            </LinearLayout>
+
+        </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>

@@ -27,4 +27,7 @@
     <string name="confirm_password">Confirm Password:</string>
     <string name="nickname">nickname</string>
     <string name="motto">Motto</string>
+    <string name="change_personal_info">Change My Infomation</string>
+    <string name="unattained_medal">Unattained:</string>
+    <string name="unattained_medal2">Unattained</string>
 </resources>

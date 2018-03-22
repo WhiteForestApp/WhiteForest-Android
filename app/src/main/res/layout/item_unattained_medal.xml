@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/mask_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="314">
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/ImageView_medal"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="433">
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp">
+                </LinearLayout>
+
+                <com.freecreator.whiteforest.ui.views.FontTextView
+                    android:id="@+id/text_medal_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:text="耳濡目染"
+                    android:textSize="28sp"
+                    android:textColor="@color/dark3"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp">
+                </LinearLayout>
+
+
+                <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                    android:id="@+id/text_medal_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:text="单个项目坚持三十天"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark3"/>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp">
+                </LinearLayout>
+
+                <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                    android:includeFontPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/unattained_medal2"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark3"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp">
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp"></LinearLayout>
+    
+</LinearLayout>

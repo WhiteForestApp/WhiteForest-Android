@@ -27,4 +27,7 @@
     <string name="confirm_password">确认密码</string>
     <string name="nickname">昵称</string>
     <string name="motto">个性签名</string>
+    <string name="change_personal_info">修改个人信息</string>
+    <string name="unattained_medal">未获得:</string>
+    <string name="unattained_medal2">未获得</string>
 </resources>
