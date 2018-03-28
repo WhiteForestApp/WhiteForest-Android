@@ -17,6 +17,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
+ * Created by JackYanx on 2018/3/25.
  * Http请求操作类
  */
 
@@ -106,6 +107,7 @@ public class BaseHttpClient {
     }
 
     /**
+     * 检测当前网络是否可用
      * @param context 组件上下文
      * @return 是否可用
      */
