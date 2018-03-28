@@ -13,6 +13,8 @@ public class UserDetails extends AbstractDetails{
 
     /*用户唯一标识*/
     private long uid;
+    /*用户名*/
+    private String userName;
     /*用户昵称*/
     private String nickName;
     /*真实姓名*/
@@ -52,6 +54,9 @@ public class UserDetails extends AbstractDetails{
 
     public void setUID(long uid){
         this.uid = uid;
+    }
+    public void setUserName(String userName){
+        this.userName = userName;
     }
     public void setNickName(String nickNime){
         this.nickName = nickNime;
@@ -104,6 +109,9 @@ public class UserDetails extends AbstractDetails{
 
     public long getUID(){
         return this.uid;
+    }
+    public String getUserName(){
+        return isNull(userName) ? UNDEF : userName;
     }
     public String getNickName(){
         return isNull(nickName) ? UNDEF : nickName;
@@ -158,6 +166,7 @@ public class UserDetails extends AbstractDetails{
     public UserDetails(JSONObject jsonObject){
         if(jsonObject == null) return;
         uid = jsonObject.optLong("uid",0);
+        userName = jsonObject.optString("userName",UNDEF);
         nickName = jsonObject.optString("nickName",UNDEF);
         realName = jsonObject.optString("realName",UNDEF);
         password = jsonObject.optString("password",UNDEF);
@@ -184,6 +193,7 @@ public class UserDetails extends AbstractDetails{
     public JSONObject toJSONObject(){
         JSONObject jsonObject = new JSONObject();
         jsonPut(jsonObject, "uid", ""+uid);
+        jsonPut(jsonObject, "userName", userName);
         jsonPut(jsonObject, "nickName", nickName);
         jsonPut(jsonObject, "realName", realName);
         jsonPut(jsonObject, "password", password);
