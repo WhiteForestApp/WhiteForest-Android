@@ -1,13 +1,37 @@
 package com.freecreator.whiteforest.ui.dialogs;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
+import com.freecreator.whiteforest.ui.fragments.fragmentNormalTask;
+import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
+import com.freecreator.whiteforest.ui.fragments.fragmentTimerTask;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
+import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
+
+import org.w3c.dom.Text;
+
 
 /**
  * Created by niko on 2018/3/12.
@@ -15,11 +39,22 @@ import com.freecreator.whiteforest.ui.utils.AdjustSize;
 
 public class dialogAddTask {
 
-    private Activity m_parent = null;
+    private AppCompatActivity m_parent = null;
     private RelativeLayout mDialog = null;
     private RelativeLayout task_option_bg = null;
+    private TextView confirm_btn = null;
+    private TextView text_normal_task = null;
+    private TextView text_timer_task = null;
 
-    public dialogAddTask(Activity parent, RelativeLayout attachment){
+
+    private FragmentManager manager = null;
+    private FragmentTransaction transaction = null;
+
+    private fragmentNormalTask fragNormalTask = null;
+    private fragmentTimerTask fragTimerTask = null;
+    private Fragment fragCurrent = null;
+
+    public dialogAddTask(AppCompatActivity parent, RelativeLayout attachment){
         m_parent = parent;
 
         mDialog = (RelativeLayout)m_parent.getLayoutInflater().inflate(R.layout.dialog_add_task_item, null);
@@ -35,7 +70,24 @@ public class dialogAddTask {
     }
 
     private void UI_init() {
+
+        manager = m_parent.getSupportFragmentManager();
+
         task_option_bg = (RelativeLayout)mDialog.findViewById(R.id.task_option_bg);
+        text_normal_task = (TextView) mDialog.findViewById(R.id.text_normal_task);
+        text_timer_task = (TextView)mDialog.findViewById(R.id.text_timer_task);
+        confirm_btn = (TextView)mDialog.findViewById(R.id.confirm_btn);
+
+        fragNormalTask = new fragmentNormalTask();
+        fragTimerTask = new fragmentTimerTask();
+
+        transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment, fragNormalTask);
+        transaction.add(R.id.fragment, fragTimerTask);
+        transaction.commit();
+
+        setCurrentFrag(fragNormalTask);
+
     }
 
     private void setListeners() {
@@ -45,6 +97,89 @@ public class dialogAddTask {
                 dialogAddTask.this.hide();
             }
         });
+
+        confirm_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                if(null == fragCurrent)
+                    return;
+
+                View v =  fragCurrent.getView();
+                EditText edit = (EditText)v.findViewById(R.id.edit_exp);
+                String strExp = edit.getText().toString();
+
+                if(strExp.equals("")){
+                    Toast.makeText(m_parent.getBaseContext(), m_parent.getResources().getString(R.string.tips_input_exp), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                edit = (EditText)v.findViewById(R.id.edit_coins);
+                String strCoins = edit.getText().toString();
+
+                if(strCoins.equals("")){
+                    Toast.makeText(m_parent.getApplicationContext(), m_parent.getResources().getText(R.string.tips_input_coins), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                edit = (EditText)v.findViewById(R.id.edit_content);
+                String strContent = edit.getText().toString();
+
+                if(strContent.equals("")){
+                    Toast.makeText(m_parent.getApplicationContext(), m_parent.getResources().getText(R.string.tips_input_content), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                dialogAddTask.this.hide();
+            }
+        });
+
+
+        text_normal_task.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                setCurrentFrag(fragNormalTask);
+            }
+
+        });
+
+        text_timer_task.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                setCurrentFrag(fragTimerTask);
+            }
+
+        });
+    }
+
+    private void setCurrentFrag( Fragment frag){
+        if(null == frag)
+            return;
+
+        if(fragCurrent == frag)
+            return;
+
+        if(frag == fragNormalTask){
+            transaction = manager.beginTransaction();
+            transaction.show(fragNormalTask);
+            transaction.hide(fragTimerTask);
+            transaction.commit();
+
+            fragCurrent = fragNormalTask;
+            text_normal_task.setTextColor(m_parent.getResources().getColor(R.color.whitef1));
+            text_timer_task.setTextColor(m_parent.getResources().getColor(R.color.whitecf));
+
+        }else if(frag == fragTimerTask){
+
+            transaction = manager.beginTransaction();
+            transaction.show(fragTimerTask);
+            transaction.hide(fragNormalTask);
+            transaction.commit();
+
+            fragCurrent =  fragTimerTask;
+            text_timer_task.setTextColor(m_parent.getResources().getColor(R.color.whitef1));
+            text_normal_task.setTextColor(m_parent.getResources().getColor(R.color.whitecf));
+        }
     }
 
     public void show(){
@@ -54,5 +189,24 @@ public class dialogAddTask {
 
     public void hide(){
         mDialog.setVisibility(View.INVISIBLE);
+
+        // Clear the editText content
+
+        View v =  fragNormalTask.getView();
+        EditText edit = (EditText)v.findViewById(R.id.edit_exp);
+        edit.setText("");
+        edit = (EditText)v.findViewById(R.id.edit_coins);
+        edit.setText("");
+        edit = (EditText)v.findViewById(R.id.edit_content);
+        edit.setText("");
+
+        v =  fragTimerTask.getView();
+        edit = (EditText)v.findViewById(R.id.edit_exp);
+        edit.setText("");
+        edit = (EditText)v.findViewById(R.id.edit_coins);
+        edit.setText("");
+        edit = (EditText)v.findViewById(R.id.edit_content);
+        edit.setText("");
+
     }
 }

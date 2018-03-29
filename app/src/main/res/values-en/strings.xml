@@ -30,4 +30,9 @@
     <string name="change_personal_info">Change My Infomation</string>
     <string name="unattained_medal">Unattained:</string>
     <string name="unattained_medal2">Unattained</string>
+    <string name="exp_to_add_timer">Exp/minute</string>
+    <string name="coins_to_add_timer">Coins/minute</string>
+    <string name="tips_input_exp">Please input the exp value</string>
+    <string name="tips_input_coins">Please input the coins value</string>
+    <string name="tips_input_content">Please input the content</string>
 </resources>

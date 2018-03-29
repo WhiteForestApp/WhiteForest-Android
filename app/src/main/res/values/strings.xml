@@ -30,4 +30,9 @@
     <string name="change_personal_info">修改个人信息</string>
     <string name="unattained_medal">未获得:</string>
     <string name="unattained_medal2">未获得</string>
+    <string name="exp_to_add_timer">经验值/分钟</string>
+    <string name="coins_to_add_timer">金币/分钟</string>
+    <string name="tips_input_exp">请输入经验值</string>
+    <string name="tips_input_coins">请输入金币值</string>
+    <string name="tips_input_content">请输入内容</string>
 </resources>

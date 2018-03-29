@@ -11,4 +11,6 @@
     <color name="dark3">#333333</color>
     <color name="dark6">#666666</color>
     <color name="dark9">#999999</color>
+    <color name="whitef1">#f1f1f1</color>
+    <color name="whitecf">#cfcfcf</color>
 </resources>
