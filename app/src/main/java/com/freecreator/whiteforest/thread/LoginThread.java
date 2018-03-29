@@ -64,8 +64,100 @@ public class LoginThread implements Runnable {
             processCode = 2;
 
             //发送Post请求
-            String result = baseHttpClient.post(USER_LOGIN_URL,params);
+            //String result = baseHttpClient.post(USER_LOGIN_URL,params);
             processCode = 3;
+
+            /*
+            * 以下为模拟登录返回内容
+            * */
+
+            String result = "{\n" +
+                    "    \"errCode\":\"0\",\n" +
+                    "    \"userData\":{\n" +
+                    "        \"birthday\":\"1998-01-01\",\n" +
+                    "        \"finishedTaskNum\":\"150\",\n" +
+                    "        \"userStatus\":\"1\",\n" +
+                    "        \"level\":\"10\",\n" +
+                    "        \"nickName\":\"测试君\",\n" +
+                    "        \"sex\":\"male\",\n" +
+                    "        \"costExperienceValue\":\"200\",\n" +
+                    "        \"totalTaskNum\":\"205\",\n" +
+                    "        \"userName\":\"wftest\",\n" +
+                    "        \"uid\":\"100001\",\n" +
+                    "        \"realName\":\"肖建波\",\n" +
+                    "        \"password\":\"wftpwd\",\n" +
+                    "        \"remainExperienceValue\":\"800\",\n" +
+                    "        \"phoneNumber\":\"13888600000\",\n" +
+                    "        \"motto\":\"Practice Makes Perfect\",\n" +
+                    "        \"totalDesireNum\":\"36\",\n" +
+                    "        \"segmentLevel\":\"5\",\n" +
+                    "        \"totalExperienceValue\":\"1000\"\n" +
+                    "      },\n" +
+                    "    \"taskData\":{\n" +
+                    "        \"uid\":\"100001\",\n" +
+                    "        \"itemNum\":\"2\",\n" +
+                    "        \"itemLatestCreateTime\":\"1522291271\",\n" +
+                    "        \"itemEarliestCreateTime\":\"1522291271\",\n" +
+                    "        \"taskDetailsList\":[\n" +
+                    "          {\n" +
+                    "            \"taskType\":\"学习/Study/勉強する\",\n" +
+                    "            \"taskDescription\":\"p1~p4,16道题\",\n" +
+                    "            \"taskObtainExperienceValue\":\"2\",\n" +
+                    "            \"taskCreateTime\":\"1522291271\",\n" +
+                    "            \"taskDurationTime\":\"1800\",\n" +
+                    "            \"taskTitle\":\"高数作业\",\n" +
+                    "            \"taskID\":\"1000001\",\n" +
+                    "            \"taskStartTime\":\"1522291271\",\n" +
+                    "            \"taskStatus\":\"1\",\n" +
+                    "            \"taskEndTime\":\"0\"\n" +
+                    "          },\n" +
+                    "          {\n" +
+                    "            \"taskType\":\"编程/Programming/プログラミング\",\n" +
+                    "            \"taskDescription\":\"Model\",\n" +
+                    "            \"taskObtainExperienceValue\":\"4\",\n" +
+                    "            \"taskCreateTime\":\"1522291271\",\n" +
+                    "            \"taskDurationTime\":\"2700\",\n" +
+                    "            \"taskTitle\":\"写代码\",\n" +
+                    "            \"taskID\":\"1000002\",\n" +
+                    "            \"taskStartTime\":\"1522291271\",\n" +
+                    "            \"taskStatus\":\"1\",\n" +
+                    "            \"taskEndTime\":\"0\"\n" +
+                    "          }\n" +
+                    "        ]\n" +
+                    "      },\n" +
+                    "      \"desireData\":{\n" +
+                    "        \"uid\":\"100001\",\n" +
+                    "        \"itemNum\":\"2\",\n" +
+                    "        \"desireDetailsList\":[\n" +
+                    "          {\n" +
+                    "            \"desireID\":\"1000001\",\n" +
+                    "            \"desireStatus\":\"1\",\n" +
+                    "            \"desireType\":\"游戏/放松\",\n" +
+                    "            \"desireFulfillmentTime\":\"0\",\n" +
+                    "            \"desireTitle\":\"打游戏\",\n" +
+                    "            \"desireAddTime\":\"1522292414\",\n" +
+                    "            \"desireCostExperienceValue\":\"20\",\n" +
+                    "            \"desireDescription\":\"QQ飞车上钻石\"\n" +
+                    "          },\n" +
+                    "          {\n" +
+                    "            \"desireID\":\"1000002\",\n" +
+                    "            \"desireStatus\":\"0\",\n" +
+                    "            \"desireType\":\"外出/旅游\",\n" +
+                    "            \"desireFulfillmentTime\":\"1522292414\",\n" +
+                    "            \"desireTitle\":\"看樱花\",\n" +
+                    "            \"desireAddTime\":\"1522292414\",\n" +
+                    "            \"desireCostExperienceValue\":\"7\",\n" +
+                    "            \"desireDescription\":\"去东湖看樱花\"\n" +
+                    "          }\n" +
+                    "        ],\n" +
+                    "        \"itemLatestAddTime\":\"1522292414\",\n" +
+                    "        \"itemEarliestAddTime\":\"1522292414\"\n" +
+                    "      }\n" +
+                    "}";
+
+            /*
+            * 以上为模拟登录返回内容
+            * */
 
             //解析为json数据
             JSONObject userData = new JSONObject(result).optJSONObject("userData");

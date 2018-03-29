@@ -67,7 +67,14 @@ public class DesireCatalog {
         if(null == desireDetails || !desireDetails.isValid()){
             return false;
         }
+        long tempTime = desireDetails.getDesireAddTime();
         desireDetailsList.add(desireDetails);
+        if(itemNum == 0){
+            itemEarliestAddTime = tempTime;
+        }
+        itemNum++;
+        itemEarliestAddTime = itemEarliestAddTime > tempTime ? tempTime : itemEarliestAddTime;
+        itemLatestAddTime = itemLatestAddTime < tempTime ? tempTime : itemLatestAddTime;
         return true;
     }
 
