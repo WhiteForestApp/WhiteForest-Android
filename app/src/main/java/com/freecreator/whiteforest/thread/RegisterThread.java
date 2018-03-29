@@ -68,8 +68,40 @@ public class RegisterThread implements Runnable {
             processCode = 2;
 
             //发送Post请求
-            String result = baseHttpClient.post(USER_REG_URL,params);
+            //String result = baseHttpClient.post(USER_REG_URL,params);
             processCode = 3;
+
+            /*
+            * 以下为模拟注册返回内容
+            * */
+
+            String result = "{\n" +
+                    "    \"errCode\":\"0\",\n" +
+                    "    \"userData\":{\n" +
+                    "      \"birthday\":\"\",\n" +
+                    "      \"finishedTaskNum\":\"0\",\n" +
+                    "      \"userStatus\":\"1\",\n" +
+                    "      \"level\":\"0\",\n" +
+                    "      \"nickName\":\"wftest\",\n" +
+                    "      \"sex\":\"\",\n" +
+                    "      \"costExperienceValue\":\"0\",\n" +
+                    "      \"totalTaskNum\":\"0\",\n" +
+                    "      \"userName\":\"wftest\",\n" +
+                    "      \"uid\":\"100001\",\n" +
+                    "      \"realName\":\"\",\n" +
+                    "      \"password\":\"wftpwd\",\n" +
+                    "      \"remainExperienceValue\":\"0\",\n" +
+                    "      \"phoneNumber\":\"0\",\n" +
+                    "      \"motto\":\"Practice Makes Perfect\",\n" +
+                    "      \"totalDesireNum\":\"0\",\n" +
+                    "      \"segmentLevel\":\"0\",\n" +
+                    "      \"totalExperienceValue\":\"0\"\n" +
+                    "    }\n" +
+                    "}";
+
+            /*
+            * 以上为模拟注册返回内容
+            * */
 
             //解析为json数据
             JSONObject userData = new JSONObject(result).optJSONObject("userData");
