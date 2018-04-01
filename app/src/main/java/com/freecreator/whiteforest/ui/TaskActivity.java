@@ -229,49 +229,29 @@ public class TaskActivity extends AppCompatActivity {
         try {
 
             obj.put("type", TYPE_TIMER_TASK);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(-1,obj);
-
-            obj.put("type", TYPE_TIMER_TASK);
             obj.put("title", "阅读书籍");
             UI_addItem(-1,obj);
 
-            obj.put("type", TYPE_NORMAL_TASK);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(-1,obj);
-
-            obj.put("type", TYPE_NORMAL_TASK);
-            obj.put("title", "msflkj阿斯顿也斯蒂");
-            UI_addItem(-1,obj);
-
-            obj.put("type", TYPE_NORMAL_TASK);
-            obj.put("title", "斯蒂芬斯多夫电风扇阿萨德斯蒂芬斯多夫阿斯顿也斯蒂");
-            UI_addItem(-1,obj);
-
-            obj.put("type", TYPE_NORMAL_TASK);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
+            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
+            obj.put("title", "安装[白色森林]");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("title", "msflkj阿斯顿也斯蒂");
+            obj.put("title", "了解白色森林的历史");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("title", "斯蒂芬斯多夫电风扇阿萨德斯蒂芬斯多夫阿斯顿也斯蒂");
+            obj.put("title", "添加一个普通的任务");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
+            obj.put("title", "添加一个时间投资计划的任务");
             UI_addItem(-1,obj);
+
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("title", "msflkj阿斯顿也斯蒂");
+            obj.put("title", "打开人物页面页 查看我所获得的奖牌");
             UI_addItem(-1,obj);
-
-            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("title", "斯蒂芬斯多夫电风扇阿萨德斯蒂芬斯多夫阿斯顿也斯蒂");
-            UI_addItem(-1,obj);
-
 
 
         } catch (JSONException e) {

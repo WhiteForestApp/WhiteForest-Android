@@ -148,10 +148,6 @@ public class DesireActivity extends AppCompatActivity {
         try {
 
             obj.put("scores", 6);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(0,obj);
-
-            obj.put("scores", 6);
             obj.put("title", "阅读书籍");
             UI_addItem(0,obj);
 
