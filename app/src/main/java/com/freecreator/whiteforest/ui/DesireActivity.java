@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.freecreator.whiteforest.common.Debug._Debug;
+import static com.freecreator.whiteforest.common.Debug._debug2;
 
 /**
  * Created by niko on 2018/3/11.
@@ -135,7 +136,7 @@ public class DesireActivity extends AppCompatActivity {
 
         UI_adjust();
 
-        if(_Debug)
+        if(_debug2)
             mockDataForTest();
     }
 

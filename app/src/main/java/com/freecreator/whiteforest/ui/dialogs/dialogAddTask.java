@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.TaskActivity;
 import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
 import com.freecreator.whiteforest.ui.fragments.fragmentNormalTask;
 import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
@@ -30,8 +31,14 @@ import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
 import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import static com.freecreator.whiteforest.ui.TaskActivity.TYPE_NORMAL_FINISHED_TASK;
+import static com.freecreator.whiteforest.ui.TaskActivity.TYPE_NORMAL_TASK;
+import static com.freecreator.whiteforest.ui.TaskActivity.TYPE_TIMER_TASK;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by niko on 2018/3/12.
@@ -45,7 +52,6 @@ public class dialogAddTask {
     private TextView confirm_btn = null;
     private TextView text_normal_task = null;
     private TextView text_timer_task = null;
-
 
     private FragmentManager manager = null;
     private FragmentTransaction transaction = null;
@@ -109,7 +115,7 @@ public class dialogAddTask {
                 EditText edit = (EditText)v.findViewById(R.id.edit_exp);
                 String strExp = edit.getText().toString();
 
-                if(strExp.equals("")){
+                if(null == strExp || strExp.equals("")){
                     Toast.makeText(m_parent.getBaseContext(), m_parent.getResources().getString(R.string.tips_input_exp), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -117,7 +123,7 @@ public class dialogAddTask {
                 edit = (EditText)v.findViewById(R.id.edit_coins);
                 String strCoins = edit.getText().toString();
 
-                if(strCoins.equals("")){
+                if(null == strCoins || strCoins.equals("")){
                     Toast.makeText(m_parent.getApplicationContext(), m_parent.getResources().getText(R.string.tips_input_coins), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -125,9 +131,37 @@ public class dialogAddTask {
                 edit = (EditText)v.findViewById(R.id.edit_content);
                 String strContent = edit.getText().toString();
 
-                if(strContent.equals("")){
+                if(null == strContent || strContent.equals("")){
                     Toast.makeText(m_parent.getApplicationContext(), m_parent.getResources().getText(R.string.tips_input_content), Toast.LENGTH_SHORT).show();
                     return;
+                }
+
+                if(fragCurrent == fragTimerTask){
+
+                    //  { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
+                    JSONObject task_obj = new JSONObject();
+                    jsonPut(task_obj, "type", TYPE_TIMER_TASK);
+                    jsonPut(task_obj, "title", strContent);
+                    jsonPut(task_obj, "scores", strCoins );
+                    jsonPut(task_obj, "exp", strExp );
+
+                    if(m_parent instanceof TaskActivity){
+                        TaskActivity taskActivity = (TaskActivity)m_parent;
+                        taskActivity.UI_addItem(-1, task_obj);
+                    }
+
+                }else if(fragCurrent == fragNormalTask){
+
+                    JSONObject task_obj = new JSONObject();
+                    jsonPut(task_obj, "type", TYPE_NORMAL_TASK);
+                    jsonPut(task_obj, "title", strContent);
+                    jsonPut(task_obj, "scores", strCoins );
+                    jsonPut(task_obj, "exp", strExp );
+
+                    if(m_parent instanceof TaskActivity){
+                        TaskActivity taskActivity = (TaskActivity)m_parent;
+                        taskActivity.UI_addItem(-1, task_obj);
+                    }
                 }
 
                 dialogAddTask.this.hide();

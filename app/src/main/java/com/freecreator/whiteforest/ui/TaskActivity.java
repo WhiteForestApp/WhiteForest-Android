@@ -31,9 +31,9 @@ public class TaskActivity extends AppCompatActivity {
 
     private ImageView ImageView_icon_task = null;
 
-    private final static int TYPE_NORMAL_TASK = 1;
-    private final static int TYPE_NORMAL_FINISHED_TASK = 2;
-    private final static int TYPE_TIMER_TASK = 3;
+    public final static int TYPE_NORMAL_TASK = 1;
+    public final static int TYPE_NORMAL_FINISHED_TASK = 2;
+    public final static int TYPE_TIMER_TASK = 3;
 
     // list_task 是可滑动区域的layout, 往list_task 添加view, 就可以添加到可滑动区域进去
     // 可以添加的view布局有两种
@@ -48,6 +48,10 @@ public class TaskActivity extends AppCompatActivity {
     private ImageView ImageView_btn_add = null;
 
     private dialogAddTask dialogTask = null;
+
+    private int task_normal_total = 0;
+    private int task_normal_finished_total = 0;
+    private int task_timer_total = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,13 +110,17 @@ public class TaskActivity extends AppCompatActivity {
      * @param data Json data. An sample is below:
      *             { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
      */
-    private void UI_addItem(int position, JSONObject data){
+    public void UI_addItem(int position, JSONObject data){
         if(null == data)
             return;
 
         int type = data.optInt("type");
         switch(type){
             case TYPE_NORMAL_FINISHED_TASK:{
+
+                if(position < 0)
+                    position = task_timer_total * 2 + task_normal_total * 2 ;
+
                 LinearLayout item = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_finished_task, null);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -137,11 +145,19 @@ public class TaskActivity extends AppCompatActivity {
                 refSize.width = 500;
                 float h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
-                list_task.addView(space,position + 1, params);
+                list_task.addView(space, position + 1, params);
+                //list_task.addView(space,  params);
+
+                task_normal_finished_total++;
+
                 break;
             }
 
             case TYPE_NORMAL_TASK:{
+
+                if(position < 0)
+                    position = task_timer_total * 2 ;
+
                 LinearLayout item = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_normal_task, null);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -162,11 +178,17 @@ public class TaskActivity extends AppCompatActivity {
                 float h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
                 list_task.addView(space, position + 1, params);
+                //list_task.addView(space,  params);
+
+                task_normal_total++;
 
                 break;
             }
 
             case TYPE_TIMER_TASK:{
+
+                if(position < 0)
+                    position = 0;
 
                 LinearLayout item = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_timer_task, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
@@ -189,6 +211,9 @@ public class TaskActivity extends AppCompatActivity {
                 h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
                 list_task.addView(space, position + 1, params);
+                //list_task.addView(space,  params);
+
+                task_timer_total++;
 
                 break;
             }
@@ -205,47 +230,47 @@ public class TaskActivity extends AppCompatActivity {
 
             obj.put("type", TYPE_TIMER_TASK);
             obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(0,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_TIMER_TASK);
             obj.put("title", "阅读书籍");
-            UI_addItem(2,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_TASK);
             obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(4,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_TASK);
             obj.put("title", "msflkj阿斯顿也斯蒂");
-            UI_addItem(6,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_TASK);
             obj.put("title", "斯蒂芬斯多夫电风扇阿萨德斯蒂芬斯多夫阿斯顿也斯蒂");
-            UI_addItem(8,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_TASK);
             obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(10,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
             obj.put("title", "msflkj阿斯顿也斯蒂");
-            UI_addItem(12,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
             obj.put("title", "斯蒂芬斯多夫电风扇阿萨德斯蒂芬斯多夫阿斯顿也斯蒂");
-            UI_addItem(14,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
             obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
-            UI_addItem(16,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
             obj.put("title", "msflkj阿斯顿也斯蒂");
-            UI_addItem(18,obj);
+            UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
             obj.put("title", "斯蒂芬斯多夫电风扇阿萨德斯蒂芬斯多夫阿斯顿也斯蒂");
-            UI_addItem(20,obj);
+            UI_addItem(-1,obj);
 
 
 

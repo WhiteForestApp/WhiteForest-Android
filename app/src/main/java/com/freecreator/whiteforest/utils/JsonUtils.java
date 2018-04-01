@@ -43,6 +43,20 @@ public class JsonUtils {
     }
 
     /**
+     * 优化过的JSONObject put方法，防止前面的异常导致后面的键值对丢失
+     * @param jsonObject
+     * @param name
+     * @param value
+     */
+    public static void jsonPut(JSONObject jsonObject, String name, int value) {
+        try {
+            jsonObject.put(name, value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 优化过的JSONObject putArray方法，防止前面的异常导致后面的键值对丢失
      * @param jsonObject
      * @param name
