@@ -62,9 +62,9 @@ public class DesireCatalog {
         return desireDetailsList;
     }
 
-    /*向本列表中添加欲望项目*/
+    /*向本列表中添加欲望项目,以desireID为标识记录,如有重复则无法添加*/
     public boolean addDesireDetails(DesireDetails desireDetails){
-        if(null == desireDetails || !desireDetails.isValid()){
+        if(null == desireDetails || !desireDetails.isValid()|| isInList(desireDetails.getDesireID())){
             return false;
         }
         long tempTime = desireDetails.getDesireAddTime();
@@ -76,6 +76,43 @@ public class DesireCatalog {
         itemEarliestAddTime = itemEarliestAddTime > tempTime ? tempTime : itemEarliestAddTime;
         itemLatestAddTime = itemLatestAddTime < tempTime ? tempTime : itemLatestAddTime;
         return true;
+    }
+
+    /*从本列表中删除欲望项目*/
+    public boolean delTaskDetails(long desireID){
+        if(false == isInList(desireID)){
+            return false;
+        }
+        DesireDetails tmp;
+        for (int i = 0; i < desireDetailsList.size(); i++) {
+            tmp = desireDetailsList.get(i);
+            if(tmp != null && tmp.getDesireID() == desireID){
+                desireDetailsList.remove(tmp);
+                itemNum--;
+                /*
+                long tempTime = tmp.getTaskCreateTime();
+                itemEarliestCreateTime = itemEarliestCreateTime > tempTime ? tempTime : itemEarliestCreateTime;
+                itemLatestCreateTime = itemLatestCreateTime < tempTime ? tempTime : itemLatestCreateTime;
+                */
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*判断具有desireID值的欲望是否在当前列表中*/
+    public boolean isInList(long desireID){
+        if(null == desireDetailsList || desireDetailsList.size() == 0){
+            return false;
+        }
+        DesireDetails tmp;
+        for (int i = 0; i < desireDetailsList.size(); i++) {
+            tmp = desireDetailsList.get(i);
+            if(tmp != null && tmp.getDesireID() == desireID){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -61,9 +61,9 @@ public class TaskCatalog {
         return taskDetailsList;
     }
 
-    /*向本列表中添加任务项目*/
+    /*向本列表中添加任务项目,以taskID为标识记录,如有重复则无法添加*/
     public boolean addTaskDetails(TaskDetails taskDetails){
-        if(null == taskDetails || !taskDetails.isValid()){
+        if(null == taskDetails || !taskDetails.isValid() || isInList(taskDetails.getTaskID())){
             return false;
         }
         long tempTime = taskDetails.getTaskCreateTime();
@@ -75,6 +75,42 @@ public class TaskCatalog {
         itemEarliestCreateTime = itemEarliestCreateTime > tempTime ? tempTime : itemEarliestCreateTime;
         itemLatestCreateTime = itemLatestCreateTime < tempTime ? tempTime : itemLatestCreateTime;
         return true;
+    }
+    /*从本列表中删除任务项目*/
+    public boolean delTaskDetails(long taskID){
+        if(false == isInList(taskID)){
+            return false;
+        }
+        TaskDetails tmp;
+        for (int i = 0; i < taskDetailsList.size(); i++) {
+            tmp = taskDetailsList.get(i);
+            if(tmp != null && tmp.getTaskID() == taskID){
+                taskDetailsList.remove(tmp);
+                itemNum--;
+                /*
+                long tempTime = tmp.getTaskCreateTime();
+                itemEarliestCreateTime = itemEarliestCreateTime > tempTime ? tempTime : itemEarliestCreateTime;
+                itemLatestCreateTime = itemLatestCreateTime < tempTime ? tempTime : itemLatestCreateTime;
+                */
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*判断具有taskID值的任务是否在当前列表中*/
+    public boolean isInList(long taskID){
+        if(null == taskDetailsList || taskDetailsList.size() == 0){
+            return false;
+        }
+        TaskDetails tmp;
+        for (int i = 0; i < taskDetailsList.size(); i++) {
+            tmp = taskDetailsList.get(i);
+            if(tmp != null && tmp.getTaskID() == taskID){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
