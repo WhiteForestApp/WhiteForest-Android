@@ -21,7 +21,11 @@ import com.freecreator.whiteforest.ui.views.FontTextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import static com.freecreator.whiteforest.common.Debug._Debug;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by niko on 2018/3/10.
@@ -52,6 +56,9 @@ public class TaskActivity extends AppCompatActivity {
     private int task_normal_total = 0;
     private int task_normal_finished_total = 0;
     private int task_timer_total = 0;
+
+    // view 对应 着 item 的view 和 JSONObject
+    private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +98,6 @@ public class TaskActivity extends AppCompatActivity {
         list_task = (LinearLayout) findViewById(R.id.list_task);
 
         dialogTask = new dialogAddTask(this, (RelativeLayout) findViewById(R.id.task_page));
-
-
     }
 
 
@@ -100,6 +105,45 @@ public class TaskActivity extends AppCompatActivity {
         // 尺寸自适应 根据图片的宽高 来调整view高度 [宽度不调整]
         AdjustSize.adjustHeight(ImageView_icon_task, AdjustSize.getImageWidthHeight(this, R.drawable.task));
         AdjustSize.adjustHeight(ImageView_btn_add, AdjustSize.getImageWidthHeight(this, R.drawable.btn_add));
+    }
+
+    private void UI_clickEvent(View v){
+
+        ArrayList<Object> value = view_info.get(v);
+
+        if(null == value)
+            return;
+
+        JSONObject obj = (JSONObject) value.get(0);
+        if(null == obj || !(obj instanceof JSONObject))
+            return;
+
+        View item = (View) value.get(1);
+        if(null == item || !(item instanceof View))
+            return;
+
+        View space = (View) value.get(1);
+        if(null == space || !(space instanceof View))
+            return;
+
+        int type = obj.optInt("type");
+        switch(type){
+            case TYPE_NORMAL_FINISHED_TASK:{
+                break;
+            }
+            case TYPE_NORMAL_TASK:{
+                task_normal_total--;
+                list_task.removeView(item);
+                list_task.removeView(space);
+
+                jsonPut(obj, "type", TYPE_NORMAL_FINISHED_TASK);
+                UI_addItem(-1, obj);
+                break;
+            }
+            case TYPE_TIMER_TASK:{
+                break;
+            }
+        }
     }
 
     /**
@@ -136,6 +180,14 @@ public class TaskActivity extends AppCompatActivity {
                 }
 
                 list_task.addView(item, position, params);
+//
+//                view_info.put(item, data);
+//                item.findViewById(R.id.checkbox).setOnClickListener(new View.OnClickListener(){
+//                    @Override
+//                    public void onClick(View v ){
+//                        UI_clickEvent(v);
+//                    }
+//                });
 
                 LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
@@ -169,6 +221,8 @@ public class TaskActivity extends AppCompatActivity {
 
                 list_task.addView(item, position, params);
 
+
+
                 LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
 
@@ -181,6 +235,18 @@ public class TaskActivity extends AppCompatActivity {
                 //list_task.addView(space,  params);
 
                 task_normal_total++;
+
+                ArrayList<Object> value = new ArrayList<>();
+                value.add(data);
+                value.add(item);
+                value.add(space);
+                view_info.put(item.findViewById(R.id.checkbox), value);
+                item.findViewById(R.id.checkbox).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v ){
+                        UI_clickEvent(v);
+                    }
+                });
 
                 break;
             }
@@ -203,6 +269,19 @@ public class TaskActivity extends AppCompatActivity {
                 }
 
                 list_task.addView(item,position, params);
+
+
+                ArrayList<Object> value = new ArrayList<>();
+                value.add(data);
+                value.add(item);
+                view_info.put(item.findViewById(R.id.btn_add_timer), value);
+                item.findViewById(R.id.btn_add_timer).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v ){
+                        UI_clickEvent(v);
+                    }
+                });
+
 
                 LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
 
