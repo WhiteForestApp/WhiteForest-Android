@@ -68,7 +68,7 @@
         </LinearLayout>
 
 
-        <ScrollView
+        <com.freecreator.whiteforest.ui.views.ScrollViewSmooth
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
@@ -98,7 +98,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="300dp">
+                        android:layout_height="100dp">
 
                     </LinearLayout>
                 </LinearLayout>
@@ -115,7 +115,7 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </com.freecreator.whiteforest.ui.views.ScrollViewSmooth>
 
 
         <LinearLayout
