@@ -1,43 +1,25 @@
 package com.freecreator.whiteforest.ui.dialogs;
 
-import android.app.Activity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.freecreator.whiteforest.R;
-import com.freecreator.whiteforest.ui.TaskActivity;
-import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
-import com.freecreator.whiteforest.ui.fragments.fragmentNormalTask;
-import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
-import com.freecreator.whiteforest.ui.fragments.fragmentTimerTask;
-import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.freecreator.whiteforest.R;
-import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
-import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
+import com.freecreator.whiteforest.ui.TaskActivity;
+import com.freecreator.whiteforest.ui.fragments.fragmentNormalTask;
+import com.freecreator.whiteforest.ui.fragments.fragmentTimerTask;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import static com.freecreator.whiteforest.ui.TaskActivity.TYPE_NORMAL_FINISHED_TASK;
 import static com.freecreator.whiteforest.ui.TaskActivity.TYPE_NORMAL_TASK;
 import static com.freecreator.whiteforest.ui.TaskActivity.TYPE_TIMER_TASK;
-import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
