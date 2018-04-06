@@ -14,5 +14,7 @@
     <color name="whitef1">#546c90</color>
     <color name="whitecf">#112a50</color>
     <color name="colorDialogText">#112a50</color>
+    <color name="Textarea">#eee8d3</color>
+
 
 </resources>

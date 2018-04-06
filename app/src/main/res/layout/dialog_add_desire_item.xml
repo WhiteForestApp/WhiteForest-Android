@@ -171,6 +171,7 @@
 
                                         <EditText
                                             android:inputType="number"
+                                            android:id="@+id/btn_money"
                                             android:textCursorDrawable="@null"
                                             android:textColor="@color/dark3"
                                             android:textSize="24sp"
@@ -210,6 +211,7 @@
 
                                         <EditText
                                             android:textCursorDrawable="@null"
+                                            android:id="@+id/exp_btn"
                                             android:textColor="@color/dark3"
                                             android:textSize="24sp"
                                             android:layout_width="match_parent"

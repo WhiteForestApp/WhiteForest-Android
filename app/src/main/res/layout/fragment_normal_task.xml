@@ -9,112 +9,86 @@
 
     <!--中部栏 内容 积分等-->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_weight="583"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="583"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="25"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-        </LinearLayout>
-
+            android:orientation="horizontal"></LinearLayout>
 
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="540"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:layout_weight="540"
+            android:orientation="vertical">
 
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="71"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
-            </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="0"
+                android:orientation="vertical"></LinearLayout>
 
 
             <!--输入经验值-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="94"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="94"
+                android:orientation="horizontal">
+
 
                 <com.freecreator.whiteforest.ui.views.FontTextView
-                    android:textColor="@color/colorDialogText"
-                    android:text="@string/exp_to_add"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:textSize="24sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent">
-                </LinearLayout>
+                    android:text="@string/exp_to_add"
+                    android:textColor="@color/colorDialogText"
+                    android:textSize="24sp" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/edit_exp"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"
-                        android:textColor="@color/colorDialogText"
-                        android:textSize="24sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:textColor="@color/colorDialogText"
+                        android:textCursorDrawable="@null"
+                        android:textSize="24sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!--输入金币-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="106"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
-
-                <com.freecreator.whiteforest.ui.views.FontTextView
-                    android:textColor="@color/colorDialogText"
-                    android:text="@string/coins_to_add"
-                    android:gravity="center_vertical"
-                    android:textSize="24sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                android:layout_height="0dp"
+                android:layout_weight="106"
+                android:orientation="horizontal">
 
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="10dp"
-                    android:layout_height="match_parent">
-                </LinearLayout>
+                    android:layout_height="10dp"
+                    android:orientation="horizontal"></LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/edit_coins"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"
-                        android:textColor="@color/colorDialogText"
-                        android:textSize="24sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -122,38 +96,37 @@
 
             <!--输入内容-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="312"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="312"
+                android:orientation="horizontal">
 
 
                 <com.freecreator.whiteforest.ui.views.FontTextView
-                    android:textColor="@color/colorDialogText"
-                    android:text="@string/content_to_add"
-                    android:textSize="24sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/content_to_add"
+                    android:textColor="@color/colorDialogText"
+                    android:textSize="24sp" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="10dp"
-                    android:layout_height="match_parent">
-                </LinearLayout>
+                    android:layout_height="20px"
+                    android:orientation="horizontal"></LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/edit_content"
-                        android:textCursorDrawable="@null"
-                        android:textColor="@color/colorDialogText"
-                        android:textSize="24sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="92dp"
+                        android:textColor="@color/colorDialogText"
+                        android:textCursorDrawable="@null"
+                        android:textSize="24sp" />
                 </LinearLayout>
 
 
@@ -162,13 +135,11 @@
         </LinearLayout>
 
 
-
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="71"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="71"
+            android:orientation="horizontal"></LinearLayout>
 
 
     </LinearLayout>

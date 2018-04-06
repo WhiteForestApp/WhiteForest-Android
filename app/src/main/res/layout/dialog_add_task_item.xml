@@ -194,10 +194,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp">
 
-                            <FrameLayout
-                                android:id="@+id/fragment"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"></FrameLayout>
+
+
+
+                                <FrameLayout
+                                    android:id="@+id/fragment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    android:text="内容"
+
+                                </FrameLayout>
+
+
+
+
 
                         </LinearLayout>
 
@@ -213,13 +223,13 @@
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
                             android:id="@+id/confirm_btn"
-                            android:textSize="28sp"
-                            android:textColor="@color/colorDialogText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical"
                             android:text="@string/confirm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textColor="@color/colorDialogText"
+                            android:textSize="25sp" />
                     </LinearLayout>
 
 

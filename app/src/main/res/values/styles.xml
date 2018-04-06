@@ -20,6 +20,8 @@
     <style name="Theme.MyTheme.standard" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/white</item>
         <item name="colorPrimaryDark">@android:color/black</item>
+
+
     </style>
 
 
