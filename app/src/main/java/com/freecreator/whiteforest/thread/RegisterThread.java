@@ -65,6 +65,7 @@ public class RegisterThread implements Runnable {
             params.put("password",password);
             params.put("nickName",nickName);
             params.put("motto",motto);
+            params.put("timeStamp",""+System.currentTimeMillis() / 1000);
             processCode = 2;
 
             //发送Post请求
@@ -77,6 +78,7 @@ public class RegisterThread implements Runnable {
 
             String result = "{\n" +
                     "    \"errCode\":\"0\",\n" +
+                    "    \"errMsg\":\"Success\",\n" +
                     "    \"userData\":{\n" +
                     "      \"birthday\":\"\",\n" +
                     "      \"finishedTaskNum\":\"0\",\n" +

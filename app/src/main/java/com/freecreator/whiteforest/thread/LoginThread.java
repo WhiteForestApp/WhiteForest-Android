@@ -61,6 +61,7 @@ public class LoginThread implements Runnable {
             SortedMap<String,String> params = new TreeMap<>();
             params.put("userName",userName);
             params.put("password",password);
+            params.put("timeStamp",""+System.currentTimeMillis() / 1000);
             processCode = 2;
 
             //发送Post请求
@@ -73,6 +74,7 @@ public class LoginThread implements Runnable {
 
             String result = "{\n" +
                     "    \"errCode\":\"0\",\n" +
+                    "    \"errMsg\":\"Success\",\n" +
                     "    \"userData\":{\n" +
                     "        \"birthday\":\"1998-01-01\",\n" +
                     "        \"finishedTaskNum\":\"150\",\n" +

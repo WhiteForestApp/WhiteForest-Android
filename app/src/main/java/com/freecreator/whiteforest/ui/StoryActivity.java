@@ -1,6 +1,5 @@
 package com.freecreator.whiteforest.ui;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
-
-import static com.freecreator.whiteforest.common.Debug._Debug;
 
 /**
  * Created by niko on 2018/3/14.
@@ -63,5 +60,11 @@ public class StoryActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         UI_adjust();
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.activity_anim_story_in, R.anim.activity_anim_story_out);
     }
 }
