@@ -58,7 +58,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="102"
+                        android:layout_weight="157.16"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                     </LinearLayout>
@@ -244,19 +244,20 @@
                         android:layout_height="0dp">
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
-                            android:textSize="28sp"
-                            android:textColor="@color/dark3"
+                            android:id="@+id/fontTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical"
                             android:text="@string/confirm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textColor="@color/dark3"
+                            android:textSize="28sp" />
                     </LinearLayout>
 
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="100"
+                        android:layout_weight="161.18"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                     </LinearLayout>

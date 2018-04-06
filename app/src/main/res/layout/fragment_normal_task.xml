@@ -47,7 +47,7 @@
                 android:layout_height="0dp">
 
                 <com.freecreator.whiteforest.ui.views.FontTextView
-                    android:textColor="@color/dark3"
+                    android:textColor="@color/colorDialogText"
                     android:text="@string/exp_to_add"
                     android:gravity="center_vertical"
                     android:textSize="24sp"
@@ -71,7 +71,7 @@
                         android:id="@+id/edit_exp"
                         android:inputType="number"
                         android:textCursorDrawable="@null"
-                        android:textColor="@color/dark3"
+                        android:textColor="@color/colorDialogText"
                         android:textSize="24sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -87,7 +87,7 @@
                 android:layout_height="0dp">
 
                 <com.freecreator.whiteforest.ui.views.FontTextView
-                    android:textColor="@color/dark3"
+                    android:textColor="@color/colorDialogText"
                     android:text="@string/coins_to_add"
                     android:gravity="center_vertical"
                     android:textSize="24sp"
@@ -111,7 +111,7 @@
                         android:id="@+id/edit_coins"
                         android:inputType="number"
                         android:textCursorDrawable="@null"
-                        android:textColor="@color/dark3"
+                        android:textColor="@color/colorDialogText"
                         android:textSize="24sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -129,7 +129,7 @@
 
 
                 <com.freecreator.whiteforest.ui.views.FontTextView
-                    android:textColor="@color/dark3"
+                    android:textColor="@color/colorDialogText"
                     android:text="@string/content_to_add"
                     android:textSize="24sp"
                     android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                     <EditText
                         android:id="@+id/edit_content"
                         android:textCursorDrawable="@null"
-                        android:textColor="@color/dark3"
+                        android:textColor="@color/colorDialogText"
                         android:textSize="24sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>

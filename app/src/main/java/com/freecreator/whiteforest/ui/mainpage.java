@@ -146,6 +146,7 @@ public class mainpage extends AppCompatActivity {
 
         ImageView_story_banner = (ImageView)findViewById(R.id.ImageView_story_banner);
         ImageView_story_banner.setImageResource(R.drawable.sc_button);
+        //ImageView_story_banner.setAlpha(255);
         //ImageView_story_banner.setImageResource(R.drawable.banner);
 
         // 建立阴影

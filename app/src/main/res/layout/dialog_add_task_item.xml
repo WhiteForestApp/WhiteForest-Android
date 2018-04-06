@@ -58,7 +58,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="102"
+                        android:layout_weight="130"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                     </LinearLayout>
@@ -72,24 +72,25 @@
 
                         <LinearLayout
                             android:layout_width="20dp"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.12">
                         </LinearLayout>
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
-                            android:gravity="center_vertical"
+                            android:gravity="center"
                             android:text="@string/make_task"
-                            android:textColor="@color/dark3"
+                            android:textColor="@color/colorDialogText"
                             android:textSize="22sp"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60" />
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:id="@+id/btn_close_dialog"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
-                        </LinearLayout>
+                            android:layout_weight="0.20"
+                            android:orientation="horizontal"></LinearLayout>
 
                     </LinearLayout>
 
@@ -113,12 +114,6 @@
                                 android:layout_width="350dp"
                                 android:layout_height="match_parent">
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:srcCompat="@drawable/option_bg"
-                                    android:scaleType="fitXY" />
-
                                 <LinearLayout
                                     android:orientation="horizontal"
                                     android:layout_width="match_parent"
@@ -127,13 +122,14 @@
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:layout_weight="55"></LinearLayout>
+                                        android:layout_weight="40.65"></LinearLayout>
 
                                     <LinearLayout
                                         android:orientation="horizontal"
                                         android:layout_width="0dp"
+                                        android:gravity="center"
                                         android:layout_height="match_parent"
-                                        android:layout_weight="362">
+                                        android:layout_weight="382.79">
 
 
                                         <LinearLayout
@@ -148,18 +144,15 @@
                                             android:gravity="center_vertical"
                                             android:includeFontPadding="false"
                                             android:text="@string/task_add_options_1"
-                                            android:textSize="15sp"
-                                            android:textColor="#eeeeee"/>
+                                            android:textColor="@color/colorDialogText"
+                                            android:textSize="15sp" />
 
 
-                                        <com.freecreator.whiteforest.ui.views.FontTextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:textSize="15sp"
-                                            android:text=" / "
-                                            android:includeFontPadding="false"
-                                            android:textColor="#eeeeee"/>
+                                        <ImageView
+                                            android:layout_width="27dp"
+                                            android:layout_height="27dp"
+                                            android:gravity="center"
+                                            android:background="@drawable/fivestar" />
 
 
                                         <com.freecreator.whiteforest.ui.views.FontTextView
@@ -170,7 +163,7 @@
                                             android:textSize="15sp"
                                             android:includeFontPadding="false"
                                             android:text="@string/task_add_options_2"
-                                            android:textColor="#eeeeee"/>
+                                            android:textColor="@color/colorDialogText"/>
 
 
                                         <LinearLayout
@@ -204,8 +197,7 @@
                             <FrameLayout
                                 android:id="@+id/fragment"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                            </FrameLayout>
+                                android:layout_height="match_parent"></FrameLayout>
 
                         </LinearLayout>
 
@@ -215,14 +207,14 @@
                     <!--确认按钮-->
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="152"
+                        android:layout_weight="173.00"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
 
                         <com.freecreator.whiteforest.ui.views.FontTextView
                             android:id="@+id/confirm_btn"
                             android:textSize="28sp"
-                            android:textColor="@color/dark3"
+                            android:textColor="@color/colorDialogText"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical"
                             android:text="@string/confirm"
@@ -233,7 +225,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="100"
+                        android:layout_weight="130"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                     </LinearLayout>

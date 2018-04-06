@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -29,10 +30,8 @@
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/shadow_top"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
-                    android:background="@drawable/round_corner"
                     android:elevation="8dp"
                     android:orientation="vertical">
 
@@ -78,7 +77,7 @@
                     android:layout_width="0dp"
                     android:layout_height="260dp"
                     android:layout_centerInParent="true"
-                    android:layout_weight="7"
+                    android:layout_weight="5.45"
                     android:scaleType="fitXY" />
 
                 <LinearLayout
@@ -89,13 +88,6 @@
 
 
                     <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp">
-                    </LinearLayout>
-
-
-                    <RelativeLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_weight="4"
@@ -106,30 +98,57 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-                            android:text="灿柳\n膜法师\nLv:神族\n段位:黑钻"
+                            android:layout_weight="0.9"
+                            android:gravity="center"
+                            android:background="@drawable/nameboard"
+                            android:text="灿柳"
                             android:textColor="@color/black"
-                            android:textSize="17sp"/>
-
-
-
+                            android:textSize="15sp"/>
 
                         <com.freecreator.whiteforest.ui.views.FontTextView_Bold
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:text="当你凝望深渊,\n深渊也在凝望着你"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.9"
+                            android:gravity="center"
+                            android:background="@drawable/nameboard1"
+                            android:text="膜法师"
                             android:textColor="@color/black"
                             android:textSize="15sp"/>
 
-                    </RelativeLayout>
+                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.9"
+                            android:gravity="center"
+                            android:background="@drawable/nameboard2"
+                            android:text="Lv:神族"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"/>
 
+                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.9"
+                            android:gravity="center"
+                            android:background="@drawable/nameboard3"
+                            android:text="段位:黑钻"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"/>
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp">
                     </LinearLayout>
+
+
+                    <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="top|center_horizontal"
+                        android:text="当你凝望深渊,深渊也在凝望着你"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 
