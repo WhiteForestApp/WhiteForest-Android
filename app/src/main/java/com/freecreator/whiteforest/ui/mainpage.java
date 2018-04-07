@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
@@ -99,12 +98,10 @@ public class mainpage extends AppCompatActivity {
 
                         break;
                     case MotionEvent.ACTION_UP:
-                        Log.d("jyyyy",""+mCurPosX+"  666  " + mCurPosY);
 
                         if (mCurPosY - mPosY > 0 && (Math.abs(mCurPosY - mPosY) > 50)) {
                             //向下滑動
-                            if(sy == 0){
-                                Toast.makeText(getApplicationContext(), "!!!", Toast.LENGTH_SHORT).show();
+                            if(sy == 0 && osy != 0){
                                 startActivity(new Intent(mainpage.this , StoryActivity.class));
                                 overridePendingTransition(R.anim.activity_anim_story_in, R.anim.activity_anim_story_out);
                             }

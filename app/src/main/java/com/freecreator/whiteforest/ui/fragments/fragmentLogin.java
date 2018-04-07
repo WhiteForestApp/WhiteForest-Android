@@ -24,6 +24,7 @@ public class fragmentLogin extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+
     }
 
     @Override

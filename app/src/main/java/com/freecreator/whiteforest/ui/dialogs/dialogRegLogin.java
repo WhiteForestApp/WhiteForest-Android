@@ -1,6 +1,6 @@
 package com.freecreator.whiteforest.ui.dialogs;
 
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
 import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
+import com.freecreator.whiteforest.ui.views.FontTextView;
 
 /**
  * Created by niko on 2018/3/19.
@@ -31,6 +32,9 @@ public class dialogRegLogin {
 
     private TextView textLogin = null;
     private TextView textRegister = null;
+
+    private FontTextView btnLogin = null;
+    private FontTextView btnReg = null;
 
     public dialogRegLogin(AppCompatActivity parent, RelativeLayout attachment){
         m_parent = parent;
@@ -56,6 +60,8 @@ public class dialogRegLogin {
 
         textLogin = (TextView) mDialog.findViewById(R.id.textLogin);
         textRegister = (TextView) mDialog.findViewById(R.id.textRegister);
+
+
 
         transaction = manager.beginTransaction();
         transaction.add(R.id.fragment, fragLogin);
@@ -100,6 +106,42 @@ public class dialogRegLogin {
             }
 
         });
+
+        btnLogin = (FontTextView)m_parent.findViewById(R.id.btn_login);
+        btnReg = (FontTextView)m_parent.findViewById(R.id.btn_reg);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                }catch (Exception e){
+
+                }
+
+                m_parent.startActivity(new Intent(m_parent,com.freecreator.whiteforest.ui.mainpage.class));
+            }
+        }).start();
+
+                /*
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(m_parent,"开始登录",Toast.LENGTH_SHORT).show();
+                //LoginThread loginThread = new LoginThread(m_parent,)
+                m_parent.startActivity(new Intent(m_parent,com.freecreator.whiteforest.ui.mainpage.class));
+            }
+        });
+
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(m_parent,"开始注册",Toast.LENGTH_SHORT).show();
+                //RegisterThread registerThread = new RegisterThread(m_parent,);
+                m_parent.startActivity(new Intent(m_parent,com.freecreator.whiteforest.ui.mainpage.class));
+            }
+        });
+        */
     }
 
     public void show(){

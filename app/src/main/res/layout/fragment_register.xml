@@ -316,6 +316,7 @@
         android:layout_height="0dp">
 
         <com.freecreator.whiteforest.ui.views.FontTextView
+            android:id="@+id/btn_reg"
             android:textSize="28sp"
             android:textColor="@color/dark3"
             android:layout_gravity="center_horizontal"
