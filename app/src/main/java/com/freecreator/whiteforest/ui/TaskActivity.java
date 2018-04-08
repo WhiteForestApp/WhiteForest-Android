@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.common.cache.LocalCache;
+import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddTask;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
@@ -57,6 +59,9 @@ public class TaskActivity extends AppCompatActivity {
     private int task_normal_finished_total = 0;
     private int task_timer_total = 0;
 
+    private TaskCatalog task_catalog = null;
+    private LocalCache local_cache = null;
+
     // view 对应 着 item 的view 和 JSONObject
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
 
@@ -64,6 +69,9 @@ public class TaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+
+        LocalCache local_cache =  new LocalCache(this);
+        task_catalog = local_cache.getTaskCatalog();
 
         UI_init();
         setListeners();
@@ -301,6 +309,10 @@ public class TaskActivity extends AppCompatActivity {
 
     }
 
+    private void UI_initList(){
+
+    }
+
     private void mockDataForTest(){
 
         // { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
@@ -343,6 +355,8 @@ public class TaskActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         UI_adjust();
+
+
 
         if(_Debug)
             mockDataForTest();
