@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.common.cache.LocalCache;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
+import com.freecreator.whiteforest.ui.dialogs.animAchevement;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddTask;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
@@ -54,6 +55,7 @@ public class TaskActivity extends AppCompatActivity {
     private ImageView ImageView_btn_add = null;
 
     private dialogAddTask dialogTask = null;
+    private animAchevement animGainAchevement = null;
 
     private int task_normal_total = 0;
     private int task_normal_finished_total = 0;
@@ -106,6 +108,7 @@ public class TaskActivity extends AppCompatActivity {
         list_task = (LinearLayout) findViewById(R.id.list_task);
 
         dialogTask = new dialogAddTask(this, (RelativeLayout) findViewById(R.id.task_page));
+        animGainAchevement = new animAchevement(this, (RelativeLayout) findViewById(R.id.task_page));
     }
 
 
@@ -130,7 +133,7 @@ public class TaskActivity extends AppCompatActivity {
         if(null == item || !(item instanceof View))
             return;
 
-        View space = (View) value.get(1);
+        View space = (View) value.get(2);
         if(null == space || !(space instanceof View))
             return;
 
@@ -146,6 +149,8 @@ public class TaskActivity extends AppCompatActivity {
 
                 jsonPut(obj, "type", TYPE_NORMAL_FINISHED_TASK);
                 UI_addItem(-1, obj);
+
+                animGainAchevement.show();
                 break;
             }
             case TYPE_TIMER_TASK:{
@@ -355,8 +360,6 @@ public class TaskActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         UI_adjust();
-
-
 
         if(_Debug)
             mockDataForTest();

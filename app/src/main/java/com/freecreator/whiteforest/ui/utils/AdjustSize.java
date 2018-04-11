@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
@@ -39,6 +40,17 @@ public class AdjustSize {
         Size size = new Size();
         size.width = view.getWidth(); // 获取宽度
         size.height = view.getHeight(); // 获取高度
+
+        return size;
+    }
+
+    public static Size getScreenSize(Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+
+        Size size  = new Size();
+        size.width = dm.widthPixels;
+        size.height = dm.heightPixels;
 
         return size;
     }
