@@ -14,21 +14,30 @@ import android.widget.TextView;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.common.cache.LocalCache;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
+import com.freecreator.whiteforest.common.details.TaskDetails;
 import com.freecreator.whiteforest.ui.dialogs.animAchevement;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddTask;
+import com.freecreator.whiteforest.ui.dialogs.controllerTimePicker;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
 import com.freecreator.whiteforest.ui.utils.UIUtils;
 import com.freecreator.whiteforest.ui.views.FontTextView;
+import com.freecreator.whiteforest.utils.MD5;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.freecreator.whiteforest.common.Debug._Debug;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
+import static com.freecreator.whiteforest.utils.JsonUtils.optStrToJsonObject;
 
 /**
  * Created by niko on 2018/3/10.
@@ -56,6 +65,7 @@ public class TaskActivity extends AppCompatActivity {
 
     private dialogAddTask dialogTask = null;
     private animAchevement animGainAchevement = null;
+    private controllerTimePicker conTimerPicker = null;
 
     private int task_normal_total = 0;
     private int task_normal_finished_total = 0;
@@ -66,17 +76,19 @@ public class TaskActivity extends AppCompatActivity {
 
     // view 对应 着 item 的view 和 JSONObject
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
+    private boolean first_time = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        LocalCache local_cache =  new LocalCache(this);
+        local_cache =  new LocalCache(this);
         task_catalog = local_cache.getTaskCatalog();
 
         UI_init();
         setListeners();
+
     }
 
     private void setListeners() {
@@ -109,8 +121,8 @@ public class TaskActivity extends AppCompatActivity {
 
         dialogTask = new dialogAddTask(this, (RelativeLayout) findViewById(R.id.task_page));
         animGainAchevement = new animAchevement(this, (RelativeLayout) findViewById(R.id.task_page));
+        conTimerPicker = new controllerTimePicker(this);
     }
-
 
     private void UI_adjust(){
         // 尺寸自适应 根据图片的宽高 来调整view高度 [宽度不调整]
@@ -129,34 +141,68 @@ public class TaskActivity extends AppCompatActivity {
         if(null == obj || !(obj instanceof JSONObject))
             return;
 
-        View item = (View) value.get(1);
-        if(null == item || !(item instanceof View))
-            return;
-
-        View space = (View) value.get(2);
-        if(null == space || !(space instanceof View))
-            return;
-
         int type = obj.optInt("type");
         switch(type){
             case TYPE_NORMAL_FINISHED_TASK:{
                 break;
             }
             case TYPE_NORMAL_TASK:{
+
+                View item = (View) value.get(1);
+                if(null == item || !(item instanceof View))
+                    return;
+
+                View space = (View) value.get(2);
+                if(null == space || !(space instanceof View))
+                    return;
+
                 task_normal_total--;
                 list_task.removeView(item);
                 list_task.removeView(space);
 
-                jsonPut(obj, "type", TYPE_NORMAL_FINISHED_TASK);
-                UI_addItem(-1, obj);
-
                 animGainAchevement.show();
+                task_catalog.deleteTaskDetails(obj.optString("hash"));
+                local_cache.setTaskCatalog(task_catalog);
+
+                JSONObject item_finished = optStrToJsonObject(obj.toString());
+                jsonPut(item_finished, "hash", MD5.MD5("" + System.currentTimeMillis()));
+                jsonPut(item_finished, "type", TYPE_NORMAL_FINISHED_TASK);
+                UI_addItem(-1, item_finished);
+
                 break;
             }
             case TYPE_TIMER_TASK:{
+                conTimerPicker.show(obj);
                 break;
             }
         }
+    }
+
+    public void data_addTimerRecord(JSONObject data, int minutes){
+
+        int used_minutes = data.optInt("total_time", 0);
+        used_minutes += minutes;
+        jsonPut(data, "total_time", used_minutes);
+
+        JSONObject new_record = new JSONObject();
+        jsonPut(new_record, "timestamp", (new Timestamp(System.currentTimeMillis() )).toString());
+        jsonPut(new_record, "add_minutes", minutes);
+
+        JSONArray record_array = data.optJSONArray("use_record");
+
+        if(null == record_array){
+            record_array = new JSONArray();
+            record_array.put(new_record);
+
+            jsonArrayPut(data, "use_record", record_array);
+        }
+        else{
+            record_array.put(new_record);
+            jsonArrayPut(data, "use_record", record_array);
+        }
+
+        task_catalog.addTaskDetails(new TaskDetails(data));
+        local_cache.setTaskCatalog(task_catalog);
     }
 
     /**
@@ -170,6 +216,9 @@ public class TaskActivity extends AppCompatActivity {
     public void UI_addItem(int position, JSONObject data){
         if(null == data)
             return;
+
+        task_catalog.addTaskDetails(new TaskDetails(data));
+        local_cache.setTaskCatalog(task_catalog);
 
         int type = data.optInt("type");
         switch(type){
@@ -193,14 +242,6 @@ public class TaskActivity extends AppCompatActivity {
                 }
 
                 list_task.addView(item, position, params);
-//
-//                view_info.put(item, data);
-//                item.findViewById(R.id.checkbox).setOnClickListener(new View.OnClickListener(){
-//                    @Override
-//                    public void onClick(View v ){
-//                        UI_clickEvent(v);
-//                    }
-//                });
 
                 LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
@@ -233,8 +274,6 @@ public class TaskActivity extends AppCompatActivity {
                 }
 
                 list_task.addView(item, position, params);
-
-
 
                 LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
@@ -283,19 +322,6 @@ public class TaskActivity extends AppCompatActivity {
 
                 list_task.addView(item,position, params);
 
-
-                ArrayList<Object> value = new ArrayList<>();
-                value.add(data);
-                value.add(item);
-                view_info.put(item.findViewById(R.id.btn_add_timer), value);
-                item.findViewById(R.id.btn_add_timer).setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v ){
-                        UI_clickEvent(v);
-                    }
-                });
-
-
                 LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
 
                 refSize.height = 15;
@@ -303,7 +329,19 @@ public class TaskActivity extends AppCompatActivity {
                 h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
                 list_task.addView(space, position + 1, params);
-                //list_task.addView(space,  params);
+
+
+                ArrayList<Object> value = new ArrayList<>();
+                value.add(data);
+                value.add(item);
+                value.add(space);
+                view_info.put(item.findViewById(R.id.btn_add_timer), value);
+                item.findViewById(R.id.btn_add_timer).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v ){
+                        UI_clickEvent(v);
+                    }
+                });
 
                 task_timer_total++;
 
@@ -316,6 +354,19 @@ public class TaskActivity extends AppCompatActivity {
 
     private void UI_initList(){
 
+        List<TaskDetails> task = task_catalog.getTaskDetailsList();
+
+        if(task == null){
+            return;
+        }
+
+        for(int i = 0; i< task.size(); i++){
+            TaskDetails details = task.get(i);
+            if(null == details)
+                continue;
+
+            UI_addItem(-1, details.toJSONObject());
+        }
     }
 
     private void mockDataForTest(){
@@ -325,27 +376,33 @@ public class TaskActivity extends AppCompatActivity {
         try {
 
             obj.put("type", TYPE_TIMER_TASK);
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "阅读书籍");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "安装[白色森林]");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "了解白色森林的历史");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "添加一个普通的任务");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "添加一个时间投资计划的任务");
             UI_addItem(-1,obj);
 
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "打开人物页面页 查看我所获得的奖牌");
             UI_addItem(-1,obj);
 
@@ -361,8 +418,14 @@ public class TaskActivity extends AppCompatActivity {
 
         UI_adjust();
 
-        if(_Debug)
-            mockDataForTest();
+        if(false == first_time){
 
+            first_time = true;
+            UI_initList();
+
+            if(task_catalog.getItemNum() == 0)
+                mockDataForTest();
+
+        }
     }
 }

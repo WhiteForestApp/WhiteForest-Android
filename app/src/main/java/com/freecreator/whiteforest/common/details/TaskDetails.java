@@ -1,5 +1,6 @@
 package com.freecreator.whiteforest.common.details;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
@@ -11,6 +12,8 @@ import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 public class TaskDetails extends AbstractDetails{
 
+    private JSONObject data = null;
+    private String hash = null;
 
     /*任务拥有者(用户)唯一标识*/
     //private long uid;
@@ -110,9 +113,19 @@ public class TaskDetails extends AbstractDetails{
 
     public TaskDetails(){}
 
-    public TaskDetails(JSONObject jsonObject){
-        if(jsonObject == null) return;
+    public TaskDetails(JSONObject obj){
+        if(obj == null)
+            return;
+
+        try{
+            data = new JSONObject(obj.toString());
+            hash = data.optString("hash");
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
         //uid = jsonObject.optLong("uid");
+        /*
         taskID = jsonObject.optLong("taskID",0);
         taskTitle = jsonObject.optString("taskTitle",UNDEF);
         taskDescription = jsonObject.optString("taskDescription",UNDEF);
@@ -123,6 +136,11 @@ public class TaskDetails extends AbstractDetails{
         taskEndTime = jsonObject.optLong("taskEndTime",0);
         taskStatus = jsonObject.optInt("taskStatus",ERRSTATUS);
         taskObtainExperienceValue = jsonObject.optLong("taskObtainExperienceValue",0);
+        */
+    }
+
+    public String getHash(){
+        return hash;
     }
 
     @Override
@@ -132,19 +150,20 @@ public class TaskDetails extends AbstractDetails{
 
 
     public JSONObject toJSONObject(){
-        JSONObject jsonObject = new JSONObject();
-        //jsonPut(jsonObject, "uid", ""+uid);
-        jsonPut(jsonObject, "taskID", ""+taskID);
-        jsonPut(jsonObject, "taskTitle", taskTitle);
-        jsonPut(jsonObject, "taskDescription", taskDescription);
-        jsonPut(jsonObject, "taskType", taskType);
-        jsonPut(jsonObject, "taskCreateTime", ""+taskCreateTime);
-        jsonPut(jsonObject, "taskDurationTime", ""+taskDurationTime);
-        jsonPut(jsonObject, "taskStartTime", ""+taskStartTime);
-        jsonPut(jsonObject, "taskEndTime", ""+taskEndTime);
-        jsonPut(jsonObject, "taskStatus", ""+taskStatus);
-        jsonPut(jsonObject, "taskObtainExperienceValue", ""+taskObtainExperienceValue);
-        return jsonObject;
+        return data;
+    }
+
+    public void setJSONObject(JSONObject obj){
+        if(obj == null)
+            return;
+
+        try{
+            data = new JSONObject(obj.toString());
+            hash = data.optString("hash");
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

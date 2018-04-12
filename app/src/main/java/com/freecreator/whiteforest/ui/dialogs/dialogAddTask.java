@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
 import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
+import static com.freecreator.whiteforest.utils.MD5.MD5;
 
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -140,6 +141,7 @@ public class dialogAddTask {
 
                     //  { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
                     JSONObject task_obj = new JSONObject();
+                    jsonPut(task_obj, "hash",  MD5(System.currentTimeMillis() + strContent + strCoins +strExp));
                     jsonPut(task_obj, "type", TYPE_TIMER_TASK);
                     jsonPut(task_obj, "title", strContent);
                     jsonPut(task_obj, "scores", strCoins );
@@ -153,6 +155,7 @@ public class dialogAddTask {
                 }else if(fragCurrent == fragNormalTask){
 
                     JSONObject task_obj = new JSONObject();
+                    jsonPut(task_obj, "hash",  MD5(System.currentTimeMillis() + strContent + strCoins +strExp));
                     jsonPut(task_obj, "type", TYPE_NORMAL_TASK);
                     jsonPut(task_obj, "title", strContent);
                     jsonPut(task_obj, "scores", strCoins );

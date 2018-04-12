@@ -49,7 +49,7 @@ public class TaskCatalog {
     }
 
     public long getItemNum(){
-        return itemNum;
+        return taskDetailsList.size();
     }
     public long getItemEarliestCreateTime(){
         return itemEarliestCreateTime;
@@ -61,11 +61,32 @@ public class TaskCatalog {
         return taskDetailsList;
     }
 
+    public void deleteTaskDetails(String hash){
+
+        for(int i = 0; i< taskDetailsList.size();i++){
+            TaskDetails item = taskDetailsList.get(i);
+            if(item.getHash().equals(hash)){
+                taskDetailsList.remove(i);
+                return;
+            }
+        }
+    }
+
     /*向本列表中添加任务项目*/
     public boolean addTaskDetails(TaskDetails taskDetails){
         if(null == taskDetails || !taskDetails.isValid()){
             return false;
         }
+
+        for(int i = 0; i< taskDetailsList.size();i++){
+            TaskDetails item = taskDetailsList.get(i);
+            if(item.getHash().equals(taskDetails.getHash())){
+                if(!taskDetails.equals(item))
+                    taskDetailsList.set(i, taskDetails);
+                return true;
+            }
+        }
+
         long tempTime = taskDetails.getTaskCreateTime();
         taskDetailsList.add(taskDetails);
         if(itemNum == 0){
