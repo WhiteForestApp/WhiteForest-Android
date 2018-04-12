@@ -50,6 +50,12 @@ public class mainpage extends AppCompatActivity {
                 startActivity(new Intent(mainpage.this , StoryActivity.class));
             }
         });
+        ImageView_character.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mainpage.this , PersonalCenterActivity.class));
+            }
+        });
     }
 
     private void UI_init() {
