@@ -3,6 +3,7 @@ package com.freecreator.whiteforest.ui;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,11 +27,18 @@ public class StoryActivity extends AppCompatActivity {
     private animDukeConversation animDuck = null;
     private animSkyMountainAppear animSkyMountain = null;
     private animConversationDialog animConversation = null;
+    private animConversationDialog animMeConversation = null;
+    private animClickPlease animClickToGoOn = null;
+    private animMeConversation animMe = null;
 
     private TextView user_name = null;
     private TextView user_name_2 = null;
 
+    private RelativeLayout parent_page = null;
+
     private boolean first_time = true;
+    private int step_of_play = 0;
+    private boolean block_clicked = true;
 
 
     @Override
@@ -39,6 +47,61 @@ public class StoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_story);
 
         UI_init();
+        setListeners();
+    }
+
+    private void setListeners() {
+        parent_page.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                if(block_clicked)
+                    return;
+
+                if(1 == step_of_play) {
+
+                    animClickToGoOn.hide();
+                    animConversation.hide();
+                    animDuck.hide();
+
+                    block_clicked = true;
+                    step_of_play = 2;
+
+                    new Thread() {
+                        public void run() {
+                            try{
+
+                                sleep(800);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        animMe.show();
+                                        animMeConversation.setOrientation("right");
+                                        animMeConversation.setText("黑水王国?");
+                                        animMeConversation.show();
+                                    }
+                                });
+
+                                sleep(1000);
+
+                                block_clicked = false;
+
+                            }catch (InterruptedException e){
+
+                            }
+                        }
+                    }.start();
+                }
+                else if(2 == step_of_play){
+
+                    block_clicked = true;
+                    step_of_play = 3;
+
+                    animMeConversation.hide();
+                    animMe.hide();
+                }
+            }
+        });
     }
 
     private void UI_init() {
@@ -47,19 +110,19 @@ public class StoryActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
                 WindowManager.LayoutParams. FLAG_FULLSCREEN);
 /*
-        ImageView_story_header = (ImageView)findViewById(R.id.ImageView_story_header);
-        ImageView_story_bottom = (ImageView)findViewById(R.id.ImageView_story_bottom);
-
         user_name = (TextView)findViewById(R.id.user_name);
         user_name_2 = (TextView)findViewById(R.id.user_name_2);
 
-        // 设置为用户名字
-        user_name.setText("灿柳");
-        user_name_2.setText("灿柳");
 */
-        animDuck = new animDukeConversation(this, (RelativeLayout) findViewById(R.id.story_attachment) );
-        animSkyMountain = new animSkyMountainAppear(this, (RelativeLayout) findViewById(R.id.story_attachment));
-        animConversation = new animConversationDialog(this, (RelativeLayout) findViewById(R.id.story_attachment));
+
+        parent_page =  (RelativeLayout) findViewById(R.id.story_attachment);
+
+        animDuck = new animDukeConversation(this, parent_page );
+        animSkyMountain = new animSkyMountainAppear(this, parent_page);
+        animConversation = new animConversationDialog(this, parent_page, 450);
+        animMeConversation = new animConversationDialog(this, parent_page, 340);
+        animClickToGoOn = new animClickPlease(this, parent_page);
+        animMe = new animMeConversation(this, parent_page);
     }
 
     private void UI_adjust(){
@@ -100,7 +163,41 @@ public class StoryActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                animConversation.setText("niko 你来啦");
                                 animConversation.show();
+                            }
+                        });
+
+                        sleep(1500);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                animConversation.hide();
+
+                            }
+                        });
+
+
+                        sleep(200);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                animConversation.setText("我是弗里曼王爵的心灵意识\n欢迎来到黑水王国");
+                                animConversation.show();
+
+                                step_of_play = 1;
+                            }
+                        });
+
+
+                        sleep(2000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                block_clicked = false;
+                                animClickToGoOn.show();
                             }
                         });
 

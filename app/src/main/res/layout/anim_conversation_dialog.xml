@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/image_top"
             app:srcCompat="@drawable/conversation_dialog_top"
             android:adjustViewBounds="true"
             android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image_center"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/conversation_dialog_center"
                 android:layout_width="match_parent"
@@ -47,12 +48,15 @@
                     android:layout_weight="626">
 
 
-                    <com.freecreator.whiteforest.ui.views.FontTextView
+                    <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                        android:id="@+id/text_content"
                         android:text="灿柳 你来啦"
                         android:textColor="@color/black"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lineSpacingMultiplier="1.2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -70,6 +74,7 @@
 
 
         <ImageView
+            android:id="@+id/image_bottom"
             app:srcCompat="@drawable/conversation_dialog_bottom"
             android:adjustViewBounds="true"
             android:layout_width="match_parent"

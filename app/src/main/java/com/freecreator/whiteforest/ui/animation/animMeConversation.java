@@ -1,10 +1,8 @@
 package com.freecreator.whiteforest.ui.animation;
 
 import android.animation.ObjectAnimator;
-import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -16,7 +14,7 @@ import com.freecreator.whiteforest.ui.utils.Size;
  * Created by niko on 2018/4/13.
  */
 
-public class animDukeConversation {
+public class animMeConversation {
 
 
     private AppCompatActivity m_parent = null;
@@ -25,18 +23,18 @@ public class animDukeConversation {
 
 
 
-    public animDukeConversation(AppCompatActivity parent, RelativeLayout attachment){
+    public animMeConversation(AppCompatActivity parent, RelativeLayout attachment){
         m_parent = parent;
 
-        mDialog = (RelativeLayout)m_parent.getLayoutInflater().inflate(R.layout.anim_duke_conversation, null);
+        mDialog = (RelativeLayout)m_parent.getLayoutInflater().inflate(R.layout.anim_me_conversation, null);
 
-        Size refSize = AdjustSize.getImageWidthHeight(m_parent, R.drawable.duke);
+        Size refSize = AdjustSize.getImageWidthHeight(m_parent, R.drawable.role_in_story);
         Size bgSize = AdjustSize.getScreenSize(m_parent);
         bgSize.width = (int)(bgSize.width * 0.5);
         float h  = (float)bgSize.width * (float)refSize.height / (float)refSize.width;
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(bgSize.width, (int)h);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         params.setMargins(0,0,0,-600);
 
@@ -54,7 +52,7 @@ public class animDukeConversation {
         mDialog.setVisibility(View.VISIBLE);
         mDialog.requestFocus();
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mDialog,"translationY",-450.0f);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mDialog,"translationY",-550.0f);
         animator.setDuration(500);
         animator.start();
     }
