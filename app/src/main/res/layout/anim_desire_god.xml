@@ -1,20 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:translationZ="13dp"
     android:layout_centerInParent="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            app:srcCompat="@drawable/click_please"
+            app:srcCompat="@drawable/desire_god"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:layout_width="80dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content" />
 
         <LinearLayout
@@ -24,7 +23,7 @@
 
         <com.freecreator.whiteforest.ui.views.FontTextView
             android:id="@+id/text_content"
-            android:text="@string/click_go_on"
+            android:text="@string/desire_god"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_gravity="center"

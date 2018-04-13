@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
 
@@ -15,7 +14,7 @@ import com.freecreator.whiteforest.R;
  * Created by niko on 2018/4/13.
  */
 
-public class animClickPlease {
+public class animGodOfDesire {
 
 
     private AppCompatActivity m_parent = null;
@@ -23,14 +22,15 @@ public class animClickPlease {
 
 
 
-    public animClickPlease(AppCompatActivity parent, RelativeLayout attachment){
+    public animGodOfDesire(AppCompatActivity parent, RelativeLayout attachment){
         m_parent = parent;
 
-        mDialog = (RelativeLayout)m_parent.getLayoutInflater().inflate(R.layout.anim_click_please, null);
+        mDialog = (RelativeLayout)m_parent.getLayoutInflater().inflate(R.layout.anim_desire_god, null);
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        params.setMargins(0,90,0,0);
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.setMargins(0,70,80,0);
 
         UI_init();
         attachment.addView(mDialog, params);
@@ -52,7 +52,7 @@ public class animClickPlease {
         AnimatorSet animatorSet = new AnimatorSet();  //组合动画
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 0f, 1.0f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 0f, 1.0f);
-        animatorSet.setDuration(100);  //动画时间
+        animatorSet.setDuration(300);  //动画时间
         animatorSet.setInterpolator(new DecelerateInterpolator());  //设置插值器
         animatorSet.play(scaleX).with(scaleY);  //同时执行
         animatorSet.start();  //启动动画
@@ -60,6 +60,15 @@ public class animClickPlease {
 
     public void hide(){
 
-        mDialog.setVisibility(View.INVISIBLE);
+        View view = mDialog;
+        view.setPivotX(view.getWidth()/2);  // X方向中点
+        view.setPivotY(view.getHeight());   // Y方向底边
+        AnimatorSet animatorSet = new AnimatorSet();  //组合动画
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 0f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f, 0f);
+        animatorSet.setDuration(200);  //动画时间
+        animatorSet.setInterpolator(new DecelerateInterpolator());  //设置插值器
+        animatorSet.play(scaleX).with(scaleY);  //同时执行
+        animatorSet.start();  //启动动画
     }
 }

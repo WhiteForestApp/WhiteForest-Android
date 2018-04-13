@@ -22,7 +22,7 @@ public class animSkyMountainAppear {
     private RelativeLayout v_sky = null;
     private RelativeLayout v_mountain = null;
 
-    private final int transitionOffset = 300;
+    private final int transitionOffset = 600;
 
     public animSkyMountainAppear(AppCompatActivity parent, RelativeLayout attachment){
         m_parent = parent;
@@ -80,5 +80,27 @@ public class animSkyMountainAppear {
 
         v_mountain.setVisibility(View.INVISIBLE);
         v_sky.setVisibility(View.INVISIBLE);
+    }
+
+    public void hide_mountain(){
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(v_mountain,"translationY",transitionOffset);
+        animator.setDuration(400);
+        animator.start();
+    }
+
+
+    public void hide_sky(){
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(v_sky,"translationY",-transitionOffset);
+        animator.setDuration(400);
+        animator.start();
+    }
+
+    public void show_mountain(){
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(v_mountain,"translationY",-transitionOffset);
+        animator.setDuration(400);
+        animator.start();
     }
 }
