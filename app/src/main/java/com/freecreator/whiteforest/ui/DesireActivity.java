@@ -1,7 +1,6 @@
 package com.freecreator.whiteforest.ui;
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.freecreator.whiteforest.ui.utils.Size;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.freecreator.whiteforest.common.Debug._Debug;
 import static com.freecreator.whiteforest.common.Debug._debug2;
 
 /**
@@ -29,6 +27,8 @@ import static com.freecreator.whiteforest.common.Debug._debug2;
 
 
 public class DesireActivity extends AppCompatActivity {
+
+    public final static int TYPE_NORMAL_DESIRE = 1;
 
     private ImageView ImageView_icon_desire = null;
 
@@ -103,7 +103,7 @@ public class DesireActivity extends AppCompatActivity {
      * @param data Json data. An sample is below:
      *             {  "title" : "blablabla", "scores" : 6 }
      */
-    private void UI_addItem(int position, JSONObject data){
+    public void UI_addItem(int position, JSONObject data){
 
 
         FrameLayout item = (FrameLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_desire, null);
@@ -128,16 +128,18 @@ public class DesireActivity extends AppCompatActivity {
         params = new LinearLayout.LayoutParams(list_desire_size.width, (int)h);
         list_desire.addView(space, position + 1, params);
 
+        /*TODO: UI需要优化*/
+
     }
 
     @Override
     public void onWindowFocusChanged (boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
-
         UI_adjust();
 
         if(_debug2)
             mockDataForTest();
+
     }
 
 
@@ -148,31 +150,23 @@ public class DesireActivity extends AppCompatActivity {
         try {
 
             obj.put("scores", 6);
-            obj.put("title", "阅读书籍");
+            obj.put("title", "打一局王者荣耀");
             UI_addItem(0,obj);
 
             obj.put("scores", 6);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
+            obj.put("title", "逛商场买衣服");
             UI_addItem(0,obj);
 
             obj.put("scores", 6);
-            obj.put("title", "阅读书籍");
+            obj.put("title", "读一本小说");
             UI_addItem(0,obj);
 
             obj.put("scores", 6);
-            obj.put("title", "阿萨德阿萨德受到法律框架的疯狂攻击所发生的空间萨德阿萨德受到法律框架的疯狂攻击所发生的空间萨德阿萨德受到法律框架的疯狂攻击所发生的空间");
+            obj.put("title", "去武大赏樱");
             UI_addItem(0,obj);
 
             obj.put("scores", 6);
-            obj.put("title", "阅读书籍");
-            UI_addItem(0,obj);
-
-            obj.put("scores", 6);
-            obj.put("title", "阿萨德阿萨德受到法律框架萨德阿萨德受到法律框架的疯狂攻击所发生的空间框架萨德阿萨德受到法律框架的疯狂攻击所发生的空间框架萨德阿萨德受到法律框架的疯狂攻击所发生的空间的疯狂攻击所发生的空间");
-            UI_addItem(0,obj);
-
-            obj.put("scores", 6);
-            obj.put("title", "阅读书籍");
+            obj.put("title", "KFC全家桶");
             UI_addItem(0,obj);
 
         } catch (JSONException e) {
