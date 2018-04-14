@@ -95,13 +95,6 @@
                     android:layout_weight="98"
                     android:layout_height="match_parent">
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp">
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
 
