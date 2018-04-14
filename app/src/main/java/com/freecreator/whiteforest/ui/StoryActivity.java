@@ -255,7 +255,7 @@ public class StoryActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                sleep(3300);
+                                sleep(2300);
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -447,7 +447,7 @@ public class StoryActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         animMe.show();
-                                        animMeConversation.setText("听起来\n令人感到难以置信");
+                                        animMeConversation.setText("听起来\n令人感到不可思议");
                                         animMeConversation.show();
                                     }
                                 });
