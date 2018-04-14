@@ -9,6 +9,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 /**
  * Created by niko on 2018/4/13.
@@ -30,7 +31,7 @@ public class animGodOfDesire {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        params.setMargins(0,70,80,0);
+        params.setMargins(0, UIUtils.heightToPx(60),UIUtils.heightToPx(70),0);
 
         UI_init();
         attachment.addView(mDialog, params);

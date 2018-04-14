@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 /**
  * Created by niko on 2018/4/13.
@@ -30,7 +31,7 @@ public class animWhiteForestPopup {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        params.setMargins(0,0,0, 70);
+        params.setMargins(0,0,0, UIUtils.heightToPx(100));
 
         UI_init();
         attachment.addView(mDialog, params);

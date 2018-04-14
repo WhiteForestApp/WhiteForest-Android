@@ -22,8 +22,17 @@ public class UIUtils {
 
     public static int dip2px(float dipValue)
     {
+        int w = Resources.getSystem().getDisplayMetrics().widthPixels;
         final float scale = Resources.getSystem().getDisplayMetrics().density;
-        return  (int)(dipValue * scale + 0.5f);
+        int val =  (int)(dipValue * scale + 0.5f);
+        return val;
+    }
+
+    public static int heightToPx(float dipValue){
+        int h = Resources.getSystem().getDisplayMetrics().heightPixels;
+        Size refSize = new Size(768, 1184);
+        float val = dipValue * h / refSize.height;
+        return (int)val;
     }
 
     public static int[] getScreenSize(Context context) {

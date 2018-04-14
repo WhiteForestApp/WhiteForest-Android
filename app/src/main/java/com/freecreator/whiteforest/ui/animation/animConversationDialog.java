@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 /**
  * Created by niko on 2018/4/13.
@@ -39,7 +40,7 @@ public class animConversationDialog {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        params.setMargins(0,0,0,margin_bottom);
+        params.setMargins(0,0,0, UIUtils.heightToPx(margin_bottom));
 
         UI_init();
         attachment.addView(mDialog, params);

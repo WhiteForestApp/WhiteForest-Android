@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/image_player"
+        app:srcCompat="@color/black"
+        android:scaleType="fitXY"
+        android:layout_width="30dp"
+        android:layout_height="300dp" />
+
+</RelativeLayout>

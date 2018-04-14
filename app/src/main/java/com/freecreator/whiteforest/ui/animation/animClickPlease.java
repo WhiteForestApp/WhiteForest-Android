@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 /**
  * Created by niko on 2018/4/13.
@@ -30,7 +31,7 @@ public class animClickPlease {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        params.setMargins(0,90,0,0);
+        params.setMargins(0, UIUtils.heightToPx(60),0,0);
 
         UI_init();
         attachment.addView(mDialog, params);

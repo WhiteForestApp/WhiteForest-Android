@@ -9,6 +9,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 /**
  * Created by niko on 2018/4/13.
@@ -30,7 +31,7 @@ public class animGodOfTask {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.setMargins(80,70,0,0);
+        params.setMargins(UIUtils.heightToPx(70),UIUtils.heightToPx(60),0,0);
 
         UI_init();
         attachment.addView(mDialog, params);

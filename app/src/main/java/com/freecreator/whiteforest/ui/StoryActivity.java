@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.animation.*;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 import static com.freecreator.whiteforest.common.Debug._Debug;
 
@@ -901,8 +902,8 @@ public class StoryActivity extends AppCompatActivity {
         animGodDesire = new animGodOfDesire(this, parent_page);
         animDuck = new animDukeConversation(this, parent_page );
         animMe = new animMeConversation(this, parent_page);
-        animConversation = new animConversationDialog(this, parent_page, 450);
-        animMeConversation = new animConversationDialog(this, parent_page, 340);
+        animConversation = new animConversationDialog(this, parent_page, 440);
+        animMeConversation = new animConversationDialog(this, parent_page, 390);
         animClickToGoOn = new animClickPlease(this, parent_page);
     }
 
