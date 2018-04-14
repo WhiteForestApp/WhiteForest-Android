@@ -902,8 +902,8 @@ public class StoryActivity extends AppCompatActivity {
         animGodDesire = new animGodOfDesire(this, parent_page);
         animDuck = new animDukeConversation(this, parent_page );
         animMe = new animMeConversation(this, parent_page);
-        animConversation = new animConversationDialog(this, parent_page, 440);
-        animMeConversation = new animConversationDialog(this, parent_page, 390);
+        animConversation = new animConversationDialog(this, parent_page, UIUtils.heightToPx(440));
+        animMeConversation = new animConversationDialog(this, parent_page, UIUtils.heightToPx(390));
         animClickToGoOn = new animClickPlease(this, parent_page);
     }
 

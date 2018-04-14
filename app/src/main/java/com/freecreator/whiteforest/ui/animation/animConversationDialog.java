@@ -40,7 +40,7 @@ public class animConversationDialog {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        params.setMargins(0,0,0, UIUtils.heightToPx(margin_bottom));
+        params.setMargins(0,0,0, (margin_bottom));
 
         UI_init();
         attachment.addView(mDialog, params);
