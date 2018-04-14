@@ -227,7 +227,7 @@
                                             android:singleLine="true"
                                             android:gravity="center"
                                             android:includeFontPadding="false"
-                                            android:text="膜法师"
+                                            android:text="魔法师"
                                             android:textColor="@color/black"
                                             android:textSize="14sp"/>
 
