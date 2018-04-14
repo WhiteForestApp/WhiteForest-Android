@@ -35,4 +35,7 @@
     <string name="tips_input_exp">Please input the exp value</string>
     <string name="tips_input_coins">Please input the coins value</string>
     <string name="tips_input_content">Please input the content</string>
+    <string name="click_go_on">Click to go on</string>
+    <string name="task_god">God of Missions</string>
+    <string name="desire_god">God of Desire</string>
 </resources>

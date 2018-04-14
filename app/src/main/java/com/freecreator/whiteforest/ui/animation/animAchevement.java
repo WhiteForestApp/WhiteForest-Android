@@ -1,4 +1,4 @@
-package com.freecreator.whiteforest.ui.dialogs;
+package com.freecreator.whiteforest.ui.animation;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;

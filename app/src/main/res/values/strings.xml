@@ -35,4 +35,7 @@
     <string name="tips_input_exp">请输入经验值</string>
     <string name="tips_input_coins">请输入金币值</string>
     <string name="tips_input_content">请输入内容</string>
+    <string name="click_go_on">点击以继续</string>
+    <string name="task_god">使命之神</string>
+    <string name="desire_god">欲望之神</string>
 </resources>

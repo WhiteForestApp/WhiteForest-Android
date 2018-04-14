@@ -15,13 +15,11 @@ import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.common.cache.LocalCache;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.common.details.TaskDetails;
-import com.freecreator.whiteforest.ui.dialogs.animAchevement;
+import com.freecreator.whiteforest.ui.animation.animAchevement;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddTask;
 import com.freecreator.whiteforest.ui.dialogs.controllerTimePicker;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
-import com.freecreator.whiteforest.ui.utils.UIUtils;
-import com.freecreator.whiteforest.ui.views.FontTextView;
 import com.freecreator.whiteforest.utils.MD5;
 
 import org.json.JSONArray;
@@ -30,11 +28,9 @@ import org.json.JSONObject;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.freecreator.whiteforest.common.Debug._Debug;
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 import static com.freecreator.whiteforest.utils.JsonUtils.optStrToJsonObject;

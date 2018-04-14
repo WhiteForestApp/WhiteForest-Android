@@ -1,4 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -91,6 +93,7 @@
                     android:scaleType="fitXY"
                     android:layout_centerInParent="true"  />
 
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_weight="4"
@@ -99,50 +102,290 @@
 
 
                     <LinearLayout
-                        android:layout_weight="1"
+                        android:layout_weight="83"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                     </LinearLayout>
 
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:orientation="vertical"
+                        android:layout_weight="80"
                         android:layout_width="match_parent"
-                        android:layout_weight="4"
                         android:layout_height="0dp">
 
-
-                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:text="灿柳\n膜法师\nLv:神族\n段位:黑钻"
-                            android:textColor="@color/black"
-                            android:textSize="17sp"/>
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:scaleType="fitXY"
+                                app:srcCompat="@drawable/nameboard"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_weight="25"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
 
 
+                                <LinearLayout
+                                    android:layout_weight="322"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent">
 
 
-                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:text="当你凝望深渊,\n深渊也在凝望着你"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"/>
+                                    <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="0dp"
+                                        android:layout_gravity="center"
+                                        android:singleLine="true"
+                                        android:gravity="center"
+                                        android:includeFontPadding="false"
+                                        android:text="灿柳"
+                                        android:textColor="@color/black"
+                                        android:textSize="17sp"/>
 
-                    </RelativeLayout>
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_weight="27"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_weight="9"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                    </LinearLayout>
 
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="1"
+                        android:layout_weight="169"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="64"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:scaleType="fitXY"
+                                    app:srcCompat="@drawable/nameboard1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:layout_weight="36"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_weight="298"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+
+
+                                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="0dp"
+                                            android:layout_gravity="center"
+                                            android:singleLine="true"
+                                            android:gravity="center"
+                                            android:includeFontPadding="false"
+                                            android:text="膜法师"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"/>
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_weight="40"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_weight="53"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <LinearLayout
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent">
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:scaleType="fitXY"
+                                    app:srcCompat="@drawable/nameboard2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:layout_weight="36"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_weight="298"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+
+
+                                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="0dp"
+                                            android:layout_gravity="center"
+                                            android:singleLine="true"
+                                            android:gravity="center"
+                                            android:includeFontPadding="false"
+                                            android:text="Lv:神族"
+                                            android:textColor="@color/black"
+                                            android:textSize="16sp"/>
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_weight="40"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="52"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:scaleType="fitXY"
+                                    app:srcCompat="@drawable/nameboard3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:layout_weight="36"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_weight="298"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+
+
+                                        <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="0dp"
+                                            android:layout_gravity="center"
+                                            android:singleLine="true"
+                                            android:gravity="center"
+                                            android:includeFontPadding="false"
+                                            android:text="段位:黑钻"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"/>
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_weight="40"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_weight="91"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                     </LinearLayout>
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_weight="1"
