@@ -102,19 +102,19 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/edit_coins"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"
-                        android:textColor="@color/dark3"
-                        android:textSize="24sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/dark3"
+                        android:textCursorDrawable="@null"
+                        android:textSize="24sp" />
                 </LinearLayout>
 
             </LinearLayout>
