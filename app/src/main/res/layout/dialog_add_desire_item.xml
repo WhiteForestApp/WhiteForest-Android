@@ -12,7 +12,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
         <LinearLayout
@@ -170,12 +173,13 @@
                                         android:layout_weight="1">
 
                                         <EditText
-                                            android:inputType="number"
-                                            android:textCursorDrawable="@null"
-                                            android:textColor="@color/dark3"
-                                            android:textSize="24sp"
+                                            android:id="@+id/edit_consumecoins"
                                             android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"/>
+                                            android:layout_height="wrap_content"
+                                            android:inputType="number"
+                                            android:textColor="@color/dark3"
+                                            android:textCursorDrawable="@null"
+                                            android:textSize="24sp" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -209,11 +213,12 @@
                                         android:layout_weight="1">
 
                                         <EditText
-                                            android:textCursorDrawable="@null"
-                                            android:textColor="@color/dark3"
-                                            android:textSize="24sp"
+                                            android:id="@+id/edit_desirecontent"
                                             android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"/>
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/dark3"
+                                            android:textCursorDrawable="@null"
+                                            android:textSize="24sp" />
                                     </LinearLayout>
 
 
@@ -246,6 +251,7 @@
                         <com.freecreator.whiteforest.ui.views.FontTextView
                             android:textSize="28sp"
                             android:textColor="@color/dark3"
+                            android:id="@+id/confirm_btn2"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical"
                             android:text="@string/confirm"
