@@ -863,7 +863,7 @@ public class StoryActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         Intent intent = new Intent(StoryActivity.this, mainpage.class);
-                                        startActivity(intent);
+                                        //startActivity(intent);
                                         StoryActivity.this.finish();
                                     }
                                 });

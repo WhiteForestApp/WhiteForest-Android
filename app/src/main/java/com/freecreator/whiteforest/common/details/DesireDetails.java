@@ -1,5 +1,6 @@
 package com.freecreator.whiteforest.common.details;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
@@ -10,6 +11,10 @@ import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
  */
 
 public class DesireDetails extends AbstractDetails{
+
+
+    private JSONObject data = null;
+    private String hash = null;
 
     /*欲望拥有者(用户)唯一标识*/
     //private long uid;
@@ -94,7 +99,18 @@ public class DesireDetails extends AbstractDetails{
 
     public DesireDetails(JSONObject jsonObject){
         if(jsonObject == null) return;
+
+
+        try{
+            data = new JSONObject(jsonObject.toString());
+            hash = data.optString("hash");
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
         //uid = jsonObject.getLong("uid");
+        /*
         desireID = jsonObject.optLong("desireID", 0);
         desireTitle = jsonObject.optString("desireTitle", UNDEF);
         desireDescription = jsonObject.optString("desireDescription", UNDEF);
@@ -103,6 +119,7 @@ public class DesireDetails extends AbstractDetails{
         desireFulfillmentTime = jsonObject.optLong("desireFulfillmentTime", 0);
         desireStatus = jsonObject.optInt("desireStatus", ERRSTATUS);
         desireCostExperienceValue = jsonObject.optLong("desireCostExperienceValue", 0);
+        */
     }
 
     @Override
@@ -111,6 +128,7 @@ public class DesireDetails extends AbstractDetails{
     }
 
     public JSONObject toJSONObject() {
+        /*
         JSONObject jsonObject = new JSONObject();
         //jsonPut(jsonObject, "uid", ""+uid);
         jsonPut(jsonObject, "desireID", "" + desireID);
@@ -122,6 +140,25 @@ public class DesireDetails extends AbstractDetails{
         jsonPut(jsonObject, "desireStatus", "" + desireStatus);
         jsonPut(jsonObject, "desireCostExperienceValue", "" + desireCostExperienceValue);
         return jsonObject;
+        */
+        return data;
+    }
+
+    public void setJSONObject(JSONObject obj){
+        if(obj == null)
+            return;
+
+        try{
+            data = new JSONObject(obj.toString());
+            hash = data.optString("hash");
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    public String getHash(){
+        return hash;
     }
 
     @Override

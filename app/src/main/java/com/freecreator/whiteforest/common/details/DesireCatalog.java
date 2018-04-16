@@ -67,6 +67,16 @@ public class DesireCatalog {
         if(null == desireDetails || !desireDetails.isValid()){
             return false;
         }
+
+        for(int i = 0; i< desireDetailsList.size();i++){
+            DesireDetails item = desireDetailsList.get(i);
+            if(item.getHash().equals(desireDetails.getHash())){
+                if(!desireDetails.equals(item))
+                    desireDetailsList.set(i, desireDetails);
+                return true;
+            }
+        }
+
         long tempTime = desireDetails.getDesireAddTime();
         desireDetailsList.add(desireDetails);
         if(itemNum == 0){

@@ -12,12 +12,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.common.cache.LocalCache;
+import com.freecreator.whiteforest.common.details.DesireCatalog;
+import com.freecreator.whiteforest.common.details.DesireDetails;
+import com.freecreator.whiteforest.common.details.TaskCatalog;
+import com.freecreator.whiteforest.common.details.TaskDetails;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddDesire;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
+import com.freecreator.whiteforest.utils.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static com.freecreator.whiteforest.common.Debug._debug2;
 
@@ -44,6 +54,11 @@ public class DesireActivity extends AppCompatActivity {
     private LinearLayout list_desire = null;
     private ImageView ImageView_btn_add = null;
 
+    private DesireCatalog desire_catalog = null;
+    private LocalCache local_cache = null;
+    private boolean first_time = false;
+    // view 是被点击的 view, Object 第一个元素是jsonObject 第二个元素是 整栏的view 第三个元素是空隔间隙的view
+    private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
 
     private dialogAddDesire dialogDesire = null;
 
@@ -52,6 +67,10 @@ public class DesireActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desire);
+
+
+        local_cache =  new LocalCache(this);
+        desire_catalog = local_cache.getDesireCatalog();
 
         UI_init();
         setListeners();
@@ -105,6 +124,8 @@ public class DesireActivity extends AppCompatActivity {
      */
     public void UI_addItem(int position, JSONObject data){
 
+        desire_catalog.addDesireDetails(new DesireDetails(data));
+        local_cache.setDesireCatalog(desire_catalog);
 
         FrameLayout item = (FrameLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_desire, null);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -117,7 +138,7 @@ public class DesireActivity extends AppCompatActivity {
             text.setText(title);
         }
 
-        list_desire.addView(item, position, params);
+        list_desire.addView(item, 0, params);
 
         LinearLayout space = (LinearLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
         Size list_desire_size = AdjustSize.getViewSize(list_desire);
@@ -126,10 +147,23 @@ public class DesireActivity extends AppCompatActivity {
         refSize.width = 500;
         float h  = (float)list_desire_size.width * (float)refSize.height / (float)refSize.width;
         params = new LinearLayout.LayoutParams(list_desire_size.width, (int)h);
-        list_desire.addView(space, position + 1, params);
+        list_desire.addView(space, 1, params);
 
-        /*TODO: UI需要优化*/
+        ArrayList<Object> value = new ArrayList<>();
+        value.add(data);
+        value.add(item);
+        value.add(space);
+        view_info.put(item, value);
+        item.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v ){
+                UI_clickEvent(v);
+            }
+        });
 
+    }
+
+    private void UI_clickEvent(View v) {
     }
 
     @Override
@@ -137,9 +171,34 @@ public class DesireActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
         UI_adjust();
 
-        if(_debug2)
-            mockDataForTest();
 
+        if(false == first_time){
+
+            first_time = true;
+            UI_initList();
+
+            if(desire_catalog.getItemNum() == 0)
+                mockDataForTest();
+
+        }
+
+    }
+
+    private void UI_initList() {
+
+        List<DesireDetails> desire = desire_catalog.getDesireDetailsList();
+
+        if(desire == null){
+            return;
+        }
+
+        for(int i = 0; i< desire.size(); i++){
+            DesireDetails details = desire.get(i);
+            if(null == details)
+                continue;
+
+            UI_addItem(-1, details.toJSONObject());
+        }
     }
 
 
@@ -151,22 +210,17 @@ public class DesireActivity extends AppCompatActivity {
 
             obj.put("scores", 6);
             obj.put("title", "打一局王者荣耀");
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             UI_addItem(0,obj);
 
             obj.put("scores", 6);
             obj.put("title", "逛商场买衣服");
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             UI_addItem(0,obj);
 
             obj.put("scores", 6);
             obj.put("title", "读一本小说");
-            UI_addItem(0,obj);
-
-            obj.put("scores", 6);
-            obj.put("title", "去武大赏樱");
-            UI_addItem(0,obj);
-
-            obj.put("scores", 6);
-            obj.put("title", "KFC全家桶");
+            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             UI_addItem(0,obj);
 
         } catch (JSONException e) {
