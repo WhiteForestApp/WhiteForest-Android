@@ -53,11 +53,12 @@
                                 android:layout_height="match_parent" />
 
                             <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                                android:id="@+id/text_coin_num"
                                 android:includeFontPadding="false"
                                 android:singleLine="true"
                                 android:text="4"
                                 android:textSize="18sp"
-                                android:textColor="#e1e1e1"
+                                android:textColor="#fbe158"
                                 android:gravity="center_vertical"
                                 android:layout_gravity="center_vertical"
                                 android:layout_width="wrap_content"
@@ -160,6 +161,8 @@
 
 
                     <ImageView
+                        android:id="@+id/image_trash"
+                        android:clickable="true"
                         android:adjustViewBounds="true"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

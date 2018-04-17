@@ -59,6 +59,8 @@ public class DesireActivity extends AppCompatActivity {
     private boolean first_time = false;
     // view 是被点击的 view, Object 第一个元素是jsonObject 第二个元素是 整栏的view
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
+    private HashMap<View, ArrayList<Object>> view_info_for_trash_btn = new HashMap<>();
+
 
     private dialogAddDesire dialogDesire = null;
 
@@ -132,11 +134,16 @@ public class DesireActivity extends AppCompatActivity {
 
         String title = data.optString("title");
         if(title != null && !title.equals("")){
-            int scores = data.optInt("scores");
-            title = "$" + scores + " " + title;
+
             TextView text = (TextView)item.findViewById(R.id.text_title);
             text.setText(title);
+
+            TextView text_coin_num = (TextView)item.findViewById(R.id.text_coin_num);
+            int scores = data.optInt("scores");
+            text_coin_num.setText(""+ scores);
+
         }
+
 
         list_desire.addView(item, 0, params);
 
@@ -161,6 +168,24 @@ public class DesireActivity extends AppCompatActivity {
             }
         });
 
+        view_info_for_trash_btn.put(item.findViewById(R.id.image_trash), value);
+
+        item.findViewById(R.id.image_trash).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v ){
+                ArrayList<Object> value = view_info_for_trash_btn.get(v);
+                JSONObject data = (JSONObject)value.get(0);
+
+                DesireDetails desire = new DesireDetails(data);
+
+                String hash = data.optString("hash");
+                desire_catalog.deleteDesireDetails(hash);
+                local_cache.setDesireCatalog(desire_catalog);
+
+                View item = (View)value.get(1);
+                list_desire.removeView(item);
+            }
+        });
     }
 
     private void UI_clickEvent(View v) {

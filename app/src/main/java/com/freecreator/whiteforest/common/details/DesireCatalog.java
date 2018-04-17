@@ -88,6 +88,17 @@ public class DesireCatalog {
         return true;
     }
 
+    public void deleteDesireDetails(String hash){
+
+        for(int i = 0; i< desireDetailsList.size();i++){
+            DesireDetails item = desireDetailsList.get(i);
+            if(item.getHash().equals(hash)){
+                desireDetailsList.remove(i);
+                return;
+            }
+        }
+    }
+
     @Override
     public String toString(){
         return toJSONObject().toString();
