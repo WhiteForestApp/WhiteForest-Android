@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/splash_iv"
@@ -8,4 +9,11 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:layout_centerInParent="true"  />
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/app_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

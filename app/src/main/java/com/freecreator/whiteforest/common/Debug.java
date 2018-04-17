@@ -18,5 +18,5 @@ package com.freecreator.whiteforest.common;
 public class Debug {
     public final static boolean _Debug = true;
     public final static boolean _debug2 = true;
-    public final static boolean toMainlogin = true;
+    public final static boolean toMainlogin = false;
 }

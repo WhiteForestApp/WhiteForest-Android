@@ -57,7 +57,7 @@ public class DesireActivity extends AppCompatActivity {
     private DesireCatalog desire_catalog = null;
     private LocalCache local_cache = null;
     private boolean first_time = false;
-    // view 是被点击的 view, Object 第一个元素是jsonObject 第二个元素是 整栏的view 第三个元素是空隔间隙的view
+    // view 是被点击的 view, Object 第一个元素是jsonObject 第二个元素是 整栏的view
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
 
     private dialogAddDesire dialogDesire = null;
@@ -140,19 +140,19 @@ public class DesireActivity extends AppCompatActivity {
 
         list_desire.addView(item, 0, params);
 
-        LinearLayout space = (LinearLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
+        //LinearLayout space = (LinearLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
         Size list_desire_size = AdjustSize.getViewSize(list_desire);
         Size refSize = new Size();
         refSize.height = 18;
         refSize.width = 500;
         float h  = (float)list_desire_size.width * (float)refSize.height / (float)refSize.width;
         params = new LinearLayout.LayoutParams(list_desire_size.width, (int)h);
-        list_desire.addView(space, 1, params);
+        //list_desire.addView(space, 1, params);
 
         ArrayList<Object> value = new ArrayList<>();
         value.add(data);
         value.add(item);
-        value.add(space);
+        //value.add(space);
         view_info.put(item, value);
         item.setOnClickListener(new View.OnClickListener(){
             @Override

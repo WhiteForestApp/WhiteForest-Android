@@ -1,6 +1,7 @@
 package com.freecreator.whiteforest.ui.views;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
@@ -118,6 +119,7 @@ public class SwipeLayout extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         viewDragHelper.processTouchEvent(event);
         return true;
     }

@@ -14,6 +14,20 @@ import com.freecreator.whiteforest.ui.utils.FontCustom;
 
 @SuppressLint("AppCompatCustomView")
 public class FontTextView_Bold  extends TextView {
+
+    public FontTextView_Bold(Context context, AttributeSet attrs, int defStyleAttr) {
+        super( context,  attrs,  defStyleAttr);
+    }
+
+    @SuppressLint("NewApi")
+    public FontTextView_Bold(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super( context,  attrs,  defStyleAttr,  defStyleRes);
+    }
+
+    public FontTextView_Bold(Context context){
+        super(context);
+    }
+
     public FontTextView_Bold(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);

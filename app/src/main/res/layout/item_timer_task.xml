@@ -64,6 +64,7 @@
 
 
                     <LinearLayout
+                        android:clickable="true"
                         android:id="@+id/btn_add_timer"
                         android:orientation="horizontal"
                         android:layout_width="0dp"
@@ -81,7 +82,7 @@
         <LinearLayout
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_width="150dp"
+            android:layout_width="75dp"
             android:layout_height="match_parent">
 
             <LinearLayout
