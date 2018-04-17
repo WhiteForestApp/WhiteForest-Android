@@ -148,13 +148,13 @@ public class TaskActivity extends AppCompatActivity {
                 if(null == item || !(item instanceof View))
                     return;
 
-                View space = (View) value.get(2);
-                if(null == space || !(space instanceof View))
-                    return;
+                //View space = (View) value.get(2);
+                //if(null == space || !(space instanceof View))
+                //    return;
 
                 task_normal_total--;
                 list_task.removeView(item);
-                list_task.removeView(space);
+                //list_task.removeView(space);
 
                 animGainAchevement.show();
                 task_catalog.deleteTaskDetails(obj.optString("hash"));
@@ -221,7 +221,7 @@ public class TaskActivity extends AppCompatActivity {
             case TYPE_NORMAL_FINISHED_TASK:{
 
                 if(position < 0)
-                    position = task_timer_total * 2 + task_normal_total * 2 ;
+                    position = task_timer_total * 2 + task_normal_total ;
 
                 LinearLayout item = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_finished_task, null);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -239,16 +239,15 @@ public class TaskActivity extends AppCompatActivity {
 
                 list_task.addView(item, position, params);
 
-                LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
+                //LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
 
                 Size refSize = new Size();
-                refSize.height = 30;
+                refSize.height = 0;//30;
                 refSize.width = 500;
                 float h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
-                list_task.addView(space, position + 1, params);
-                //list_task.addView(space,  params);
+                //list_task.addView(space, position + 1, params);
 
                 task_normal_finished_total++;
 
@@ -271,23 +270,22 @@ public class TaskActivity extends AppCompatActivity {
 
                 list_task.addView(item, position, params);
 
-                LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
+                //LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
                 Size list_task_size = AdjustSize.getViewSize(list_task);
 
                 Size refSize = new Size();
-                refSize.height = 30;
+                refSize.height = 0;//30;
                 refSize.width = 500;
                 float h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
-                list_task.addView(space, position + 1, params);
-                //list_task.addView(space,  params);
+                //list_task.addView(space, position + 1, params);
 
                 task_normal_total++;
 
                 ArrayList<Object> value = new ArrayList<>();
                 value.add(data);
                 value.add(item);
-                value.add(space);
+                //value.add(space);
                 view_info.put(item.findViewById(R.id.checkbox), value);
                 item.findViewById(R.id.checkbox).setOnClickListener(new View.OnClickListener(){
                     @Override
