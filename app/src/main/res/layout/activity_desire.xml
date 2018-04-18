@@ -63,8 +63,22 @@
 
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="20dp">
+            android:layout_height="30dp">
+
+
+            <com.freecreator.whiteforest.ui.views.FontTextView_Bold
+                android:id="@+id/text_current_coins"
+                android:includeFontPadding="false"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/dark3"
+                android:textSize="12sp"
+                android:text=""/>
+
         </LinearLayout>
 
 
@@ -89,11 +103,22 @@
 
 
                 <LinearLayout
-                    android:id="@+id/list_desire"
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="98"
                     android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/list_desire"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -115,7 +140,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp">
+            android:layout_height="25dp">
         </LinearLayout>
 
 

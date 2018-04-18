@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.base.Application;
+import com.freecreator.whiteforest.base.User;
 import com.freecreator.whiteforest.common.cache.LocalCache;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.common.details.TaskDetails;
@@ -58,6 +60,7 @@ public class TaskActivity extends AppCompatActivity {
     //   该布局的标题 TextView 的 id 是 task_content
     private LinearLayout list_task = null;
     private ImageView ImageView_btn_add = null;
+    private TextView text_current_coins = null;
 
     private dialogAddTask dialogTask = null;
     private animAchevement animGainAchevement = null;
@@ -73,6 +76,9 @@ public class TaskActivity extends AppCompatActivity {
     // view 对应 着 item 的view 和 JSONObject
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
     private boolean first_time = false;
+    private User user = null;
+    private int user_coins = -2;
+    private int user_soul = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +124,40 @@ public class TaskActivity extends AppCompatActivity {
         dialogTask = new dialogAddTask(this, (RelativeLayout) findViewById(R.id.task_page));
         animGainAchevement = new animAchevement(this, (RelativeLayout) findViewById(R.id.task_page));
         conTimerPicker = new controllerTimePicker(this);
+
+        text_current_coins = (TextView) findViewById(R.id.text_current_coins);
+
+        user = Application.getUser();
+
+        new Thread(){
+            @Override
+            public void run(){
+                try {
+                    while(1==1){
+
+                        sleep(1000);
+                        int coins = user.getData().optInt("coins", 0);
+                        int soul = user.getData().optInt("soul", 0);
+
+                        if(coins != user_coins || soul != user_soul){
+                            user_coins = coins;
+                            user_soul = soul;
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String text = getResources().getString(R.string.coins_soul_tip);
+                                    text = String.format(text, user_coins, user_soul);
+                                    text_current_coins.setText(text);
+                                }
+                            });
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void UI_adjust(){
@@ -148,15 +188,19 @@ public class TaskActivity extends AppCompatActivity {
                 if(null == item || !(item instanceof View))
                     return;
 
-                //View space = (View) value.get(2);
-                //if(null == space || !(space instanceof View))
-                //    return;
+                int coins = obj.optInt("scores", 0);
+                int soul = obj.optInt("exp", 0);
+
+                JSONObject user_data = user.getData();
+                jsonPut(user_data, "coins", user_data.optInt("coins", 0 )+ coins);
+                jsonPut(user_data, "soul", user_data.optInt("soul", 0 )+ soul);
+                user.saveData();
 
                 task_normal_total--;
                 list_task.removeView(item);
-                //list_task.removeView(space);
 
                 animGainAchevement.show();
+
                 task_catalog.deleteTaskDetails(obj.optString("hash"));
                 local_cache.setTaskCatalog(task_catalog);
 
@@ -372,6 +416,8 @@ public class TaskActivity extends AppCompatActivity {
             obj.put("type", TYPE_TIMER_TASK);
             obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             obj.put("title", "阅读书籍");
+            obj.put("scores", "7");
+            obj.put("exp", "5");
             UI_addItem(-1,obj);
 
             obj.put("type", TYPE_NORMAL_FINISHED_TASK);
@@ -410,11 +456,12 @@ public class TaskActivity extends AppCompatActivity {
     public void onWindowFocusChanged (boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
 
-        UI_adjust();
 
         if(false == first_time){
 
             first_time = true;
+
+            UI_adjust();
             UI_initList();
 
             if(task_catalog.getItemNum() == 0)

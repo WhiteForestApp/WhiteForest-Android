@@ -35,11 +35,12 @@ public class UIUtils {
         return (int)val;
     }
 
-    public static int[] getScreenSize(Context context) {
+    public static Size getScreenSize(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
-        return new int[]{outMetrics.widthPixels, outMetrics.heightPixels};
+        Size val = new Size(outMetrics.widthPixels, outMetrics.heightPixels);
+        return val;
     }
 
     public static void setMargins (View v, int l, int t, int r, int b) {

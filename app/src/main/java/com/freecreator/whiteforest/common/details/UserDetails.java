@@ -1,5 +1,6 @@
 package com.freecreator.whiteforest.common.details;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
@@ -10,6 +11,9 @@ import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
  */
 
 public class UserDetails extends AbstractDetails{
+
+    private JSONObject data = null;
+    private String hash = null;
 
     /*用户唯一标识*/
     private long uid;
@@ -163,8 +167,19 @@ public class UserDetails extends AbstractDetails{
     }
 
     public UserDetails(){}
+
     public UserDetails(JSONObject jsonObject){
         if(jsonObject == null) return;
+
+        try{
+            data = new JSONObject(jsonObject.toString());
+            hash = data.optString("hash");
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        /*
         uid = jsonObject.optLong("uid",0);
         userName = jsonObject.optString("userName",UNDEF);
         nickName = jsonObject.optString("nickName",UNDEF);
@@ -183,8 +198,36 @@ public class UserDetails extends AbstractDetails{
         finishedTaskNum = jsonObject.optLong("finishedTaskNum",0);
         totalDesireNum = jsonObject.optLong("totalDesireNum",0);
         userStatus = jsonObject.optInt("userStatus",ERRSTATUS);
+        */
     }
 
+    public String getHash(){
+        return hash;
+    }
+
+    @Override
+    public String toString(){
+        return toJSONObject().toString();
+    }
+
+
+    public JSONObject toJSONObject(){
+        return data;
+    }
+
+    public void setJSONObject(JSONObject obj){
+        if(obj == null)
+            return;
+
+        try{
+            data = new JSONObject(obj.toString());
+            hash = data.optString("hash");
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+    /*
     @Override
     public String toString(){
         return toJSONObject().toString();
@@ -212,7 +255,7 @@ public class UserDetails extends AbstractDetails{
         jsonPut(jsonObject, "userStatus", ""+userStatus);
         return jsonObject;
     }
-
+*/
     @Override
     public boolean isValid(){
         return true;

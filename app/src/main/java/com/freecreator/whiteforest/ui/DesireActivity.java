@@ -10,26 +10,34 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.base.Application;
+import com.freecreator.whiteforest.base.User;
 import com.freecreator.whiteforest.common.cache.LocalCache;
 import com.freecreator.whiteforest.common.details.DesireCatalog;
 import com.freecreator.whiteforest.common.details.DesireDetails;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.common.details.TaskDetails;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddDesire;
+import com.freecreator.whiteforest.ui.dialogs.dialogCustom;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
+import com.freecreator.whiteforest.ui.utils.ResourceUtils;
 import com.freecreator.whiteforest.ui.utils.Size;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 import com.freecreator.whiteforest.utils.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static com.freecreator.whiteforest.common.Debug._debug2;
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
  * Created by niko on 2018/3/11.
@@ -42,27 +50,22 @@ public class DesireActivity extends AppCompatActivity {
 
     private ImageView ImageView_icon_desire = null;
 
-    // list_task 是可滑动区域的layout, 往list_task 添加view, 就可以添加到可滑动区域进去
-    // 可以添加的view布局有两种
-    // 1. item_timer_task  这种布局是 时间投资型 任务的item布局
-    //  该布局的 标题TextView 的 id 是 text_title
-    //  该布局的 "加号" 按钮的 LinearLayout 的 id 是 btn_add_timer
-    // 2.  item_normal_task   这种布局是普通任务的布局
-    //   该布局的 标题 TextView 的 id 是 task_content
-    // 3.  item_finished_task   这种布局是普通任务被完成时 显示出来的布局
-    //   该布局的标题 TextView 的 id 是 task_content
     private LinearLayout list_desire = null;
     private ImageView ImageView_btn_add = null;
+    private TextView text_current_coins = null;
 
     private DesireCatalog desire_catalog = null;
     private LocalCache local_cache = null;
     private boolean first_time = false;
+    private User user = null;
+    private int user_coins = -2;
+
     // view 是被点击的 view, Object 第一个元素是jsonObject 第二个元素是 整栏的view
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
     private HashMap<View, ArrayList<Object>> view_info_for_trash_btn = new HashMap<>();
 
-
     private dialogAddDesire dialogDesire = null;
+    private dialogCustom dialogTips = null;
 
 
     @Override
@@ -105,10 +108,41 @@ public class DesireActivity extends AppCompatActivity {
         ImageView_btn_add.setImageResource(R.drawable.btn_add);
 
         list_desire = (LinearLayout) findViewById(R.id.list_desire);
+        text_current_coins = (TextView) findViewById(R.id.text_current_coins);
 
-        dialogDesire = new dialogAddDesire(this, (RelativeLayout) findViewById(R.id.desire_page) );
+        //dialogDesire = new dialogAddDesire(this, (RelativeLayout) findViewById(R.id.desire_page) );
+        dialogDesire = new dialogAddDesire(this, R.style.Dialog);
+
+        user = Application.getUser();
+
+        new Thread(){
+            @Override
+            public void run(){
+                try {
+                    while(1==1){
+
+                        sleep(1000);
+                        int coins = user.getData().optInt("coins", 0);
+
+                        if(coins != user_coins){
+                            user_coins = coins;
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String text = getResources().getString(R.string.store_coins_tip);
+                                    text = String.format(text, user_coins);
+                                    text_current_coins.setText(text);
+                                }
+                            });
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
-
 
     private void UI_adjust(){
         // 尺寸自适应 根据图片的宽高 来调整view高度 [宽度不调整]
@@ -160,8 +194,10 @@ public class DesireActivity extends AppCompatActivity {
         value.add(data);
         value.add(item);
         //value.add(space);
-        view_info.put(item, value);
-        item.setOnClickListener(new View.OnClickListener(){
+        View clickable = item.findViewById(R.id.linear_item);
+        view_info.put(clickable, value);
+
+        clickable.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v ){
                 UI_clickEvent(v);
@@ -189,6 +225,64 @@ public class DesireActivity extends AppCompatActivity {
     }
 
     private void UI_clickEvent(View v) {
+        ArrayList<Object> value = view_info.get(v);
+        if(null == value)
+            return;
+
+        JSONObject data = (JSONObject)value.get(0);
+        if(null == data)
+            return;
+
+        Size refSize = AdjustSize.getImageWidthHeight(this, R.drawable.custom_dialog);
+        Size size = UIUtils.getScreenSize(this);
+        size.height =  (int)((float)size.width * (float)refSize.height / (float)refSize.width);
+
+        dialogCustom.Builder builder = new dialogCustom.Builder(this);
+        dialogTips = builder
+                .style(R.style.Dialog)
+                .heightpx(size.height)
+                .widthpx(size.width)
+                .cancelTouchout(true)
+                .view(R.layout.dialog_common)
+                .build();
+
+        TextView text_title = (TextView)dialogTips.getView().findViewById(R.id.text_dialog_title);
+        String text = getResources().getString(R.string.desire_use_tip);
+        text = String.format(text, data.optInt("scores", 0));
+        text_title.setText(text);
+
+        dialogTips.addExtraData(value);
+        dialogTips.addViewOnclick(R.id.cancel, new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                dialogTips.dismiss();
+            }
+        });
+        dialogTips.addViewOnclick(R.id.confirm, new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                ArrayList<Object> obj = (ArrayList<Object>)dialogTips.getExtraData();
+
+                JSONObject data = (JSONObject)obj.get(0);
+                if(null != data){
+                    int coins_cost = data.optInt("scores", 0);
+                    int coins = user.getData().optInt("coins", 0);
+
+                    if(coins - coins_cost < 0){
+                        Toast.makeText(DesireActivity.this, getResources().getString(R.string.coins_not_enough), Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        jsonPut(user.getData(), "coins", coins - coins_cost);
+                        user.saveData();
+                    }
+                    dialogTips.dismiss();
+                    return;
+                }
+
+            }
+        });
+        dialogTips.show();
+
     }
 
     @Override
@@ -233,17 +327,20 @@ public class DesireActivity extends AppCompatActivity {
         JSONObject obj = new JSONObject();
         try {
 
+            obj.put("type", 1);
             obj.put("scores", 6);
             obj.put("title", "打一局王者荣耀");
             obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             UI_addItem(0,obj);
 
+            obj.put("type", 1);
             obj.put("scores", 6);
             obj.put("title", "逛商场买衣服");
             obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             UI_addItem(0,obj);
 
-            obj.put("scores", 6);
+            obj.put("type", 1);
+            obj.put("scores", 4);
             obj.put("title", "读一本小说");
             obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
             UI_addItem(0,obj);

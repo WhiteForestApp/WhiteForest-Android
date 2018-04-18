@@ -1,8 +1,14 @@
 package com.freecreator.whiteforest.ui.dialogs;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -10,6 +16,8 @@ import android.widget.Toast;
 
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.DesireActivity;
+import com.freecreator.whiteforest.ui.utils.Size;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 
 import org.json.JSONObject;
 
@@ -21,15 +29,52 @@ import static com.freecreator.whiteforest.utils.MD5.MD5;
  * Created by niko on 2018/3/12.
  */
 
-public class dialogAddDesire {
+public class dialogAddDesire extends Dialog {
 
     private Activity m_parent = null;
     private RelativeLayout mDialog = null;
+    private Context context;
 
     private TextView confirm_btn2 = null;
 
+    public dialogAddDesire(Context context) {
+        super(context);
+        this.context = context;
+    }
 
+    public dialogAddDesire(Context context, int theme) {
+        super(context, theme);
+        this.context = context;
+    }
 
+    public dialogAddDesire(Context context, boolean cancelable, OnCancelListener cancelListener) {
+        super(context, cancelable, cancelListener);
+        this.context = context;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDialog = (RelativeLayout) View.inflate(context, R.layout.dialog_add_desire_item, null);
+        setContentView(mDialog);
+
+        setCanceledOnTouchOutside(false);
+
+        Window win = getWindow();
+        WindowManager.LayoutParams lp = win.getAttributes();
+        Size screen =  UIUtils.getScreenSize(context);
+        lp.height = screen.height;
+        lp.width = screen.width;
+        win.setAttributes(lp);
+
+        if(context instanceof Activity)
+            m_parent = (Activity)context;
+
+        UI_init();
+        setListeners();
+    }
+
+    /*
     public dialogAddDesire(Activity parent, RelativeLayout attachment){
         m_parent = parent;
 
@@ -44,6 +89,7 @@ public class dialogAddDesire {
 
         setListeners();
     }
+    */
 
     private void UI_init() {
         confirm_btn2 = (TextView)mDialog.findViewById(R.id.confirm_btn2);
@@ -98,12 +144,15 @@ public class dialogAddDesire {
 
     }
 
-    public void show(){
-        mDialog.setVisibility(View.VISIBLE);
-        mDialog.requestFocus();
-    }
-
+    @Override
     public void hide(){
-        mDialog.setVisibility(View.INVISIBLE);
+
+        View v =  mDialog;
+        EditText edit = (EditText)v.findViewById(R.id.edit_consumecoins);
+        edit.setText("");
+        edit = (EditText)v.findViewById(R.id.edit_desirecontent);
+        edit.setText("");
+
+        super.hide();
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.base.Application;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,9 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Application.init(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 

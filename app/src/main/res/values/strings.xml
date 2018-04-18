@@ -38,4 +38,9 @@
     <string name="click_go_on">点击以继续</string>
     <string name="task_god">使命之神</string>
     <string name="desire_god">欲望之神</string>
+    <string name="cancel">取消</string>
+    <string name="desire_use_tip">将花费 %1$d 个金币\n你确定要使用吗</string>
+    <string name="store_coins_tip">当前金币数量 : %1$d 个</string>
+    <string name="coins_soul_tip">金币 : %1$d 个 | 心灵值 : %2$d</string>
+    <string name="coins_not_enough">金币不够, 完成你向使命之神承诺的任务以获得更多金币</string>
 </resources>

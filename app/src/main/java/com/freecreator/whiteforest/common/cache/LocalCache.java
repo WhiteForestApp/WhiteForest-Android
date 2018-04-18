@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 
+import com.freecreator.whiteforest.base.Application;
 import com.freecreator.whiteforest.common.details.DesireCatalog;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.common.details.UserDetails;
@@ -45,9 +46,12 @@ public class LocalCache extends AbstractCache{
     * 从缓存中获取用户详细信息
     */
     @Nullable
-    public UserDetails getUserDetails(){
+    public UserDetails getUserDetails(String user_hash){
         UserDetails userDetails = null;
-        String str = sharedPreferences.getString(USERDETAILSINFO, "");
+        String str = sharedPreferences.getString(user_hash, "");
+        if(null == str || str.equals(""))
+            return null;
+
         JSONObject jsonObject = optStrToJsonObject(str);
         userDetails = new UserDetails(jsonObject);
         return userDetails;
@@ -56,13 +60,18 @@ public class LocalCache extends AbstractCache{
     /*
     * 更新缓存中用户详细信息
     * */
-    public void setUserDetails(UserDetails userDetails){
+    public void setUserDetails( UserDetails userDetails){
         if(null == userDetails || !userDetails.isValid()){
             return;
         }
+
+        String user_hash = userDetails.getHash();
+        if(user_hash.equals(""))
+            return;
+
         String str = userDetails.toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(USERDETAILSINFO, str);
+        editor.putString(user_hash, str);
         editor.apply();
     }
 
@@ -71,7 +80,7 @@ public class LocalCache extends AbstractCache{
     * */
     public void clearUserDetails(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(USERDETAILSINFO, "");
+        editor.putString(Application.getUser().getData().optString("hash"), "");
         editor.apply();
     }
 
@@ -80,8 +89,10 @@ public class LocalCache extends AbstractCache{
     */
     @Nullable
     public TaskCatalog getTaskCatalog(){
+        String user_hash = Application.getUser().getData().optString("hash");
+
         TaskCatalog taskCatalog = null;
-        String str = sharedPreferences.getString(TASKCATALOGINFO, "");
+        String str = sharedPreferences.getString(user_hash + TASKCATALOGINFO, "");
         JSONObject jsonObject = optStrToJsonObject(str);
         taskCatalog = new TaskCatalog(jsonObject);
         return taskCatalog;
@@ -94,9 +105,11 @@ public class LocalCache extends AbstractCache{
         if(null == taskCatalog){
             return;
         }
+        String user_hash = Application.getUser().getData().optString("hash");
+
         String str = taskCatalog.toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(TASKCATALOGINFO, str);
+        editor.putString(user_hash + TASKCATALOGINFO, str);
         editor.apply();
     }
 
@@ -104,8 +117,10 @@ public class LocalCache extends AbstractCache{
     *清除缓存中任务列表信息
     * */
     public void clearTaskCatalog(){
+        String user_hash = Application.getUser().getData().optString("hash");
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(TASKCATALOGINFO, "");
+        editor.putString(user_hash + TASKCATALOGINFO, "");
         editor.apply();
     }
 
@@ -115,7 +130,9 @@ public class LocalCache extends AbstractCache{
     @Nullable
     public DesireCatalog getDesireCatalog(){
         DesireCatalog desireCatalog = null;
-        String str = sharedPreferences.getString(DESIRECATALOGINFO, "");
+        String user_hash = Application.getUser().getData().optString("hash");
+
+        String str = sharedPreferences.getString(user_hash+ DESIRECATALOGINFO, "");
         JSONObject jsonObject = optStrToJsonObject(str);
         desireCatalog = new DesireCatalog(jsonObject);
         return desireCatalog;
@@ -128,9 +145,11 @@ public class LocalCache extends AbstractCache{
         if(null == desireCatalog){
             return;
         }
+        String user_hash = Application.getUser().getData().optString("hash");
+
         String str = desireCatalog.toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DESIRECATALOGINFO, str);
+        editor.putString(user_hash+DESIRECATALOGINFO, str);
         editor.apply();
     }
 
@@ -138,8 +157,11 @@ public class LocalCache extends AbstractCache{
     *清除缓存中欲望列表信息
     * */
     public void clearDesireCatalog(){
+
+        String user_hash = Application.getUser().getData().optString("hash");
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DESIRECATALOGINFO, "");
+        editor.putString(user_hash+ DESIRECATALOGINFO, "");
         editor.apply();
     }
 }

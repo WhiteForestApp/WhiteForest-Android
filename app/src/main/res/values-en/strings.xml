@@ -38,4 +38,9 @@
     <string name="click_go_on">Click to go on</string>
     <string name="task_god">God of Missions</string>
     <string name="desire_god">God of Desire</string>
+    <string name="cancel">Cancel</string>
+    <string name="desire_use_tip">It will cost %1$d coins\nAre you sure to use?</string>
+    <string name="store_coins_tip">Coins you have : %1$d</string>
+    <string name="coins_soul_tip">Coins : %1$d | Soul : %2$d</string>
+    <string name="coins_not_enough">Not enough coins! Goto finish your tasks to gain coins.</string>
 </resources>
