@@ -10,18 +10,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.base.Application;
-import com.freecreator.whiteforest.base.User;
 import com.freecreator.whiteforest.common.cache.LocalCache;
+import com.freecreator.whiteforest.common.details.DesireDetails;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.common.details.TaskDetails;
+import com.freecreator.whiteforest.common.details.UserDetails;
 import com.freecreator.whiteforest.ui.animation.animAchevement;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddTask;
 import com.freecreator.whiteforest.ui.dialogs.controllerTimePicker;
+import com.freecreator.whiteforest.ui.dialogs.dialogCustom;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
 import com.freecreator.whiteforest.ui.utils.Size;
+import com.freecreator.whiteforest.ui.utils.UIUtils;
 import com.freecreator.whiteforest.utils.MD5;
 
 import org.json.JSONArray;
@@ -63,6 +67,7 @@ public class TaskActivity extends AppCompatActivity {
     private TextView text_current_coins = null;
 
     private dialogAddTask dialogTask = null;
+    private dialogCustom dialogTips = null;
     private animAchevement animGainAchevement = null;
     private controllerTimePicker conTimerPicker = null;
 
@@ -71,12 +76,12 @@ public class TaskActivity extends AppCompatActivity {
     private int task_timer_total = 0;
 
     private TaskCatalog task_catalog = null;
-    private LocalCache local_cache = null;
 
     // view 对应 着 item 的view 和 JSONObject
     private HashMap<View, ArrayList<Object>> view_info = new HashMap<>();
+    private HashMap<View, ArrayList<Object>> view_info_for_trash_btn = new HashMap<>();
     private boolean first_time = false;
-    private User user = null;
+    private UserDetails user = null;
     private int user_coins = -2;
     private int user_soul = -1;
 
@@ -85,8 +90,8 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        local_cache =  new LocalCache(this);
-        task_catalog = local_cache.getTaskCatalog();
+        user = Application.getCurrentUser(this);
+        task_catalog = Application.getTaskCatalog(this);
 
         UI_init();
         setListeners();
@@ -127,8 +132,6 @@ public class TaskActivity extends AppCompatActivity {
 
         text_current_coins = (TextView) findViewById(R.id.text_current_coins);
 
-        user = Application.getUser();
-
         new Thread(){
             @Override
             public void run(){
@@ -136,8 +139,8 @@ public class TaskActivity extends AppCompatActivity {
                     while(1==1){
 
                         sleep(1000);
-                        int coins = user.getData().optInt("coins", 0);
-                        int soul = user.getData().optInt("soul", 0);
+                        int coins = user.getCoins();
+                        int soul = user.getRemainExperienceValue();
 
                         if(coins != user_coins || soul != user_soul){
                             user_coins = coins;
@@ -191,10 +194,8 @@ public class TaskActivity extends AppCompatActivity {
                 int coins = obj.optInt("scores", 0);
                 int soul = obj.optInt("exp", 0);
 
-                JSONObject user_data = user.getData();
-                jsonPut(user_data, "coins", user_data.optInt("coins", 0 )+ coins);
-                jsonPut(user_data, "soul", user_data.optInt("soul", 0 )+ soul);
-                user.saveData();
+                user.setCoins(user.getCoins() + coins);
+                user.setRemainExperienceValue(user.getRemainExperienceValue() + soul);
 
                 task_normal_total--;
                 list_task.removeView(item);
@@ -202,7 +203,6 @@ public class TaskActivity extends AppCompatActivity {
                 animGainAchevement.show();
 
                 task_catalog.deleteTaskDetails(obj.optString("hash"));
-                local_cache.setTaskCatalog(task_catalog);
 
                 JSONObject item_finished = optStrToJsonObject(obj.toString());
                 jsonPut(item_finished, "hash", MD5.MD5("" + System.currentTimeMillis()));
@@ -242,7 +242,6 @@ public class TaskActivity extends AppCompatActivity {
         }
 
         task_catalog.addTaskDetails(new TaskDetails(data));
-        local_cache.setTaskCatalog(task_catalog);
     }
 
     /**
@@ -258,7 +257,6 @@ public class TaskActivity extends AppCompatActivity {
             return;
 
         task_catalog.addTaskDetails(new TaskDetails(data));
-        local_cache.setTaskCatalog(task_catalog);
 
         int type = data.optInt("type");
         switch(type){
@@ -295,6 +293,25 @@ public class TaskActivity extends AppCompatActivity {
 
                 task_normal_finished_total++;
 
+                ArrayList<Object> value = new ArrayList<>();
+                value.add(data);
+                value.add(item);
+                view_info_for_trash_btn.put(item.findViewById(R.id.image_trash), value);
+
+                item.findViewById(R.id.image_trash).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v ){
+                        ArrayList<Object> value = view_info_for_trash_btn.get(v);
+                        JSONObject data = (JSONObject)value.get(0);
+
+                        String hash = data.optString("hash");
+                        task_catalog.deleteTaskDetails(hash);
+
+                        View item = (View)value.get(1);
+                        list_task.removeView(item);
+                    }
+                });
+
                 break;
             }
 
@@ -315,7 +332,7 @@ public class TaskActivity extends AppCompatActivity {
                 list_task.addView(item, position, params);
 
                 //LinearLayout space = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_space, null);
-                Size list_task_size = AdjustSize.getViewSize(list_task);
+                final Size list_task_size = AdjustSize.getViewSize(list_task);
 
                 Size refSize = new Size();
                 refSize.height = 0;//30;
@@ -335,6 +352,22 @@ public class TaskActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v ){
                         UI_clickEvent(v);
+                    }
+                });
+
+                view_info_for_trash_btn.put(item.findViewById(R.id.image_trash), value);
+
+                item.findViewById(R.id.image_trash).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v ){
+                        ArrayList<Object> value = view_info_for_trash_btn.get(v);
+                        JSONObject data = (JSONObject)value.get(0);
+
+                        String hash = data.optString("hash");
+                        task_catalog.deleteTaskDetails(hash);
+
+                        View item = (View)value.get(1);
+                        list_task.removeView(item);
                     }
                 });
 
@@ -378,6 +411,66 @@ public class TaskActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v ){
                         UI_clickEvent(v);
+                    }
+                });
+
+
+                view_info_for_trash_btn.put(item.findViewById(R.id.image_trash), value);
+
+                item.findViewById(R.id.image_trash).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v ){
+
+                        ArrayList<Object> value = view_info_for_trash_btn.get(v);
+
+                        Size refSize = AdjustSize.getImageWidthHeight(TaskActivity.this, R.drawable.custom_dialog);
+                        Size size = UIUtils.getScreenSize(TaskActivity.this);
+                        size.height =  (int)((float)size.width * (float)refSize.height / (float)refSize.width);
+
+                        dialogCustom.Builder builder = new dialogCustom.Builder(TaskActivity.this);
+                        dialogTips = builder
+                                .style(R.style.Dialog)
+                                .heightpx(size.height)
+                                .widthpx(size.width)
+                                .cancelTouchout(true)
+                                .view(R.layout.dialog_common)
+                                .build();
+
+                        TextView text_title = (TextView)dialogTips.getView().findViewById(R.id.text_dialog_title);
+                        String text = getResources().getString(R.string.task_delete_tip);
+                        text_title.setText(text);
+
+                        dialogTips.addExtraData(value);
+                        dialogTips.addViewOnclick(R.id.cancel, new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v){
+                                dialogTips.dismiss();
+                            }
+                        });
+                        dialogTips.addViewOnclick(R.id.confirm, new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v){
+                                ArrayList<Object> obj = (ArrayList<Object>)dialogTips.getExtraData();
+
+                                JSONObject data = (JSONObject)obj.get(0);
+                                if(null != data){
+                                    View _item = (View)obj.get(1);
+                                    list_task.removeView(_item);
+                                    View _space = (View)obj.get(1);
+                                    list_task.removeView(_space);
+
+                                    String hash = data.optString("hash", "");
+                                    task_catalog.deleteTaskDetails(hash);
+
+                                    dialogTips.dismiss();
+                                    return;
+                                }
+
+                            }
+                        });
+                        dialogTips.show();
+
+
                     }
                 });
 

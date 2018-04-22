@@ -1,5 +1,7 @@
 package com.freecreator.whiteforest.common.details;
 
+import com.freecreator.whiteforest.base.Application;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -47,6 +49,7 @@ public class DesireCatalog {
 
     public void setUID(long uid){
         this.uid = uid;
+        Application.saveData(this);
     }
 
     public long getItemNum(){
@@ -73,6 +76,7 @@ public class DesireCatalog {
             if(item.getHash().equals(desireDetails.getHash())){
                 if(!desireDetails.equals(item))
                     desireDetailsList.set(i, desireDetails);
+                Application.saveData(this);
                 return true;
             }
         }
@@ -85,6 +89,7 @@ public class DesireCatalog {
         itemNum++;
         itemEarliestAddTime = itemEarliestAddTime > tempTime ? tempTime : itemEarliestAddTime;
         itemLatestAddTime = itemLatestAddTime < tempTime ? tempTime : itemLatestAddTime;
+        Application.saveData(this);
         return true;
     }
 
@@ -94,6 +99,7 @@ public class DesireCatalog {
             DesireDetails item = desireDetailsList.get(i);
             if(item.getHash().equals(hash)){
                 desireDetailsList.remove(i);
+                Application.saveData(this);
                 return;
             }
         }

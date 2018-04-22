@@ -2,14 +2,16 @@ package com.freecreator.whiteforest.common.details;
 
 import android.text.TextUtils;
 
+import org.json.JSONObject;
+
 /**
  * Created by JackYanx on 2018/3/15.
  * 详细信息抽象基类
  */
 
 public abstract class AbstractDetails {
-    public static final String UNDEF = "UndefinedText";
-    public static final int ERRSTATUS = -1;
+    public static final String UNDEF = "";
+    public static final int ERRSTATUS = 0;
 
     /*验证字符串是否为空或者NULL,Null,null*/
     protected boolean isNull(String str) {
@@ -23,4 +25,6 @@ public abstract class AbstractDetails {
     }
 
     public abstract boolean isValid();
+
+    public abstract void build(JSONObject obj);
 }

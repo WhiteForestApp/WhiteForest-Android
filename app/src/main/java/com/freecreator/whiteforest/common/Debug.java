@@ -19,4 +19,6 @@ public class Debug {
     public final static boolean _Debug = true;
     public final static boolean _debug2 = true;
     public final static boolean toMainlogin = false;
+
+    public final static boolean fakeLogin = true;
 }

@@ -1,3 +1,4 @@
+
 package com.freecreator.whiteforest.common.details;
 
 import org.json.JSONException;
@@ -169,6 +170,22 @@ public class TaskDetails extends AbstractDetails{
     @Override
     public boolean isValid(){
         return true;
+    }
+
+    public void build(JSONObject jsonObject){
+        if(jsonObject == null) return;
+        //uid = jsonObject.optLong("uid");
+        hash = jsonObject.optString("hash",UNDEF);
+        taskID = jsonObject.optLong("taskID",0);
+        taskTitle = jsonObject.optString("taskTitle",UNDEF);
+        taskDescription = jsonObject.optString("taskDescription",UNDEF);
+        taskType = jsonObject.optString("type",UNDEF);
+        taskCreateTime = jsonObject.optLong("taskCreateTime",0);
+        taskDurationTime = jsonObject.optLong("taskDurationTime",0);
+        taskStartTime = jsonObject.optLong("taskStartTime",0);
+        taskEndTime = jsonObject.optLong("taskEndTime",0);
+        taskStatus = jsonObject.optInt("taskStatus",ERRSTATUS);
+        taskObtainExperienceValue = jsonObject.optLong("taskObtainExperienceValue",0);
     }
 
 }

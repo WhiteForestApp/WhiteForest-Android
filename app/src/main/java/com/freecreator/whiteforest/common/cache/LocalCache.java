@@ -8,6 +8,7 @@ import com.freecreator.whiteforest.base.Application;
 import com.freecreator.whiteforest.common.details.DesireCatalog;
 import com.freecreator.whiteforest.common.details.TaskCatalog;
 import com.freecreator.whiteforest.common.details.UserDetails;
+import com.freecreator.whiteforest.common.details.UserList;
 
 import org.json.JSONObject;
 
@@ -21,14 +22,17 @@ import static com.freecreator.whiteforest.utils.JsonUtils.optStrToJsonObject;
 
 public class LocalCache extends AbstractCache{
 
-    public static final String USERDETAILSINFO = "USERDETAILSINFO";
-    public static final String TASKCATALOGINFO = "TASKCATALOGINFO";
-    public static final String DESIRECATALOGINFO = "DESIRECATALOGINFO";
+    private static final String USERDETAILSINFO = "USERDETAILSINFO";
+    private static final String TASKCATALOGINFO = "TASKCATALOGINFO";
+    private static final String DESIRECATALOGINFO = "DESIRECATALOGINFO";
+    private static final String USER_LIST = "USER_LIST";
 
     /*
     * 构造函数,传入Context
+    * 第一个参数 Application access 的用途在于控制权限, 用于保证有且仅有 Application 类才可以构造本类
+    * 这样, 所有的数据存取操作都要经过 Application 类
     * */
-    public LocalCache(Context context){
+    public LocalCache(Application access, Context context){
         super(context);
     }
 
@@ -60,19 +64,21 @@ public class LocalCache extends AbstractCache{
     /*
     * 更新缓存中用户详细信息
     * */
-    public void setUserDetails( UserDetails userDetails){
+    public boolean setUserDetails( UserDetails userDetails){
         if(null == userDetails || !userDetails.isValid()){
-            return;
+            return false;
         }
 
-        String user_hash = userDetails.getHash();
+        String user_hash = userDetails.getUserName();
         if(user_hash.equals(""))
-            return;
+            return false;
 
         String str = userDetails.toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(user_hash, str);
         editor.apply();
+
+        return true;
     }
 
     /*
@@ -80,7 +86,7 @@ public class LocalCache extends AbstractCache{
     * */
     public void clearUserDetails(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Application.getUser().getData().optString("hash"), "");
+        editor.putString(Application.getCurrentUser(context).getUserName(), "");
         editor.apply();
     }
 
@@ -89,7 +95,7 @@ public class LocalCache extends AbstractCache{
     */
     @Nullable
     public TaskCatalog getTaskCatalog(){
-        String user_hash = Application.getUser().getData().optString("hash");
+        String user_hash = Application.getCurrentUser(context).getUserName();
 
         TaskCatalog taskCatalog = null;
         String str = sharedPreferences.getString(user_hash + TASKCATALOGINFO, "");
@@ -105,7 +111,7 @@ public class LocalCache extends AbstractCache{
         if(null == taskCatalog){
             return;
         }
-        String user_hash = Application.getUser().getData().optString("hash");
+        String user_hash = Application.getCurrentUser(context).getUserName();
 
         String str = taskCatalog.toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -117,7 +123,7 @@ public class LocalCache extends AbstractCache{
     *清除缓存中任务列表信息
     * */
     public void clearTaskCatalog(){
-        String user_hash = Application.getUser().getData().optString("hash");
+        String user_hash = Application.getCurrentUser(context).getUserName();
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(user_hash + TASKCATALOGINFO, "");
@@ -130,7 +136,7 @@ public class LocalCache extends AbstractCache{
     @Nullable
     public DesireCatalog getDesireCatalog(){
         DesireCatalog desireCatalog = null;
-        String user_hash = Application.getUser().getData().optString("hash");
+        String user_hash = Application.getCurrentUser(context).getUserName();
 
         String str = sharedPreferences.getString(user_hash+ DESIRECATALOGINFO, "");
         JSONObject jsonObject = optStrToJsonObject(str);
@@ -145,7 +151,7 @@ public class LocalCache extends AbstractCache{
         if(null == desireCatalog){
             return;
         }
-        String user_hash = Application.getUser().getData().optString("hash");
+        String user_hash = Application.getCurrentUser(context).getUserName();
 
         String str = desireCatalog.toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -158,10 +164,43 @@ public class LocalCache extends AbstractCache{
     * */
     public void clearDesireCatalog(){
 
-        String user_hash = Application.getUser().getData().optString("hash");
+        String user_hash = Application.getCurrentUser(context).getUserName();
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(user_hash+ DESIRECATALOGINFO, "");
+        editor.apply();
+    }
+
+
+    @Nullable
+    public UserList getUserList(){
+
+        String str = sharedPreferences.getString(USER_LIST, "");
+        JSONObject jsonObject = optStrToJsonObject(str);
+        UserList userlist = new UserList(jsonObject);
+        return userlist;
+    }
+
+    /*
+    * 更新缓存中欲望列表信息
+    * */
+    public void setUserList(UserList userlist){
+        if(null == userlist){
+            return;
+        }
+        String str = userlist.toString();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_LIST, str);
+        editor.apply();
+    }
+
+    /*
+    *清除缓存中欲望列表信息
+    * */
+    public void clearUserList(){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_LIST, "");
         editor.apply();
     }
 }

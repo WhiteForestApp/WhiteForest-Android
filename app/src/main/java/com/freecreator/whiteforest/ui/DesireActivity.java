@@ -8,35 +8,29 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.base.Application;
-import com.freecreator.whiteforest.base.User;
 import com.freecreator.whiteforest.common.cache.LocalCache;
 import com.freecreator.whiteforest.common.details.DesireCatalog;
 import com.freecreator.whiteforest.common.details.DesireDetails;
-import com.freecreator.whiteforest.common.details.TaskCatalog;
-import com.freecreator.whiteforest.common.details.TaskDetails;
+import com.freecreator.whiteforest.common.details.UserDetails;
 import com.freecreator.whiteforest.ui.dialogs.dialogAddDesire;
 import com.freecreator.whiteforest.ui.dialogs.dialogCustom;
 import com.freecreator.whiteforest.ui.utils.AdjustSize;
-import com.freecreator.whiteforest.ui.utils.ResourceUtils;
 import com.freecreator.whiteforest.ui.utils.Size;
 import com.freecreator.whiteforest.ui.utils.UIUtils;
 import com.freecreator.whiteforest.utils.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.freecreator.whiteforest.common.Debug._debug2;
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
@@ -55,9 +49,8 @@ public class DesireActivity extends AppCompatActivity {
     private TextView text_current_coins = null;
 
     private DesireCatalog desire_catalog = null;
-    private LocalCache local_cache = null;
     private boolean first_time = false;
-    private User user = null;
+    private UserDetails user = null;
     private int user_coins = -2;
 
     // view 是被点击的 view, Object 第一个元素是jsonObject 第二个元素是 整栏的view
@@ -73,9 +66,8 @@ public class DesireActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desire);
 
-
-        local_cache =  new LocalCache(this);
-        desire_catalog = local_cache.getDesireCatalog();
+        user = Application.getCurrentUser(this);
+        desire_catalog = Application.getDesireCatalog(this);
 
         UI_init();
         setListeners();
@@ -113,8 +105,6 @@ public class DesireActivity extends AppCompatActivity {
         //dialogDesire = new dialogAddDesire(this, (RelativeLayout) findViewById(R.id.desire_page) );
         dialogDesire = new dialogAddDesire(this, R.style.Dialog);
 
-        user = Application.getUser();
-
         new Thread(){
             @Override
             public void run(){
@@ -122,7 +112,7 @@ public class DesireActivity extends AppCompatActivity {
                     while(1==1){
 
                         sleep(1000);
-                        int coins = user.getData().optInt("coins", 0);
+                        int coins = user.getCoins();
 
                         if(coins != user_coins){
                             user_coins = coins;
@@ -161,7 +151,6 @@ public class DesireActivity extends AppCompatActivity {
     public void UI_addItem(int position, JSONObject data){
 
         desire_catalog.addDesireDetails(new DesireDetails(data));
-        local_cache.setDesireCatalog(desire_catalog);
 
         FrameLayout item = (FrameLayout) DesireActivity.this.getLayoutInflater().inflate(R.layout.item_desire, null);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -216,7 +205,6 @@ public class DesireActivity extends AppCompatActivity {
 
                 String hash = data.optString("hash");
                 desire_catalog.deleteDesireDetails(hash);
-                local_cache.setDesireCatalog(desire_catalog);
 
                 View item = (View)value.get(1);
                 list_desire.removeView(item);
@@ -266,14 +254,13 @@ public class DesireActivity extends AppCompatActivity {
                 JSONObject data = (JSONObject)obj.get(0);
                 if(null != data){
                     int coins_cost = data.optInt("scores", 0);
-                    int coins = user.getData().optInt("coins", 0);
+                    int coins = user.getCoins();
 
                     if(coins - coins_cost < 0){
                         Toast.makeText(DesireActivity.this, getResources().getString(R.string.coins_not_enough), Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        jsonPut(user.getData(), "coins", coins - coins_cost);
-                        user.saveData();
+                        user.setCoins(user.getCoins() - coins_cost);
                     }
                     dialogTips.dismiss();
                     return;

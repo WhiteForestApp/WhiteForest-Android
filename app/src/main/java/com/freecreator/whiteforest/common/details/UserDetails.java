@@ -1,6 +1,7 @@
 package com.freecreator.whiteforest.common.details;
 
-import org.json.JSONException;
+import com.freecreator.whiteforest.base.Application;
+
 import org.json.JSONObject;
 
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
@@ -11,9 +12,6 @@ import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
  */
 
 public class UserDetails extends AbstractDetails{
-
-    private JSONObject data = null;
-    private String hash = null;
 
     /*用户唯一标识*/
     private long uid;
@@ -34,81 +32,105 @@ public class UserDetails extends AbstractDetails{
     /*生日 e.g."1998-01-01"*/
     private String birthday;
     /*当前等级(Lv.)*/
-    private long level;
+    private int level;
     /*当前段位(使用整数标识)(荒野求生者,从林探险家...)*/
-    private long segmentLevel;
+    private int segmentLevel;
     /*累计获得经验值*/
-    private long totalExperienceValue;
+    private int totalExperienceValue;
     /*累计消耗经验值*/
-    private long costExperienceValue;
+    private int costExperienceValue;
     /*当前剩余经验值*/
-    private long remainExperienceValue;
+    private int remainExperienceValue;
     /*任务总计数*/
-    private long totalTaskNum;
+    private int totalTaskNum;
     /*任务成功完成数*/
-    private long finishedTaskNum;
+    private int finishedTaskNum;
     /*所有任务详细列表(暂时存在)*/
     //private List<TaskDetails> taskDetailsList = new LinkedList();
     /*欲望总计数*/
-    private long totalDesireNum;
+    private int totalDesireNum;
     /*用户状态*/
     private int userStatus;
     /*所有欲望详细列表(暂时存在)*/
     //private List<DesireDetails> desireDetailsList = new LinkedList();
+    /**/
+    private int remainCoins;
 
     public void setUID(long uid){
         this.uid = uid;
+        Application.saveData(this);
     }
     public void setUserName(String userName){
         this.userName = userName;
+        Application.saveData(this);
     }
     public void setNickName(String nickNime){
         this.nickName = nickNime;
+        Application.saveData(this);
     }
     public void setRealName(String realName){
         this.realName = realName;
+        Application.saveData(this);
     }
     public void setPassword(String password){
         this.password = password;
+        Application.saveData(this);
     }
     public void setSex(String sex){
         this.sex = sex;
+        Application.saveData(this);
     }
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
+        Application.saveData(this);
     }
     public void setMotto(String motto){
         this.motto = motto;
+        Application.saveData(this);
     }
     public void setBirthday(String birthday){
         this.birthday = birthday;
+        Application.saveData(this);
     }
-    public void setLevel(long level){
+    public void setLevel(int level){
         this.level = level;
+        Application.saveData(this);
     }
-    public void setSegmentLevel(long segmentLevel){
+    public void setSegmentLevel(int segmentLevel){
         this.segmentLevel = segmentLevel;
+        Application.saveData(this);
     }
-    public void setTotalExperienceValue(long totalExperienceValue){
+    public void setTotalExperienceValue(int totalExperienceValue){
         this.totalExperienceValue = totalExperienceValue;
+        Application.saveData(this);
     }
-    public void setCostExperienceValue(long costExperienceValue){
+    public void setCostExperienceValue(int costExperienceValue){
         this.costExperienceValue = costExperienceValue;
+        Application.saveData(this);
     }
-    public void setRemainExperienceValue(long remainExperienceValue){
+    public void setRemainExperienceValue(int remainExperienceValue){
         this.remainExperienceValue = remainExperienceValue;
+        Application.saveData(this);
     }
-    public void setTotalTaskNum(long totalTaskNum){
+    public void setTotalTaskNum(int totalTaskNum){
         this.totalTaskNum = totalTaskNum;
+        Application.saveData(this);
     }
-    public void setFinishedTaskNum(long finishedTaskNum){
+    public void setFinishedTaskNum(int finishedTaskNum){
         this.finishedTaskNum = finishedTaskNum;
+        Application.saveData(this);
     }
-    public void setTotalDesireNum(long totalDesireNum){
+    public void setTotalDesireNum(int totalDesireNum){
         this.totalDesireNum = totalDesireNum;
+        Application.saveData(this);
     }
     public void setUserStatus(int userStatus){
         this.userStatus = userStatus;
+        Application.saveData(this);
+    }
+    public void setCoins(int val){
+        this.remainCoins = val;
+        Application.saveData(this);
     }
 
     public long getUID(){
@@ -138,96 +160,42 @@ public class UserDetails extends AbstractDetails{
     public String getBirthday(){
         return isNull(birthday) ? UNDEF : birthday;
     }
-    public long getLevel(){
+    public int getLevel(){
         return this.level;
     }
-    public long getSegmentLevel(){
+    public int getSegmentLevel(){
         return this.segmentLevel;
     }
-    public long getTotalExperienceValue(){
+    public int getTotalExperienceValue(){
         return this.totalExperienceValue;
     }
-    public long getCostExperienceValue(){
+    public int getCostExperienceValue(){
         return this.costExperienceValue;
     }
-    public long getRemainExperienceValue(){
+    public int getRemainExperienceValue(){
         return this.remainExperienceValue;
     }
-    public long getTotalTaskNum(){
+    public int getTotalTaskNum(){
         return this.totalTaskNum;
     }
-    public long getFinishedTaskNum(){
+    public int getFinishedTaskNum(){
         return this.finishedTaskNum;
     }
-    public long getTotalDesireNum(){
+    public int getTotalDesireNum(){
         return this.totalDesireNum;
     }
     public int getUserStatus(){
         return this.userStatus;
     }
+    public int getCoins(){
+        return this.remainCoins;
+    }
 
     public UserDetails(){}
-
     public UserDetails(JSONObject jsonObject){
-        if(jsonObject == null) return;
-
-        try{
-            data = new JSONObject(jsonObject.toString());
-            hash = data.optString("hash");
-
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        /*
-        uid = jsonObject.optLong("uid",0);
-        userName = jsonObject.optString("userName",UNDEF);
-        nickName = jsonObject.optString("nickName",UNDEF);
-        realName = jsonObject.optString("realName",UNDEF);
-        password = jsonObject.optString("password",UNDEF);
-        sex = jsonObject.optString("sex",UNDEF);
-        phoneNumber = jsonObject.optString("phoneNumber",UNDEF);
-        motto = jsonObject.optString("motto",UNDEF);
-        birthday = jsonObject.optString("birthday",UNDEF);
-        level = jsonObject.optLong("level",0);
-        segmentLevel = jsonObject.optLong("segmentLevel",0);
-        totalExperienceValue = jsonObject.optLong("totalExperienceValue",0);
-        costExperienceValue = jsonObject.optLong("costExperienceValue",0);
-        remainExperienceValue = jsonObject.optLong("remainExperienceValue",0);
-        totalTaskNum = jsonObject.optLong("totalTaskNum",0);
-        finishedTaskNum = jsonObject.optLong("finishedTaskNum",0);
-        totalDesireNum = jsonObject.optLong("totalDesireNum",0);
-        userStatus = jsonObject.optInt("userStatus",ERRSTATUS);
-        */
+        build(jsonObject);
     }
 
-    public String getHash(){
-        return hash;
-    }
-
-    @Override
-    public String toString(){
-        return toJSONObject().toString();
-    }
-
-
-    public JSONObject toJSONObject(){
-        return data;
-    }
-
-    public void setJSONObject(JSONObject obj){
-        if(obj == null)
-            return;
-
-        try{
-            data = new JSONObject(obj.toString());
-            hash = data.optString("hash");
-
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
-    /*
     @Override
     public String toString(){
         return toJSONObject().toString();
@@ -253,15 +221,47 @@ public class UserDetails extends AbstractDetails{
         jsonPut(jsonObject, "finishedTaskNum", ""+finishedTaskNum);
         jsonPut(jsonObject, "totalDesireNum", ""+totalDesireNum);
         jsonPut(jsonObject, "userStatus", ""+userStatus);
+        jsonPut(jsonObject, "coins", ""+remainCoins);
         return jsonObject;
     }
-*/
+
     @Override
     public boolean isValid(){
+        if(userName.equals(UNDEF))
+            return false;
         return true;
     }
 
+    public void build(JSONObject jsonObject){
+        if(jsonObject == null) return;
+        uid = jsonObject.optLong("uid",0);
+        userName = jsonObject.optString("userName",UNDEF);
+        nickName = jsonObject.optString("nickName",UNDEF);
+        realName = jsonObject.optString("realName",UNDEF);
+        password = jsonObject.optString("password",UNDEF);
+        sex = jsonObject.optString("sex",UNDEF);
+        phoneNumber = jsonObject.optString("phoneNumber",UNDEF);
+        motto = jsonObject.optString("motto",UNDEF);
+        birthday = jsonObject.optString("birthday",UNDEF);
+        level = jsonObject.optInt("level",0);
+        segmentLevel = jsonObject.optInt("segmentLevel",0);
+        totalExperienceValue = jsonObject.optInt("totalExperienceValue",0);
+        costExperienceValue = jsonObject.optInt("costExperienceValue",0);
+        remainExperienceValue = jsonObject.optInt("remainExperienceValue",0);
+        totalTaskNum = jsonObject.optInt("totalTaskNum",0);
+        finishedTaskNum = jsonObject.optInt("finishedTaskNum",0);
+        totalDesireNum = jsonObject.optInt("totalDesireNum",0);
+        userStatus = jsonObject.optInt("userStatus",ERRSTATUS);
+        remainCoins = jsonObject.optInt("coins",ERRSTATUS);
+    }
 
-
+    /**
+     *
+     * @param access 用于保证该方法能且仅能被 Application 类调用
+     * @param json 数据
+     */
+    public void rebuild(Application access, JSONObject json){
+        build(json);
+    }
 
 }

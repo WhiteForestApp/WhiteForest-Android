@@ -123,6 +123,21 @@ public class DesireDetails extends AbstractDetails{
     }
 
     @Override
+    public void build(JSONObject jsonObject){
+        //uid = jsonObject.getLong("uid");
+        /*
+        desireID = jsonObject.optLong("desireID", 0);
+        desireTitle = jsonObject.optString("desireTitle", UNDEF);
+        desireDescription = jsonObject.optString("desireDescription", UNDEF);
+        desireType = jsonObject.optString("desireType", UNDEF);
+        desireAddTime = jsonObject.optLong("desireAddTime", 0);
+        desireFulfillmentTime = jsonObject.optLong("desireFulfillmentTime", 0);
+        desireStatus = jsonObject.optInt("desireStatus", ERRSTATUS);
+        desireCostExperienceValue = jsonObject.optLong("desireCostExperienceValue", 0);
+        */
+    }
+
+    @Override
     public String toString(){
         return toJSONObject().toString();
     }

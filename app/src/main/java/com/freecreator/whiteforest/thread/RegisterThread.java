@@ -112,9 +112,9 @@ public class RegisterThread implements Runnable {
             processCode = 5;
 
             //缓存用户数据
-            LocalCache cache = new LocalCache(mContext);
+            /*LocalCache cache = new LocalCache(mContext);
             cache.clear();
-            cache.setUserDetails(userDetails);
+            cache.setUserDetails(userDetails);*/
             processCode = 0;
 
         }catch (Exception e){

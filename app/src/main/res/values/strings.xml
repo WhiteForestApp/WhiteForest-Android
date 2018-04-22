@@ -43,4 +43,5 @@
     <string name="store_coins_tip">当前金币数量 : %1$d 个</string>
     <string name="coins_soul_tip">金币 : %1$d 个 | 心灵值 : %2$d</string>
     <string name="coins_not_enough">金币不够, 完成你向使命之神承诺的任务以获得更多金币</string>
+    <string name="task_delete_tip">删除后不可恢复\n你确定删除吗</string>
 </resources>

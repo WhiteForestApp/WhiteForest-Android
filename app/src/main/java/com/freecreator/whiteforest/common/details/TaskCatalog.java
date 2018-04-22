@@ -1,5 +1,7 @@
 package com.freecreator.whiteforest.common.details;
 
+import com.freecreator.whiteforest.base.Application;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,6 +48,7 @@ public class TaskCatalog {
 
     public void setUID(long uid){
         this.uid = uid;
+        Application.saveData(this);
     }
 
     public long getItemNum(){
@@ -67,9 +70,11 @@ public class TaskCatalog {
             TaskDetails item = taskDetailsList.get(i);
             if(item.getHash().equals(hash)){
                 taskDetailsList.remove(i);
+                Application.saveData(this);
                 return;
             }
         }
+
     }
 
     /*向本列表中添加任务项目*/
@@ -83,6 +88,7 @@ public class TaskCatalog {
             if(item.getHash().equals(taskDetails.getHash())){
                 if(!taskDetails.equals(item))
                     taskDetailsList.set(i, taskDetails);
+                Application.saveData(this);
                 return true;
             }
         }
@@ -95,6 +101,7 @@ public class TaskCatalog {
         itemNum++;
         itemEarliestCreateTime = itemEarliestCreateTime > tempTime ? tempTime : itemEarliestCreateTime;
         itemLatestCreateTime = itemLatestCreateTime < tempTime ? tempTime : itemLatestCreateTime;
+        Application.saveData(this);
         return true;
     }
 

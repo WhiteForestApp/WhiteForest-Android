@@ -172,11 +172,11 @@ public class LoginThread implements Runnable {
             processCode = 5;
 
             //缓存相关数据
-            LocalCache cache = new LocalCache(mContext);
+            /*LocalCache cache = new LocalCache(mContext);
             cache.clear();
             cache.setUserDetails(userDetails);
             cache.setTaskCatalog(taskCatalog);
-            cache.setDesireCatalog(desireCatalog);
+            cache.setDesireCatalog(desireCatalog);*/
             processCode = 0;
 
         }catch (Exception e){
