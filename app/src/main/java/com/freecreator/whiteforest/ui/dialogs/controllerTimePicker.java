@@ -11,7 +11,9 @@ import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.base.Application;
 import com.freecreator.whiteforest.common.details.TaskDetails;
+import com.freecreator.whiteforest.common.details.UserDetails;
 import com.freecreator.whiteforest.ui.TaskActivity;
 
 import org.json.JSONObject;
@@ -34,7 +36,7 @@ public class controllerTimePicker {
     private ArrayList<String> data_hours = new ArrayList<>();
     private ArrayList<String> data_minutes = new ArrayList<>();
 
-    private JSONObject task_data = null;
+    private TaskDetails task_data = null;
 
     public controllerTimePicker(AppCompatActivity parent){
         m_parent = parent;
@@ -57,8 +59,12 @@ public class controllerTimePicker {
 
                 if(null != task_data && m_parent instanceof TaskActivity){
 
-                    int use_time = options1 * 60 * 60 + options2* 60 + options3;
-                    ((TaskActivity) m_parent).data_addTimerRecord(task_data, use_time);
+                    int use_time = options1 * 60 * 60 + options2* 60 + options3+1;
+                    task_data.addTimerRecord(use_time);
+                    Application.getTaskCatalog(m_parent).addTaskDetails(task_data);
+                    UserDetails user = Application.getCurrentUser(m_parent);
+                    user.setCoins(user.getCoins() * use_time);
+                    user.setRemainExperienceValue(user.getRemainExperienceValue() * use_time);
                 }
                 task_data = null;
             }
@@ -99,7 +105,7 @@ public class controllerTimePicker {
         pvCustomOptions.setNPicker(data_days, data_hours, data_minutes);//添加数据
     }
 
-    public void show(JSONObject obj){
+    public void show(TaskDetails obj){
         task_data = obj;
         pvCustomOptions.show();
     }

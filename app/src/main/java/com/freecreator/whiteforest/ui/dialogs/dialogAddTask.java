@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.freecreator.whiteforest.R;
+import com.freecreator.whiteforest.common.details.TaskDetails;
 import com.freecreator.whiteforest.ui.TaskActivity;
 import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
 import com.freecreator.whiteforest.ui.fragments.fragmentNormalTask;
@@ -30,6 +31,8 @@ import android.widget.Toast;
 import com.freecreator.whiteforest.R;
 import com.freecreator.whiteforest.ui.fragments.fragmentLogin;
 import com.freecreator.whiteforest.ui.fragments.fragmentRegister;
+import com.freecreator.whiteforest.utils.MD5;
+
 import static com.freecreator.whiteforest.utils.MD5.MD5;
 
 import org.json.JSONObject;
@@ -140,30 +143,33 @@ public class dialogAddTask {
                 if(fragCurrent == fragTimerTask){
 
                     //  { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
-                    JSONObject task_obj = new JSONObject();
-                    jsonPut(task_obj, "hash",  MD5(System.currentTimeMillis() + strContent + strCoins +strExp));
-                    jsonPut(task_obj, "type", TYPE_TIMER_TASK);
-                    jsonPut(task_obj, "title", strContent);
-                    jsonPut(task_obj, "scores", strCoins );
-                    jsonPut(task_obj, "exp", strExp );
 
+                    TaskDetails details = null;
+                    details = new TaskDetails();
+                    details.setTaskType(TYPE_TIMER_TASK);
+                    details.setTaskTitle(strContent);
+                    details.setTaskObtainExperienceValue(Integer.valueOf(strExp));
+                    details.setCoins(Integer.valueOf(strCoins));
+                    details.setHash(MD5(System.currentTimeMillis() + strContent + strCoins +strExp));
                     if(m_parent instanceof TaskActivity){
                         TaskActivity taskActivity = (TaskActivity)m_parent;
-                        taskActivity.UI_addItem(-1, task_obj);
+                        taskActivity.UI_addItem(-1, details);
                     }
+
 
                 }else if(fragCurrent == fragNormalTask){
 
-                    JSONObject task_obj = new JSONObject();
-                    jsonPut(task_obj, "hash",  MD5(System.currentTimeMillis() + strContent + strCoins +strExp));
-                    jsonPut(task_obj, "type", TYPE_NORMAL_TASK);
-                    jsonPut(task_obj, "title", strContent);
-                    jsonPut(task_obj, "scores", strCoins );
-                    jsonPut(task_obj, "exp", strExp );
+                    TaskDetails details = null;
+                    details = new TaskDetails();
+                    details.setTaskType(TYPE_NORMAL_TASK);
+                    details.setTaskTitle(strContent);
+                    details.setTaskObtainExperienceValue(Integer.valueOf(strExp));
+                    details.setCoins(Integer.valueOf(strCoins));
+                    details.setHash(MD5(System.currentTimeMillis() + strContent + strCoins +strExp));
 
                     if(m_parent instanceof TaskActivity){
                         TaskActivity taskActivity = (TaskActivity)m_parent;
-                        taskActivity.UI_addItem(-1, task_obj);
+                        taskActivity.UI_addItem(-1, details);
                     }
                 }
 

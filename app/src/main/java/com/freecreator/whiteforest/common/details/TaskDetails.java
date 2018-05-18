@@ -1,9 +1,13 @@
 
 package com.freecreator.whiteforest.common.details;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+
+import static com.freecreator.whiteforest.utils.JsonUtils.jsonArrayPut;
 import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 /**
@@ -13,8 +17,6 @@ import static com.freecreator.whiteforest.utils.JsonUtils.jsonPut;
 
 public class TaskDetails extends AbstractDetails{
 
-    private JSONObject data = null;
-    private String hash = null;
 
     /*任务拥有者(用户)唯一标识*/
     //private long uid;
@@ -25,7 +27,7 @@ public class TaskDetails extends AbstractDetails{
     /*任务描述*/
     private String taskDescription;
     /*任务类型*/
-    private String taskType;
+    private int taskType;
     /*任务创建时间*/
     private long taskCreateTime;
     /*任务持续时间*/
@@ -37,13 +39,23 @@ public class TaskDetails extends AbstractDetails{
     /*任务状态*/
     private int taskStatus;
     /*完成任务所能获得的经验值*/
-    private long taskObtainExperienceValue;
+    private int taskObtainExperienceValue;
+    /*完成任务所能获得的金币*/
+    private int coin;
+    /*时间投资任务的总时间*/
+    private int total_use_time;
+    private JSONArray use_record = new JSONArray();
+
+    private String hash = null;
 
     /*
     public void setUID(long uid){
         this.uid = uid;
     }
     */
+    public void setTotalUseTime(int min){
+        total_use_time = min;
+    }
     public void setTaskID(long taskID){
         this.taskID = taskID;
     }
@@ -53,7 +65,7 @@ public class TaskDetails extends AbstractDetails{
     public void setTaskDescription(String taskDescription){
         this.taskDescription = taskDescription;
     }
-    public void setTaskType(String taskType){
+    public void setTaskType(int taskType){
         this.taskType = taskType;
     }
     public void setTaskCreateTime(long taskCreateTime){
@@ -71,8 +83,29 @@ public class TaskDetails extends AbstractDetails{
     public void setTaskStatus(int taskStatus){
         this.taskStatus = taskStatus;
     }
-    public void setTaskObtainExperienceValue(long taskObtainExperienceValue){
+    public void setTaskObtainExperienceValue(int taskObtainExperienceValue){
         this.taskObtainExperienceValue = taskObtainExperienceValue;
+    }
+    public void setCoins(int coins){
+        this.coin = coins;
+    }
+    public void addTimerRecord(int minutes){
+
+        int used_minutes = getTotalUseTime();
+        used_minutes += minutes;
+        setTotalUseTime(used_minutes);
+
+        JSONObject new_record = new JSONObject();
+        jsonPut(new_record, "timestamp", (new Timestamp(System.currentTimeMillis() )).toString());
+        jsonPut(new_record, "add_minutes", minutes);
+
+        if(null == use_record){
+            use_record = new JSONArray();
+            use_record.put(new_record);
+        }
+        else{
+            use_record.put(new_record);
+        }
     }
 
 
@@ -81,6 +114,9 @@ public class TaskDetails extends AbstractDetails{
         return uid;
     }
     */
+    public int getTotalUseTime(){
+        return this.total_use_time;
+    }
     public long getTaskID(){
         return taskID;
     }
@@ -90,8 +126,8 @@ public class TaskDetails extends AbstractDetails{
     public String getTaskDescription(){
         return isNull(taskDescription) ? UNDEF : taskDescription;
     }
-    public String getTaskType(){
-        return isNull(taskType) ? UNDEF : taskType;
+    public int getTaskType(){
+        return taskType;
     }
     public long getTaskCreateTime(){
         return taskCreateTime;
@@ -108,8 +144,11 @@ public class TaskDetails extends AbstractDetails{
     public int getTaskStatus(){
         return taskStatus;
     }
-    public long getTaskObtainExperienceValue(){
+    public int getTaskObtainExperienceValue(){
         return taskObtainExperienceValue;
+    }
+    public int getCoin(){
+        return this.coin;
     }
 
     public TaskDetails(){}
@@ -118,30 +157,15 @@ public class TaskDetails extends AbstractDetails{
         if(obj == null)
             return;
 
-        try{
-            data = new JSONObject(obj.toString());
-            hash = data.optString("hash");
-
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        //uid = jsonObject.optLong("uid");
-        /*
-        taskID = jsonObject.optLong("taskID",0);
-        taskTitle = jsonObject.optString("taskTitle",UNDEF);
-        taskDescription = jsonObject.optString("taskDescription",UNDEF);
-        taskType = jsonObject.optString("taskType",UNDEF);
-        taskCreateTime = jsonObject.optLong("taskCreateTime",0);
-        taskDurationTime = jsonObject.optLong("taskDurationTime",0);
-        taskStartTime = jsonObject.optLong("taskStartTime",0);
-        taskEndTime = jsonObject.optLong("taskEndTime",0);
-        taskStatus = jsonObject.optInt("taskStatus",ERRSTATUS);
-        taskObtainExperienceValue = jsonObject.optLong("taskObtainExperienceValue",0);
-        */
+        build(obj);
     }
 
     public String getHash(){
         return hash;
+    }
+
+    public void setHash(String a ){
+        this.hash = a;
     }
 
     @Override
@@ -151,21 +175,26 @@ public class TaskDetails extends AbstractDetails{
 
 
     public JSONObject toJSONObject(){
-        return data;
+        JSONObject jsonObject = new JSONObject();
+        //jsonPut(jsonObject, "uid", ""+uid);
+        jsonPut(jsonObject, " taskID", ""+taskID);
+        jsonPut(jsonObject, " taskTitle", taskTitle);
+        jsonPut(jsonObject, " taskDescription", taskDescription);
+        jsonPut(jsonObject, " taskType", taskType);
+        jsonPut(jsonObject, " taskCreateTime", ""+taskCreateTime);
+        jsonPut(jsonObject, " taskDurationTime", ""+taskDurationTime);
+        jsonPut(jsonObject, " taskStartTime", ""+taskStartTime);
+        jsonPut(jsonObject, " taskEndTime", ""+taskEndTime);
+        jsonPut(jsonObject, " taskStatus", ""+taskStatus);
+        jsonPut(jsonObject, " taskObtainExperienceValue", taskObtainExperienceValue);
+        jsonPut(jsonObject, " coin", coin);
+        jsonPut(jsonObject, " hash", hash);
+        jsonPut(jsonObject, " totaltime", total_use_time);
+        if(null != use_record)
+            jsonArrayPut(jsonObject, " use_record", use_record);
+        return jsonObject;
     }
 
-    public void setJSONObject(JSONObject obj){
-        if(obj == null)
-            return;
-
-        try{
-            data = new JSONObject(obj.toString());
-            hash = data.optString("hash");
-
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public boolean isValid(){
@@ -175,17 +204,21 @@ public class TaskDetails extends AbstractDetails{
     public void build(JSONObject jsonObject){
         if(jsonObject == null) return;
         //uid = jsonObject.optLong("uid");
-        hash = jsonObject.optString("hash",UNDEF);
-        taskID = jsonObject.optLong("taskID",0);
-        taskTitle = jsonObject.optString("taskTitle",UNDEF);
-        taskDescription = jsonObject.optString("taskDescription",UNDEF);
-        taskType = jsonObject.optString("type",UNDEF);
-        taskCreateTime = jsonObject.optLong("taskCreateTime",0);
-        taskDurationTime = jsonObject.optLong("taskDurationTime",0);
-        taskStartTime = jsonObject.optLong("taskStartTime",0);
-        taskEndTime = jsonObject.optLong("taskEndTime",0);
-        taskStatus = jsonObject.optInt("taskStatus",ERRSTATUS);
-        taskObtainExperienceValue = jsonObject.optLong("taskObtainExperienceValue",0);
+        hash = jsonObject.optString(" hash",UNDEF);
+        taskID = jsonObject.optLong(" taskID",0);
+        taskTitle = jsonObject.optString(" taskTitle",UNDEF);
+        taskDescription = jsonObject.optString(" taskDescription",UNDEF);
+        taskType = jsonObject.optInt(" taskType",0);
+        taskCreateTime = jsonObject.optLong( " taskCreateTime",0);
+        taskDurationTime = jsonObject.optLong(" taskDurationTime",0);
+        taskStartTime = jsonObject.optLong(" taskStartTime",0);
+        taskEndTime = jsonObject.optLong(" taskEndTime",0);
+        taskStatus = jsonObject.optInt(" taskStatus",ERRSTATUS);
+        taskObtainExperienceValue = jsonObject.optInt(" taskObtainExperienceValue",0);
+        coin  = jsonObject.optInt(" coin",0);
+        hash = jsonObject.optString(" hash",UNDEF);
+        total_use_time = jsonObject.optInt(" totaltime",0);
+        use_record = jsonObject.optJSONArray(" use_record");
     }
 
 }

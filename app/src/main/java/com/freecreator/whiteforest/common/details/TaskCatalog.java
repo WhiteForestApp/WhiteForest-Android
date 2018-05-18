@@ -86,8 +86,7 @@ public class TaskCatalog {
         for(int i = 0; i< taskDetailsList.size();i++){
             TaskDetails item = taskDetailsList.get(i);
             if(item.getHash().equals(taskDetails.getHash())){
-                if(!taskDetails.equals(item))
-                    taskDetailsList.set(i, taskDetails);
+                taskDetailsList.set(i, taskDetails);
                 Application.saveData(this);
                 return true;
             }

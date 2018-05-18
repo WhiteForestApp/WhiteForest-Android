@@ -176,11 +176,10 @@ public class TaskActivity extends AppCompatActivity {
         if(null == value)
             return;
 
-        JSONObject obj = (JSONObject) value.get(0);
-        if(null == obj || !(obj instanceof JSONObject))
-            return;
+        TaskDetails obj = (TaskDetails) value.get(0);
 
-        int type = obj.optInt("type");
+
+        int type = obj.getTaskType();
         switch(type){
             case TYPE_NORMAL_FINISHED_TASK:{
                 break;
@@ -191,8 +190,8 @@ public class TaskActivity extends AppCompatActivity {
                 if(null == item || !(item instanceof View))
                     return;
 
-                int coins = obj.optInt("scores", 0);
-                int soul = obj.optInt("exp", 0);
+                int coins = obj.getCoin();
+                int soul = obj.getTaskObtainExperienceValue();
 
                 user.setCoins(user.getCoins() + coins);
                 user.setRemainExperienceValue(user.getRemainExperienceValue() + soul);
@@ -202,11 +201,12 @@ public class TaskActivity extends AppCompatActivity {
 
                 animGainAchevement.show();
 
-                task_catalog.deleteTaskDetails(obj.optString("hash"));
+                task_catalog.deleteTaskDetails(obj.getHash());
 
-                JSONObject item_finished = optStrToJsonObject(obj.toString());
-                jsonPut(item_finished, "hash", MD5.MD5("" + System.currentTimeMillis()));
-                jsonPut(item_finished, "type", TYPE_NORMAL_FINISHED_TASK);
+                TaskDetails item_finished = new TaskDetails();
+                item_finished.setHash(MD5.MD5("" + System.currentTimeMillis()));
+                item_finished.setTaskTitle(obj.getTaskTitle());
+                item_finished.setTaskType(TYPE_NORMAL_FINISHED_TASK);
                 UI_addItem(-1, item_finished);
 
                 break;
@@ -218,32 +218,6 @@ public class TaskActivity extends AppCompatActivity {
         }
     }
 
-    public void data_addTimerRecord(JSONObject data, int minutes){
-
-        int used_minutes = data.optInt("total_time", 0);
-        used_minutes += minutes;
-        jsonPut(data, "total_time", used_minutes);
-
-        JSONObject new_record = new JSONObject();
-        jsonPut(new_record, "timestamp", (new Timestamp(System.currentTimeMillis() )).toString());
-        jsonPut(new_record, "add_minutes", minutes);
-
-        JSONArray record_array = data.optJSONArray("use_record");
-
-        if(null == record_array){
-            record_array = new JSONArray();
-            record_array.put(new_record);
-
-            jsonArrayPut(data, "use_record", record_array);
-        }
-        else{
-            record_array.put(new_record);
-            jsonArrayPut(data, "use_record", record_array);
-        }
-
-        task_catalog.addTaskDetails(new TaskDetails(data));
-    }
-
     /**
      * Why i use "JSONObject" as the param instead of "int type, String title, ..." ?
      * Because in this way we can devide the UI part and the data part
@@ -252,13 +226,13 @@ public class TaskActivity extends AppCompatActivity {
      * @param data Json data. An sample is below:
      *             { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
      */
-    public void UI_addItem(int position, JSONObject data){
+    public void UI_addItem(int position, TaskDetails data){
         if(null == data)
             return;
 
-        task_catalog.addTaskDetails(new TaskDetails(data));
+        task_catalog.addTaskDetails(data);
 
-        int type = data.optInt("type");
+        int type = data.getTaskType();
         switch(type){
             case TYPE_NORMAL_FINISHED_TASK:{
 
@@ -268,7 +242,7 @@ public class TaskActivity extends AppCompatActivity {
                 LinearLayout item = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_finished_task, null);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                String title = data.optString("title");
+                String title = data.getTaskTitle();
                 if(title != null && !title.equals("")){
                     TextView text = (TextView)item.findViewById(R.id.task_content);
                     text.setText(title);
@@ -302,10 +276,9 @@ public class TaskActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v ){
                         ArrayList<Object> value = view_info_for_trash_btn.get(v);
-                        JSONObject data = (JSONObject)value.get(0);
+                        TaskDetails data = (TaskDetails)value.get(0);
 
-                        String hash = data.optString("hash");
-                        task_catalog.deleteTaskDetails(hash);
+                        task_catalog.deleteTaskDetails(data.getHash());
 
                         View item = (View)value.get(1);
                         list_task.removeView(item);
@@ -323,7 +296,7 @@ public class TaskActivity extends AppCompatActivity {
                 LinearLayout item = (LinearLayout) TaskActivity.this.getLayoutInflater().inflate(R.layout.item_normal_task, null);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                String title = data.optString("title");
+                String title = data.getTaskTitle();
                 if(title != null && !title.equals("")){
                     TextView text = (TextView)item.findViewById(R.id.task_content);
                     text.setText(title);
@@ -361,10 +334,9 @@ public class TaskActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v ){
                         ArrayList<Object> value = view_info_for_trash_btn.get(v);
-                        JSONObject data = (JSONObject)value.get(0);
+                        TaskDetails data = (TaskDetails)value.get(0);
 
-                        String hash = data.optString("hash");
-                        task_catalog.deleteTaskDetails(hash);
+                        task_catalog.deleteTaskDetails(data.getHash());
 
                         View item = (View)value.get(1);
                         list_task.removeView(item);
@@ -385,7 +357,7 @@ public class TaskActivity extends AppCompatActivity {
                 float h  = (float)list_task_size.width * (float)refSize.height / (float)refSize.width;
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(list_task_size.width, (int)h);
 
-                String title = data.optString("title");
+                String title = data.getTaskTitle();
                 if(title != null && !title.equals("")){
                     TextView text = (TextView)item.findViewById(R.id.text_title);
                     text.setText(title);
@@ -452,15 +424,14 @@ public class TaskActivity extends AppCompatActivity {
                             public void onClick(View v){
                                 ArrayList<Object> obj = (ArrayList<Object>)dialogTips.getExtraData();
 
-                                JSONObject data = (JSONObject)obj.get(0);
+                                TaskDetails data = (TaskDetails)obj.get(0);
                                 if(null != data){
                                     View _item = (View)obj.get(1);
                                     list_task.removeView(_item);
                                     View _space = (View)obj.get(1);
                                     list_task.removeView(_space);
 
-                                    String hash = data.optString("hash", "");
-                                    task_catalog.deleteTaskDetails(hash);
+                                    task_catalog.deleteTaskDetails(data.getHash());
 
                                     dialogTips.dismiss();
                                     return;
@@ -496,53 +467,64 @@ public class TaskActivity extends AppCompatActivity {
             if(null == details)
                 continue;
 
-            UI_addItem(-1, details.toJSONObject());
+            UI_addItem(-1, details);
         }
     }
 
     private void mockDataForTest(){
 
-        // { "type" : 1,  "title" : "blablabla", "scores" : 6, "exp" : 13}
-        JSONObject obj = new JSONObject();
-        try {
+        TaskDetails details = null;
 
-            obj.put("type", TYPE_TIMER_TASK);
-            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
-            obj.put("title", "阅读书籍");
-            obj.put("scores", "7");
-            obj.put("exp", "5");
-            UI_addItem(-1,obj);
+        details = new TaskDetails();
+        details.setTaskType(TYPE_TIMER_TASK);
+        details.setTaskTitle("阅读书籍");
+        details.setTaskObtainExperienceValue(5);
+        details.setCoins(7);
+        details.setHash(MD5.MD5(""+ System.currentTimeMillis()));
+        UI_addItem(-1,details);
 
-            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
-            obj.put("title", "安装[白色森林]");
-            UI_addItem(-1,obj);
+        details = new TaskDetails();
+        details.setTaskType(TYPE_NORMAL_FINISHED_TASK);
+        details.setTaskTitle("安装[白色森林]");
+        details.setTaskObtainExperienceValue(5);
+        details.setCoins(7);
+        details.setHash(MD5.MD5(""+ System.currentTimeMillis()));
+        UI_addItem(-1,details);
 
-            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
-            obj.put("title", "了解白色森林的历史");
-            UI_addItem(-1,obj);
+        details = new TaskDetails();
+        details.setTaskType(TYPE_NORMAL_FINISHED_TASK);
+        details.setTaskTitle("了解白色森林的历史");
+        details.setTaskObtainExperienceValue(5);
+        details.setCoins(7);
+        details.setHash(MD5.MD5(""+ System.currentTimeMillis()));
+        UI_addItem(-1,details);
 
-            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
-            obj.put("title", "添加一个普通的任务");
-            UI_addItem(-1,obj);
+        details = new TaskDetails();
+        details.setTaskType(TYPE_NORMAL_FINISHED_TASK);
+        details.setTaskTitle("添加一个普通的任务");
+        details.setTaskObtainExperienceValue(5);
+        details.setCoins(7);
+        details.setHash(MD5.MD5(""+ System.currentTimeMillis()));
+        UI_addItem(-1,details);
 
-            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
-            obj.put("title", "添加一个时间投资计划的任务");
-            UI_addItem(-1,obj);
+        details = new TaskDetails();
+        details.setTaskType(TYPE_NORMAL_FINISHED_TASK);
+        details.setTaskTitle("添加一个时间投资计划的任务");
+        details.setTaskObtainExperienceValue(5);
+        details.setCoins(7);
+        details.setHash(MD5.MD5(""+ System.currentTimeMillis()));
+        UI_addItem(-1,details);
 
 
-            obj.put("type", TYPE_NORMAL_FINISHED_TASK);
-            obj.put("hash", MD5.MD5(""+ System.currentTimeMillis()));
-            obj.put("title", "打开人物页面页 查看我所获得的奖牌");
-            UI_addItem(-1,obj);
+        details = new TaskDetails();
+        details.setTaskType(TYPE_NORMAL_FINISHED_TASK);
+        details.setTaskTitle("打开人物页面页 查看我所获得的奖牌");
+        details.setTaskObtainExperienceValue(5);
+        details.setCoins(7);
+        details.setHash(MD5.MD5(""+ System.currentTimeMillis()));
+        UI_addItem(-1,details);
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
